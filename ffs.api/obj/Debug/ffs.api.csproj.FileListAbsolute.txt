@@ -1,4 +1,0 @@
-C:\Users\nitipanp\Documents\Angular\ffs\dist\bin\ffs.api.dll
-C:\Users\nitipanp\Documents\Angular\ffs\dist\bin\ffs.api.pdb
-C:\Users\nitipanp\Documents\Angular\ffs\ffs.api\obj\Debug\ffs.api.dll
-C:\Users\nitipanp\Documents\Angular\ffs\ffs.api\obj\Debug\ffs.api.pdb
