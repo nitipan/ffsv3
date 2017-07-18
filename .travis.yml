@@ -2,5 +2,6 @@ language: node_js
 node_js:
   - "7"
 before_script:
+  - "cd ffs.web"
   - "npm install"
-script: cd ffs.web & ng build
+script: "ng build"
