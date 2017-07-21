@@ -8,6 +8,7 @@ export abstract class FFSInputBase implements OnInit {
     @Input() unit: string;
     @Input() form: FormGroup;
     @Input() options: { key: string, value: string }[] = [];
+    @Input() required = false;
 
     ngOnInit(): void {
         let group: any = {};
