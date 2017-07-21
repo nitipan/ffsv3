@@ -1,0 +1,43 @@
+.wizard-component {
+  background: white;
+  * {
+    border-radius: 0 !important;
+  }
+  div.list-group>a.active:after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    margin-top: -13px;
+    border-left: 0;
+    border-bottom: 13px solid transparent;
+    border-top: 13px solid transparent;
+    border-left: 10px solid #337ab7;
+  }
+  .icon-custom {
+    display: block;
+    height: 50px;
+    background-position: center center;
+    background-size: 40px;
+    background-blend-mode: hue;
+    background-repeat: no-repeat;
+  }
+  .icon-custom-equipment {
+    background-image: url("/assets/equipment.png");
+  }
+  .icon-custom-design {
+    background-image: url("/assets/design.png");
+  }
+  .icon-custom-material {
+    background-image: url("/assets/material.png");
+  }
+  .icon-custom-flaw {
+    background-image: url("/assets/flaw.png");
+  }
+  .icon-custom-loads {
+    background-image: url("/assets/load.png");
+  }
+  .icon-custom-result {
+    background-image: url("/assets/result.png");
+  }
+}

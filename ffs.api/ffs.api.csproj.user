@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Users\nitipanp\Documents\Angular\ffs\packages\OwinHost.3.1.0\tools\OwinHost.exe</StartProgram>
-    <StartWorkingDirectory>C:\Users\nitipanp\Documents\Angular\ffs\dist\</StartWorkingDirectory>
+    <StartProgram>C:\Users\nitipanp\Documents\Git\ffsv3\packages\OwinHost.3.1.0\tools\OwinHost.exe</StartProgram>
+    <StartWorkingDirectory>C:\Users\nitipanp\Documents\Git\ffsv3\dist\</StartWorkingDirectory>
   </PropertyGroup>
 </Project>

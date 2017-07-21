@@ -1,0 +1,43 @@
+<app-wizard>
+  <equipment>
+
+    <div class="row">
+      <div class="col-md-6">
+        <app-panel>
+          <ffs-text label="Equipment Number" key="equipmentNumber"></ffs-text>
+          <ffs-select label="Equipment Type" key="equipmentType" [options]="[{key:'0' , value: 'Pipe Components'},{key:'1' , value: 'Pressure Vessel'},{key:'2' , value: 'Atmospheric Storage Tank'}]"
+            value="0"></ffs-select>
+        </app-panel>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <app-panel>
+          <ffs-select label="Methodology" key="methodology" [options]="[{key:'0' , value: 'API 579-1/ASME FFS-1 2007 Fitness-For-Service'},{key:'1' , value: 'Other'}]"
+            value="0"></ffs-select>
+          <ffs-select label="Assessment Level" key="assessmentLevel" [options]="[{key:'0' , value: 'Level 1'},{key:'1' , value: 'Level 2'}]"
+            value="0"></ffs-select>
+          <ffs-check label="Check me" key="isEnabled"></ffs-check>
+          <ffs-text label="Input text" key="someInput"></ffs-text>
+        </app-panel>
+      </div>
+    </div>
+
+
+  </equipment>
+  <design>
+    <label>design inputs</label>
+  </design>
+  <material>
+    <label>material inputs</label>
+  </material>
+  <flaw>
+    <label>flaw inputs</label>
+  </flaw>
+  <loads>
+    <label>loads inputs</label>
+  </loads>
+  <result>
+    <label>result inputs</label>
+  </result>
+</app-wizard>

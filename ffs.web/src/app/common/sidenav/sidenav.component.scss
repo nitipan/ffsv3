@@ -1,0 +1,66 @@
+.nav-side-menu {
+  overflow: auto;
+  background-color: rgb(51, 51, 51);
+  position: fixed;
+  top: 0px;
+  height: 100%;
+}
+
+.brand {
+  margin-top: 50px;
+  h1 {
+    font-weight: 700;
+    font-size: 4em;
+    margin-bottom: 0px;
+  }
+  h4 {
+    margin-top: -5px;
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+}
+
+.loginbox {
+  margin-top: 50px;
+  input[type=text],
+  input[type=password] {
+    background: rgb(108, 108, 108);
+    padding: 20px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  button {
+    width: 49%;
+    background: rgb(183, 54, 47);
+    color: white;
+    border: none;
+    font-size: 15px;
+    padding: 10px;
+    font-weight: 500;
+    &:hover {
+      background: rgb(160, 54, 47);
+    }
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
+  @mixin placeholder {
+     ::-webkit-input-placeholder {
+      @content
+    }
+     :-moz-placeholder {
+      @content
+    }
+     ::-moz-placeholder {
+      @content
+    }
+     :-ms-input-placeholder {
+      @content
+    }
+  }
+  @include placeholder {
+    color: white;
+  }
+}

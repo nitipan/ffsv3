@@ -1,0 +1,25 @@
+<div class="wizard-component row">
+  <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+    <div class="list-group">
+      <a href="#" class="list-group-item text-center" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active">
+        <span class="icon-custom icon-custom-{{step.title | lowercase}}"></span>
+        <span>{{step.title}}</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 wizard-component-container">
+    <div class="row" style="height:100%;">
+      <ng-content></ng-content>
+    </div>
+    <div class="row">
+      <button type="button" class="btn btn-primary" (click)="backStep()" [disabled]="!canBack">
+          <span class="glyphicon glyphicon-menu-left"></span>  Back
+        </button>
+      <button type="button" class="btn btn-primary" (click)="nextStep()" [disabled]="!canNext">
+          Next <span class="glyphicon glyphicon-menu-right"></span>
+        </button>
+    </div>
+  </div>
+
+</div>
