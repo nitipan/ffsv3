@@ -9,13 +9,6 @@
             value="0"></ffs-select>
         </app-panel>
       </div>
-      <div class="col-md-6">
-        <app-panel>
-          <ffs-text label="Equipment Number" key="equipmentNumber"></ffs-text>
-          <ffs-select label="Equipment Type" key="equipmentType" [options]="[{key:'0' , value: 'Pipe Components'},{key:'1' , value: 'Pressure Vessel'},{key:'2' , value: 'Atmospheric Storage Tank'}]"
-            value="0"></ffs-select>
-        </app-panel>
-      </div>
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -37,7 +30,16 @@
 
   </equipment>
   <design>
-    <label>design inputs</label>
+    <div class="row">
+      <div class="col-md-6">
+        <app-panel>
+          <ffs-select label="Component Type" key="componentType" [options]="[{key:'0' , value: 'Straight Pipe'}]" value="0"></ffs-select>
+        </app-panel>
+        <app-panel title="Geometry Design">
+          <ffs-text label="Internal Diameter" key="internalDiameter" unit="in"></ffs-text>
+        </app-panel>
+      </div>
+    </div>
   </design>
   <material>
     <label>material inputs</label>
