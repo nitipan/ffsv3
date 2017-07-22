@@ -21,18 +21,11 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
   ngAfterViewInit(): void {
     this.form = this.toFormGroup(this.inputs);
+
     this.form.valueChanges.subscribe((v) => {
       // do something
       console.log(v);
     });
-
-    this.form.get("isEnabled").valueChanges.subscribe((v) => {
-      if (v)
-        this.form.get("someInput").enable();
-      else
-        this.form.get("someInput").disable();
-    });
-
   }
 
   ngOnInit() {
