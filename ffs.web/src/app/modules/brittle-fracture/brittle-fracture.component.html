@@ -1,47 +1,20 @@
 <app-wizard>
   <equipment>
-
-    <div class="row">
-
-
-
-      <div class="col-md-6">
-        <app-panel>
-          <ffs-text label="Equipment Number" key="equipmentNumber"></ffs-text>
-          <ffs-select label="Equipment Type" key="equipmentType" [options]="[{key:'0' , value: 'Pipe Components'},{key:'1' , value: 'Pressure Vessel'},{key:'2' , value: 'Atmospheric Storage Tank'}]"
-            value="0"></ffs-select>
-        </app-panel>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <app-panel>
-          <ffs-select label="Methodology" key="methodology" [options]="[{key:'0' , value: 'API 579-1/ASME FFS-1 2007 Fitness-For-Service'},{key:'1' , value: 'Other'}]"
-            value="0"></ffs-select>
-          <ffs-select label="Assessment Level" key="assessmentLevel" [options]="[{key:'0' , value: 'Level 1'},{key:'1' , value: 'Level 2'}]"
-            value="0"></ffs-select>
-        </app-panel>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <app-panel>
-          <ffs-select label="Unit" key="unit" [options]="[{key:'0' , value: 'mm-MPa-°C'},{key:'1' , value: 'in-psi-°F'}]" value="0"></ffs-select>
-        </app-panel>
-      </div>
-    </div>
-
+    <app-equipment-input></app-equipment-input>
   </equipment>
-  <design active="true">
+  <design>
     <div class="row">
       <div class="col-md-6">
         <app-panel>
           <ffs-select label="Component Type" key="componentType" [options]="[{key:'0' , value: 'Straight Pipe'}]" value="0"></ffs-select>
+          <ffs-select label="Component Type" key="componentType" [options]="[{key:'0' , value: 'Straight Pipe'}]" value="0"></ffs-select>
         </app-panel>
         <app-panel title="Geometry Design">
-          <ffs-number label="Internal Diameter" key="internalDiameter" unit="in" required="true"></ffs-number>
+          <ffs-number label="Internal Diameter" key="internalDiameter" unit="in"></ffs-number>
           <ffs-number label="Norminal Thickness" key="norminalThickness" unit="in"></ffs-number>
-          <ffs-text label="Norminal Thickness" key="norminalThickness" required="true"></ffs-text>
+          <ffs-number label="Uniform Metal Loss" key="internalDiameter" unit="in"></ffs-number>
+          <ffs-number label="Future Corrosion Allowance" key="norminalThickness" unit="in"></ffs-number>
+          <ffs-number label="Weld Join Efficiency" key="norminalThickness" unit="in"></ffs-number>
         </app-panel>
       </div>
     </div>

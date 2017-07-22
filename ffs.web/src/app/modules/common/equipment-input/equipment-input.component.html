@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-6">
+    <app-panel>
+      <ffs-text label="Equipment Number" key="equipmentNumber"></ffs-text>
+      <ffs-select label="Equipment Type" key="equipmentType" [options]="equipmentTypes | async" value="1"></ffs-select>
+    </app-panel>
+    <app-panel>
+      <ffs-select label="Methodology" key="methodology" [options]="methodologies | async" value="1"></ffs-select>
+      <ffs-select label="Assessment Level" key="assessmentLevel" [options]="assessmentLevel | async" value="1"></ffs-select>
+    </app-panel>
+    <app-panel>
+      <ffs-select label="Unit" key="unit" [options]="units| async" value="1"></ffs-select>
+    </app-panel>
+  </div>
+  <div class="col-md-6">
+    <img src="assets/equipment1.png" class="img-responsive" />
+  </div>
+</div>

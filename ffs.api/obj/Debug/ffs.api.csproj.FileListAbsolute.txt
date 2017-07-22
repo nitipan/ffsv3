@@ -1,5 +1,4 @@
 C:\Users\nitipanp\Documents\Git\ffsv3\dist\bin\ffs.api.dll
 C:\Users\nitipanp\Documents\Git\ffsv3\dist\bin\ffs.api.pdb
-C:\Users\nitipanp\Documents\Git\ffsv3\ffs.api\obj\Debug\ffs.api.csprojResolveAssemblyReference.cache
 C:\Users\nitipanp\Documents\Git\ffsv3\ffs.api\obj\Debug\ffs.api.dll
 C:\Users\nitipanp\Documents\Git\ffsv3\ffs.api\obj\Debug\ffs.api.pdb
