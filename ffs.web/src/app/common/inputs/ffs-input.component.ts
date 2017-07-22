@@ -11,7 +11,7 @@ import { FFSInputBase } from "./ffs-input-base";
             <div class="form-group" [class.has-error]="!isValid">
                 <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
                 <div class="input-group col-xs-7">
-                    <input [formControlName]="key" [id]="key" [type]="type" class="form-control">                
+                    <input [formControlName]="key" [id]="key" class="form-control">                
                     <label class="input-group-addon control-label" *ngIf="unit != undefined">{{unit}}</label>
                     <div class="control-label errorText" *ngIf="!isValid && required">* {{label}} is required</div>
                 </div>
