@@ -1,4 +1,4 @@
-import { FFSTextComponent, FFSSelectComponent, FFSCheckComponent } from './common/inputs/ffs-input.component';
+import { FFSTextComponent, FFSSelectComponent, FFSCheckComponent, FFSNumberComponent } from './common/inputs/ffs-input.component';
 
 
 import { EquipmentStepComponent, DesignStepComponent, MaterialStepComponent, FlawStepComponent, LoadsStepComponent, ResultStepComponent } from './modules/steps/steps.component';
@@ -18,6 +18,7 @@ import { PanelComponent } from './common/panel/panel.component';
     FFSTextComponent,
     FFSSelectComponent,
     FFSCheckComponent,
+    FFSNumberComponent,
     AppComponent,
     TopnavComponent,
     SidenavComponent,

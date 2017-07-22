@@ -32,14 +32,16 @@
     </div>
 
   </equipment>
-  <design>
+  <design active="true">
     <div class="row">
       <div class="col-md-6">
         <app-panel>
           <ffs-select label="Component Type" key="componentType" [options]="[{key:'0' , value: 'Straight Pipe'}]" value="0"></ffs-select>
         </app-panel>
         <app-panel title="Geometry Design">
-          <ffs-text label="Internal Diameter" key="internalDiameter" unit="in"></ffs-text>
+          <ffs-number label="Internal Diameter" key="internalDiameter" unit="in" required="true"></ffs-number>
+          <ffs-number label="Norminal Thickness" key="norminalThickness" unit="in"></ffs-number>
+          <ffs-text label="Norminal Thickness" key="norminalThickness" required="true"></ffs-text>
         </app-panel>
       </div>
     </div>

@@ -1,4 +1,10 @@
 .app-panel {
+  .panel-heading {
+    padding: 5px;
+    .panel-title {
+      font-size: 13px;
+    }
+  }
   .panel-body {
     padding: 10px;
   }
