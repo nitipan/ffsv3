@@ -145,3 +145,65 @@ export class FFSDateComponent extends FFSInputBase implements AfterViewInit {
             });
     }
 }
+
+
+@Component(
+    {
+        selector: 'ffs-browse',
+        styleUrls: ['./ffs-input.component.scss'],
+        template: `
+     <div class="ffs-input form-horizontal" [formGroup]="form">
+            <div class="form-group">
+                <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
+                <input type="file" [attr.accept]="accept" [attr.for]="key" size="chars" #file (change)="fileBrowserChanged($event)">
+                <button class="btn btn-primary col-xs-7" (click)="browseFile()">Browse</button>
+            </div>
+            <div class=" col-xs-7 col-xs-offset-5" *ngIf="filename != ''">
+                <div class="chip">
+                {{filename}}
+                <span class="closebtn" (click)="removeFile()">&times;</span>
+                </div>
+            </div>
+            </div>
+        `,
+        providers: [{ provide: FFSInputBase, useExisting: forwardRef(() => FFSBrowseComponent) }]
+    }
+)
+export class FFSBrowseComponent extends FFSInputBase implements AfterViewInit {
+
+    @Input() accept = "*.*";
+
+    @ViewChild("file") fileBrowserInput;
+    filename: string = '';
+
+    browseFile() {
+        this.fileBrowserInput.nativeElement.click();
+    }
+
+    fileBrowserChanged(event: any) {
+        var inputForm = this.form.get(this.key);
+        let input = event.target;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                inputForm.setValue((e.target as any).result);
+            }
+
+            this.filename = input.files[0].name;
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    removeFile() {
+        this.filename = '';
+        var inputForm = this.form.get(this.key);
+        inputForm.setValue('');
+        $(this.fileBrowserInput.nativeElement).val('');
+    }
+
+    ngAfterViewInit(): void {
+
+    }
+
+}

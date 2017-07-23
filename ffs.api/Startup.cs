@@ -14,16 +14,16 @@ namespace ffs.api
     {
         public void Configuration(IAppBuilder app)
         {
-            const string rootFolder = "public";
-            var fileSystem = new PhysicalFileSystem(rootFolder);
-            var options = new FileServerOptions
-            {
-                EnableDefaultFiles = true,
+            //const string rootFolder = "public";
+            //var fileSystem = new PhysicalFileSystem(rootFolder);
+            //var options = new FileServerOptions
+            //{
+            //    EnableDefaultFiles = true,
 
-                FileSystem = fileSystem
-            };
+            //    FileSystem = fileSystem
+            //};
 
-            app.UseFileServer(options);
+         //   app.UseFileServer(options);
 
             app.UseNancy();
             app.UseStageMarker(PipelineStage.MapHandler);

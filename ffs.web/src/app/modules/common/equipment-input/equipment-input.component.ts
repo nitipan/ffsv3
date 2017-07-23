@@ -19,6 +19,8 @@ export class EquipmentInputComponent extends ModuleBase implements OnInit, After
   units: Observable<KV[]>
   assessmentLevel: Observable<KV[]>;
 
+  previewEquipmentImage: any;
+
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
   form: FormGroup;
 
@@ -44,6 +46,10 @@ export class EquipmentInputComponent extends ModuleBase implements OnInit, After
 
   ngAfterViewInit(): void {
     this.form = this.toFormGroup(this.inputs);
+
+    this.form.get("equipmentImage").valueChanges.subscribe(x => {
+      this.previewEquipmentImage = x;
+    });
 
     this.form.valueChanges.subscribe((v) => {
       // do something

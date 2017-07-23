@@ -14,10 +14,17 @@
     <app-panel>
       <ffs-text label="Analysis By" key="analysisBy" required="true"></ffs-text>
       <ffs-date label="Analysis Date" key="analysisDate"></ffs-date>
-      <ffs-text label="Equipment Image" key="equipmentImage"></ffs-text>
+      <ffs-browse label="Equipment Image" key="equipmentImage" accept="image/*"></ffs-browse>
     </app-panel>
   </div>
   <div class="col-md-6">
-    <img src="assets/equipment1.png" class="img-responsive" />
+    <div class="row">
+      <img src="assets/equipment1.png" class="img-responsive" />
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 mt-md-3" style="margin-top:10px;">
+        <img [attr.src]="previewEquipmentImage" class="img-responsive" *ngIf="previewEquipmentImage != ''" />
+      </div>
+    </div>
   </div>
 </div>
