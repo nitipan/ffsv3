@@ -1,22 +1,28 @@
+import { ModuleBase } from './../../module-base.component';
+import { FormGroup } from '@angular/forms';
 import { KV } from './../../../model/kv';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { Http } from "@angular/http";
 import 'rxjs/Rx';
 import { Observable } from "rxjs/Rx";
+import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
 
 @Component({
   selector: 'app-equipment-input',
   templateUrl: './equipment-input.component.html',
   styleUrls: ['./equipment-input.component.scss']
 })
-export class EquipmentInputComponent implements OnInit {
+export class EquipmentInputComponent extends ModuleBase implements OnInit, AfterViewInit {
 
   equipmentTypes: Observable<KV[]>;
   methodologies: Observable<KV[]>;
   units: Observable<KV[]>
   assessmentLevel: Observable<KV[]>;
 
-  constructor(private http: Http) { }
+  @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
+  form: FormGroup;
+
+  constructor(private http: Http) { super() }
 
   ngOnInit() {
     this.equipmentTypes = this.http.get("/api/lookup/equipmenttypes")
@@ -34,6 +40,15 @@ export class EquipmentInputComponent implements OnInit {
     this.assessmentLevel = this.http.get("/api/lookup/assessmentLevel")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.assessmentLevelID, value: a.assessmentLevelName }; }));
+  }
+
+  ngAfterViewInit(): void {
+    this.form = this.toFormGroup(this.inputs);
+
+    this.form.valueChanges.subscribe((v) => {
+      // do something
+      console.log(v);
+    });
   }
 
 }

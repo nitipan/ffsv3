@@ -11,6 +11,11 @@
     <app-panel>
       <ffs-select label="Unit" key="unit" [options]="units| async" value="1"></ffs-select>
     </app-panel>
+    <app-panel>
+      <ffs-text label="Analysis By" key="analysisBy" required="true"></ffs-text>
+      <ffs-date label="Analysis Date" key="analysisDate"></ffs-date>
+      <ffs-text label="Equipment Image" key="equipmentImage"></ffs-text>
+    </app-panel>
   </div>
   <div class="col-md-6">
     <img src="assets/equipment1.png" class="img-responsive" />
