@@ -11,7 +11,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
 
   @ContentChildren(WizardStepBase) steps: QueryList<WizardStepBase>;
 
-  private step: WizardStepBase;
+  step: WizardStepBase;
 
   canBack = false;
   canNext = true;

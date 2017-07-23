@@ -7,6 +7,12 @@ body {
   background-color: rgb(65, 65, 65);
 }
 
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
 .btn-ffs {
   background-image: url("/assets/menu_bg.png");
   background-repeat: no-repeat;
