@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { OnInit, Input } from '@angular/core';
+import { OnInit, Input, QueryList } from '@angular/core';
 export abstract class FFSInputBase implements OnInit {
 
     @Input() label: string;
@@ -17,5 +17,14 @@ export abstract class FFSInputBase implements OnInit {
 
     get isValid() {
         return this.form.controls[this.key].valid;
+    }
+
+    static toFormGroup(inputs: QueryList<FFSInputBase>) {
+        var formItems: any = {};
+        inputs.forEach((i) => {
+            formItems[i.key] = i.form.controls[i.key];
+        });
+
+        return new FormGroup(formItems);
     }
 }

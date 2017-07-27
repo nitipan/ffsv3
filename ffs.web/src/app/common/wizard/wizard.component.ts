@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter } from '@angular/core';
 import { WizardStepBase } from "./wizard-step-base";
 
 @Component({
@@ -10,6 +10,8 @@ import { WizardStepBase } from "./wizard-step-base";
 export class WizardComponent implements OnInit, AfterContentInit {
 
   @ContentChildren(WizardStepBase) steps: QueryList<WizardStepBase>;
+
+  @Output() stepChanged: EventEmitter<WizardStepBase> = new EventEmitter();
 
   step: WizardStepBase;
 
@@ -38,6 +40,8 @@ export class WizardComponent implements OnInit, AfterContentInit {
     var currentIndex = this.steps.toArray().indexOf(this.step);
     this.canBack = currentIndex > 0;
     this.canNext = currentIndex < this.steps.length - 1;
+
+    this.stepChanged.emit(this.step);
   }
 
   backStep() {

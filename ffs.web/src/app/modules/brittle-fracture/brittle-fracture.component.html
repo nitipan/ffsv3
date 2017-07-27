@@ -1,23 +1,9 @@
-<app-wizard>
+<app-wizard (stepChanged)="onStepChange($event)">
   <equipment>
     <app-equipment-input></app-equipment-input>
   </equipment>
   <design>
-    <div class="row">
-      <div class="col-md-6">
-        <app-panel>
-          <ffs-select label="Component Type" key="componentType" [options]="[{key:'0' , value: 'Straight Pipe'}]" value="0"></ffs-select>
-          <ffs-select label="Component Type" key="componentType" [options]="[{key:'0' , value: 'Straight Pipe'}]" value="0"></ffs-select>
-        </app-panel>
-        <app-panel title="Geometry Design">
-          <ffs-number label="Internal Diameter" key="internalDiameter" unit="in"></ffs-number>
-          <ffs-number label="Norminal Thickness" key="norminalThickness" unit="in"></ffs-number>
-          <ffs-number label="Uniform Metal Loss" key="internalDiameter" unit="in"></ffs-number>
-          <ffs-number label="Future Corrosion Allowance" key="norminalThickness" unit="in"></ffs-number>
-          <ffs-number label="Weld Join Efficiency" key="norminalThickness" unit="in"></ffs-number>
-        </app-panel>
-      </div>
-    </div>
+    <app-design-input></app-design-input>
   </design>
   <material>
     <label>material inputs</label>

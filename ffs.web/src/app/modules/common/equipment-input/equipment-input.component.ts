@@ -1,3 +1,4 @@
+import { InputBase } from './../../../model/inputbase';
 import { ModuleBase } from './../../module-base.component';
 import { FormGroup } from '@angular/forms';
 import { KV } from './../../../model/kv';
@@ -12,19 +13,19 @@ import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
   templateUrl: './equipment-input.component.html',
   styleUrls: ['./equipment-input.component.scss']
 })
-export class EquipmentInputComponent extends ModuleBase implements OnInit, AfterViewInit {
+export class EquipmentInputComponent implements OnInit, AfterViewInit {
 
-  equipmentTypes: Observable<KV[]>;
-  methodologies: Observable<KV[]>;
-  units: Observable<KV[]>
-  assessmentLevel: Observable<KV[]>;
+  private equipmentTypes: Observable<KV[]>;
+  private methodologies: Observable<KV[]>;
+  private units: Observable<KV[]>
+  private assessmentLevel: Observable<KV[]>;
 
-  previewEquipmentImage: any;
-
-  @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
+  private previewEquipmentImage: any;
   form: FormGroup;
 
-  constructor(private http: Http) { super() }
+  @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;
+
+  constructor(private http: Http) { }
 
   ngOnInit() {
     this.equipmentTypes = this.http.get("/api/lookup/equipmenttypes")
@@ -45,16 +46,19 @@ export class EquipmentInputComponent extends ModuleBase implements OnInit, After
   }
 
   ngAfterViewInit(): void {
-    this.form = this.toFormGroup(this.inputs);
+    this.form = FFSInputBase.toFormGroup(this.inputs);
 
     this.form.get("equipmentImage").valueChanges.subscribe(x => {
       this.previewEquipmentImage = x;
     });
 
     this.form.valueChanges.subscribe((v) => {
-      // do something
-      console.log(v);
+      // custom event
     });
+  }
+
+  get Inputs(): InputBase {
+    return this.form.value as InputBase;
   }
 
 }

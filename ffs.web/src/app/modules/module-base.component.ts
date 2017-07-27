@@ -1,14 +1,15 @@
+import { DesignStepComponent } from './steps/steps.component';
 import { QueryList } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { FFSInputBase } from "../common/inputs/ffs-input-base";
+import { WizardStepBase } from "../common/wizard/wizard-step-base";
 
-export class ModuleBase {
-    toFormGroup(inputs: QueryList<FFSInputBase>) {
-        var formItems: any = {};
-        inputs.forEach((i) => {
-            formItems[i.key] = i.form.controls[i.key];
-        });
+export abstract class ModuleBase {
 
-        return new FormGroup(formItems);
+    onStepChange(step: WizardStepBase) {
+        if (step instanceof DesignStepComponent)
+            this.initDesignInput();
     }
+
+    abstract initDesignInput();
 }

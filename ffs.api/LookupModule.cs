@@ -47,6 +47,28 @@ namespace ffs.api
                     return Response.AsJson(result);
                 }
             };
+
+            Get["/componenttypes/{equipmentTypeId}"] = x =>
+           {
+               var equipmentTypeId = (int)x.equipmentTypeId;
+
+               using (var db = DbContext.Get())
+               {
+                   IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT ComponentTypeID, ComponentTypeName  FROM  ComponentType WHERE EquipmentTypeID = @EquipmentTypeID", new { EquipmentTypeID = equipmentTypeId });
+                   return Response.AsJson(result);
+               }              
+           };
+
+            Get["/designcodes/{equipmentTypeId}"] = x =>
+            {
+                var equipmentTypeId = (int)x.equipmentTypeId;
+
+                using (var db = DbContext.Get())
+                {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT DesignCodeID, DesignCodeName FROM DesignCode WHERE EquipmentTypeID = @EquipmentTypeID", new { EquipmentTypeID = equipmentTypeId });
+                    return Response.AsJson(result);
+                }
+            };
         }
     }
 }
