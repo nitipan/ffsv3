@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlServerCe;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,13 @@ namespace ffs.api
         public static DbContext Get()
         {
             DbContext context = new api.DbContext();
-            context.Connection = new SqlConnection(ConfigurationManager.AppSettings["connectionString"]);
+            var connectionString = ConfigurationManager.AppSettings["connectionString"];
+
+            if (connectionString.Contains(".sdf"))
+                context.Connection = new SqlCeConnection(connectionString);
+            else
+                context.Connection = new SqlConnection(connectionString);
+
             context.Connection.Open();
             return context;
         }
