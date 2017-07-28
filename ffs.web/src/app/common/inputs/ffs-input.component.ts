@@ -10,7 +10,7 @@ import 'bootstrap-datepicker';
         styleUrls: ['./ffs-input.component.scss'],
         template: `
         <div class="ffs-input form-horizontal" [formGroup]="form">
-            <div class="form-group" [class.has-error]="!isValid">
+            <div class="form-group" [class.has-error]="!isValid && enabled">
                 <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
                 <div class="input-group col-xs-7">
                     <input [formControlName]="key" [id]="key" class="form-control">                
@@ -79,7 +79,7 @@ export class FFSCheckComponent extends FFSInputBase {
         styleUrls: ['./ffs-input.component.scss'],
         template: `
         <div class="ffs-input form-horizontal" [formGroup]="form">
-            <div class="form-group" [class.has-error]="!isValid">
+            <div class="form-group" [class.has-error]="!isValid && enabled">
                 <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
                 <div class="input-group col-xs-7">
                     <input [formControlName]="key" type="number" [id]="key" class="form-control">                
