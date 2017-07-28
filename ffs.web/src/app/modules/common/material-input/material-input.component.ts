@@ -1,6 +1,6 @@
+import { Observable } from 'rxjs/Rx';
 import { FormGroup } from '@angular/forms';
 import { KV } from './../../../model/kv';
-import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { Component, OnInit, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
 import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
@@ -15,12 +15,16 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
 
   private materialTypes: Observable<KV[]>;
   private materials: Observable<KV[]>;
+  private asmeExemptionCurves: Observable<KV[]>;
+
   form: FormGroup;
 
   @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;
 
   private materialObjects: any[];
   private currentMaterial: any;
+
+  private showOther: boolean = false;
 
   private materialSubject: Subject<any> = new Subject();
 
@@ -46,15 +50,41 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
       this.form.get("material").setValue(m[0].key);
     });
 
+    this.asmeExemptionCurves = this.http.get("/api/lookup/asmeexemptioncurves")
+      .map(response => response.json() as any[])
+      .map(arr => arr.map(a => { return { key: a.aSMEExemptionCurvesID, value: a.aSMEExemptionCurvesName }; }));
 
+    this.asmeExemptionCurves.subscribe((m: KV[]) => {
+      this.form.get("asmeExemptionCurvesID").setValue(m[0].key);
+    });
   }
 
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
     this.form.get("material").valueChanges.subscribe(m => {
+      this.showOther = m == '999';
       this.materialSubject.next(this.materialObjects.find(o => o.materialID == m));
     });
 
+    setTimeout(() => {
+      this.form.get("automaticallyCalculationAllowableStress").setValue(true);
+    });
+
+    this.form.get("automaticallyCalculationAllowableStress").valueChanges.subscribe((v: boolean) => {
+      if (v) {
+        this.form.get("allowableStress").disable();
+        this.form.get("yieldStrength").enable();
+        this.form.get("ultimatedTensileStrength").enable();
+        this.form.get("poissonRatio").disable();
+        this.form.get("youngModulus").disable();
+      } else {
+        this.form.get("allowableStress").enable();
+        this.form.get("yieldStrength").disable();
+        this.form.get("ultimatedTensileStrength").disable();
+        this.form.get("poissonRatio").disable();
+        this.form.get("youngModulus").disable();
+      }
+    });
 
     this.materialSubject.subscribe(m => {
       this.form.get("allowableStress").setValue(m.yieldStrength);
@@ -63,6 +93,8 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
       this.form.get("yieldStrength").setValue(m.yieldStrength);
       this.form.get("poissonRatio").setValue(m.possionRatio);
     });
+
+
 
 
   }

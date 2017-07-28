@@ -4,12 +4,13 @@
       <div class="col-md-6">
         <ffs-select label="Material Type" key="materialTypeID" [options]="materialTypes | async"></ffs-select>
         <ffs-select label="Material Specification" key="material" [options]="materials | async"></ffs-select>
-        <ffs-select label="ASME Excemtion Curves"></ffs-select>
+        <ffs-text label="" key="materialName" *ngIf="showOther"></ffs-text>
+        <ffs-select label="ASME Excemtion Curves" [options]="asmeExemptionCurves | async" key="asmeExemptionCurvesID"></ffs-select>
       </div>
     </app-panel>
     <app-panel title="Physical Property">
       <p>
-        <ffs-check label="Automatically Calculate Allowable Stress"></ffs-check>
+        <ffs-check label="Automatically Calculate Allowable Stress" key="automaticallyCalculationAllowableStress"></ffs-check>
       </p>
       <div class="row">
         <div class="col-md-6">
@@ -25,7 +26,7 @@
     </app-panel>
     <app-panel title="Fracture Property">
       <p>
-        <ffs-check label="Automatic calculation reference temperature"></ffs-check>
+        <ffs-check label="Automatic calculation reference temperature" key="automaticCalculationReferenceTemperature"></ffs-check>
       </p>
       <div class="row">
         <div class="col-md-6">

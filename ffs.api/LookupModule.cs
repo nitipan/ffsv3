@@ -87,6 +87,17 @@ namespace ffs.api
                     return Response.AsJson(result);
                 }
             };
+
+            Get["/asmeexemptioncurves"] = x =>
+            {
+                using (var db = DbContext.Get())
+                {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT* FROM ASMEExemptionCurves");
+                    return Response.AsJson(result);
+                }
+            };
+
+            
         }
     }
 }
