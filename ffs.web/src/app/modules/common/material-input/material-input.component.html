@@ -2,8 +2,8 @@
   <div class="col-md-12">
     <app-panel title="Material Specification">
       <div class="col-md-6">
-        <ffs-select label="Material Type"></ffs-select>
-        <ffs-select label="Material Specification"></ffs-select>
+        <ffs-select label="Material Type" key="materialTypeID" [options]="materialTypes | async"></ffs-select>
+        <ffs-select label="Material Specification" key="material" [options]="materials | async"></ffs-select>
         <ffs-select label="ASME Excemtion Curves"></ffs-select>
       </div>
     </app-panel>
@@ -13,7 +13,7 @@
       </p>
       <div class="row">
         <div class="col-md-6">
-          <ffs-number label="Allowable Stress" unit="psi"></ffs-number>
+          <ffs-number label="Allowable Stress" key="allowableStress" unit="psi"></ffs-number>
           <ffs-number label="Ultimate Tensile Strength" unit="psi"></ffs-number>
           <ffs-number label="Young Modulus" unit="psi"></ffs-number>
         </div>

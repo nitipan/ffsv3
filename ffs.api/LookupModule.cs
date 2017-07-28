@@ -69,6 +69,24 @@ namespace ffs.api
                     return Response.AsJson(result);
                 }
             };
+
+            Get["/materialtypes"] = x =>
+            {
+                using (var db = DbContext.Get())
+                {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT * FROM MaterialType");
+                    return Response.AsJson(result);
+                }
+            };
+
+            Get["/materials"] = x =>
+            {
+                using (var db = DbContext.Get())
+                {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT * FROM Material ORDER BY MaterialID");
+                    return Response.AsJson(result);
+                }
+            };
         }
     }
 }
