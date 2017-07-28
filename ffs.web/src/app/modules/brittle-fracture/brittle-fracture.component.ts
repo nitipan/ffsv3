@@ -13,6 +13,7 @@ import { FFSInputBase } from "../../common/inputs/ffs-input-base";
 })
 export class BrittleFractureComponent extends ModuleBase implements OnInit, AfterViewInit {
 
+
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
 
 
@@ -43,6 +44,17 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
   initDesignInput() {
     this.designInput.init(this.equipmentInput.Inputs);
+  }
+
+  initMaterialInput() {
+
+  }
+
+  initFlawInput() {
+
+  }
+  initLoadInput() {
+
   }
 
 
