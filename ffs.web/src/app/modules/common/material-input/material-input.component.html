@@ -1,12 +1,37 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <app-panel title="Material Specification">
-      <ffs-select label="Material Type"></ffs-select>
-      <ffs-select label="Material Specification"></ffs-select>
-      <ffs-select label="ASME Excemtion Curves"></ffs-select>
+      <div class="col-md-6">
+        <ffs-select label="Material Type"></ffs-select>
+        <ffs-select label="Material Specification"></ffs-select>
+        <ffs-select label="ASME Excemtion Curves"></ffs-select>
+      </div>
     </app-panel>
     <app-panel title="Physical Property">
-
+      <p>
+        <ffs-check label="Automatically Calculate Allowable Stress"></ffs-check>
+      </p>
+      <div class="row">
+        <div class="col-md-6">
+          <ffs-number label="Allowable Stress" unit="psi"></ffs-number>
+          <ffs-number label="Ultimate Tensile Strength" unit="psi"></ffs-number>
+          <ffs-number label="Young Modulus" unit="psi"></ffs-number>
+        </div>
+        <div class="col-md-6">
+          <ffs-number label="Yield Strength" unit="psi"></ffs-number>
+          <ffs-number label="Possion Ratio" unit="psi"></ffs-number>
+        </div>
+      </div>
+    </app-panel>
+    <app-panel title="Feature Property">
+      <p>
+        <ffs-check label="Automatic calculation reference temperature"></ffs-check>
+      </p>
+      <div class="row">
+        <div class="col-md-6">
+          <ffs-number label="Reference temperature" unit="°F"></ffs-number>
+        </div>
+      </div>
     </app-panel>
   </div>
 </div>
