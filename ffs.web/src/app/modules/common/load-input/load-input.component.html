@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-6">
+    <app-panel title="Operating Load">
+      <ffs-number label="Pressure" key="operatingPressure" unit="MPa"></ffs-number>
+      <ffs-number label="Temperature" unit="°C"></ffs-number>
+    </app-panel>
+    <app-panel title="Norminal Stress">
+      <p>
+        <ffs-check label="Automatically Calculation Norminal Stress" key="automaticallyCalculationTheNominalStressOfTheComponent"></ffs-check>
+      </p>
+      <ffs-number label="Norminal Stress" key="theNominalStressOfTheComponent" unit="MPa"></ffs-number>
+    </app-panel>
+    <app-panel title="Norminal Membrance Stress">
+      <p>
+        <ffs-check label="Automatically Primary Stress" key="automaticcallyPrimaryStress"></ffs-check>
+      </p>
+      <ffs-number label="Primary Stress" key="primaryStress"></ffs-number>
+      <p>
+        <ffs-check label="Supplemental Load" key="supplementalLoad"></ffs-check>
+      </p>
+      <ffs-number label="Supplemental Stress" key="supplementalStress"></ffs-number>
+    </app-panel>
+  </div>
+</div>

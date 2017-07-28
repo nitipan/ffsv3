@@ -15,6 +15,7 @@ import { PanelComponent } from './common/panel/panel.component';
 import { EquipmentInputComponent } from './modules/common/equipment-input/equipment-input.component';
 import { DesignInputComponent } from './modules/common/design-input/design-input.component';
 import { MaterialInputComponent } from './modules/common/material-input/material-input.component';
+import { LoadInputComponent } from './modules/common/load-input/load-input.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MaterialInputComponent } from './modules/common/material-input/material
     PanelComponent,
     EquipmentInputComponent,
     DesignInputComponent,
-    MaterialInputComponent
+    MaterialInputComponent,
+    LoadInputComponent
   ],
   imports: [
     FFSInputModule,

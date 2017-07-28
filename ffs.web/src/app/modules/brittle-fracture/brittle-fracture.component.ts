@@ -2,7 +2,7 @@ import { DesignInputComponent } from './../common/design-input/design-input.comp
 import { EquipmentInputComponent } from './../common/equipment-input/equipment-input.component';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { ModuleBase } from './../module-base.component';
-import { Component, OnInit, Injectable, Input, QueryList, ContentChildren, AfterContentInit, forwardRef, AfterViewInit, ViewChildren, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Injectable, Input, QueryList, ContentChildren, AfterContentInit, forwardRef, AfterViewInit, ViewChildren, ViewChild, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { FFSInputBase } from "../../common/inputs/ffs-input-base";
 
 
@@ -20,7 +20,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
   form: FormGroup;
 
-  constructor() {
+  constructor(private cdRef: ChangeDetectorRef) {
     super();
   }
 
@@ -28,9 +28,12 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
 
+
     this.designInput.form.get("componentShapeID").disable();
     this.designInput.form.get("autoCalculateMinRequireThickness").setValue(true);
 
+    // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
+    this.cdRef.detectChanges();
   }
 
   ngOnInit() {
@@ -42,7 +45,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   }
 
   initDesignInput() {
-    this.designInput.init(this.equipmentInput.Inputs);
+    // this.designInput.init(this.equipmentInput.Inputs);
   }
 
   initMaterialInput() {
