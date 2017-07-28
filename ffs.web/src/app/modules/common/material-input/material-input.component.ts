@@ -58,6 +58,10 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
 
     this.materialSubject.subscribe(m => {
       this.form.get("allowableStress").setValue(m.yieldStrength);
+      this.form.get("ultimatedTensileStrength").setValue(m.tensileStrength);
+      this.form.get("youngModulus").setValue(m.youngModulas);
+      this.form.get("yieldStrength").setValue(m.yieldStrength);
+      this.form.get("poissonRatio").setValue(m.possionRatio);
     });
 
 
