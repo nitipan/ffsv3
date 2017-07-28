@@ -31,6 +31,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
     this.designInput.form.get("componentShapeID").disable();
     this.designInput.form.get("autoCalculateMinRequireThickness").setValue(true);
+
   }
 
   ngOnInit() {

@@ -16,7 +16,8 @@ export abstract class FFSInputBase implements OnInit {
     }
 
     get isValid() {
-        return this.form.controls[this.key].valid;
+        console.log(this.form.controls[this.key].disabled);
+        return this.form.controls[this.key].valid && !this.form.controls[this.key].disabled;
     }
 
     static toFormGroup(inputs: QueryList<FFSInputBase>) {
