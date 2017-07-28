@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { WizardStepBase } from "./wizard-step-base";
 
 @Component({
@@ -9,11 +9,13 @@ import { WizardStepBase } from "./wizard-step-base";
 })
 export class WizardComponent implements OnInit, AfterContentInit {
 
+
+
   @ContentChildren(WizardStepBase) steps: QueryList<WizardStepBase>;
 
   @Output() stepChanged: EventEmitter<WizardStepBase> = new EventEmitter();
 
-  step: WizardStepBase;
+  step: WizardStepBase = { title: "", active: false };
 
   canBack = false;
   canNext = true;
@@ -23,11 +25,13 @@ export class WizardComponent implements OnInit, AfterContentInit {
   ngOnInit() {
   }
 
-  ngAfterContentInit(): void {
 
+  ngAfterContentInit(): void {
     let activetab = this.steps.filter((t) => t.active);
     if (activetab.length == 0)
       this.selectStep(this.steps.first);
+    else
+      this.selectStep(activetab[0]);
   }
 
   selectStep(step: WizardStepBase) {
