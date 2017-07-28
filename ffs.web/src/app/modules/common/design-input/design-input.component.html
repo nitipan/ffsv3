@@ -2,7 +2,7 @@
   <div class="col-md-6">
     <app-panel>
       <ffs-select label="Component Type" key="componentTypeID" [options]="componentType | async"></ffs-select>
-      <ffs-select label="Component Shape" key="componentShapeID"></ffs-select>
+      <ffs-select label="Component Shape" key="componentShapeID" [options]="componentShape | async"></ffs-select>
       <ffs-select label="Code Design" key="designCode" [options]="codeDesign | async"></ffs-select>
     </app-panel>
     <app-panel title="Geometry Design">

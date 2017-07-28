@@ -14,6 +14,8 @@ import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
 export class DesignInputComponent implements OnInit, AfterViewInit {
 
   private componentType: Observable<KV[]>;
+  private componentShape: Observable<KV[]>;
+
   private codeDesign: Observable<KV[]>;
 
   constructor(private http: Http) { }
@@ -51,6 +53,16 @@ export class DesignInputComponent implements OnInit, AfterViewInit {
       }
     });
 
+    this.form.get("componentShapeID").setValue("");
+    this.componentShape = this.http.get(`/api/lookup/componentshapes`)
+      .map(response => response.json() as any[])
+      .map(arr => arr.map(a => { return { key: a.componentShapeID, value: a.componentShapeName }; }));
+
+    this.componentShape.subscribe(c => {
+      if (c.length > 0 && this.form.get("componentShapeID").value === "") {
+        this.form.get("componentShapeID").setValue(c[0].key);
+      }
+    });
 
     this.form.get("designCode").setValue("");
     this.codeDesign = this.http.get(`/api/lookup/designcodes/${input.equipmentType}`)

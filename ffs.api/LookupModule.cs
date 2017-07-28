@@ -97,7 +97,14 @@ namespace ffs.api
                 }
             };
 
-            
+            Get["/componentshapes"] = x =>
+            {
+                using (var db = DbContext.Get())
+                {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT * FROM ComponentShape");
+                    return Response.AsJson(result);
+                }
+            };
         }
     }
 }
