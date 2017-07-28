@@ -68,6 +68,16 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
 
     setTimeout(() => {
       this.form.get("automaticallyCalculationAllowableStress").setValue(true);
+
+      this.form.get("automaticCalculationReferenceTemperature").setValue(true);
+      this.form.get("automaticCalculationReferenceTemperature").disable();
+    });
+
+    this.form.get("automaticCalculationReferenceTemperature").valueChanges.subscribe((v: boolean) => {
+      if (v)
+        this.form.get("referenceTemperature").disable();
+      else
+        this.form.get("referenceTemperature").enable();
     });
 
     this.form.get("automaticallyCalculationAllowableStress").valueChanges.subscribe((v: boolean) => {
@@ -87,6 +97,15 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
     });
 
     this.materialSubject.subscribe(m => {
+
+      if (m.curve != null) {
+        this.form.get("asmeExemptionCurvesID").setValue(m.curve);
+        this.form.get("asmeExemptionCurvesID").disable();
+      } else {
+        this.form.get("asmeExemptionCurvesID").enable();
+      }
+
+      // get by unit
       this.form.get("allowableStress").setValue(m.yieldStrength);
       this.form.get("ultimatedTensileStrength").setValue(m.tensileStrength);
       this.form.get("youngModulus").setValue(m.youngModulas);
