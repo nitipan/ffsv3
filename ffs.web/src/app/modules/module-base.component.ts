@@ -1,14 +1,22 @@
+import { InputBase } from './../model/inputbase';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Rx';
 import { EventService } from './../event.service';
 import { DesignStepComponent, MaterialStepComponent, FlawStepComponent, LoadsStepComponent, ResultStepComponent, EquipmentStepComponent } from './steps/steps.component';
-import { QueryList, OnDestroy } from '@angular/core';
+import { QueryList, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { FFSInputBase } from "../common/inputs/ffs-input-base";
 import { WizardStepBase } from "../common/wizard/wizard-step-base";
 
 export abstract class ModuleBase implements OnDestroy {
 
+    protected valueChangedSubject: Subject<InputBase> = new Subject();
+
     constructor(protected eventService: EventService) {
-        eventService.calculationModuleSubject.next(this);
+
+        this.valueChanges = this.valueChangedSubject.asObservable();
+
+        this.eventService.calculationModuleSubject.next(this);
     }
     ngOnDestroy(): void {
         this.eventService.calculationModuleSubject.next(null);
@@ -43,4 +51,7 @@ export abstract class ModuleBase implements OnDestroy {
     abstract initFlawInput();
 
     abstract initLoadInput();
+
+    @Input()
+    valueChanges: Observable<InputBase>
 }

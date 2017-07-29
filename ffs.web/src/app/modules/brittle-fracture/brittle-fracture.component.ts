@@ -1,3 +1,4 @@
+import { InputBase } from './../../model/inputbase';
 import { EventService } from './../../event.service';
 import { DesignInputComponent } from './../common/design-input/design-input.component';
 import { EquipmentInputComponent } from './../common/equipment-input/equipment-input.component';
@@ -29,7 +30,10 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   }
 
   ngAfterViewInit(): void {
-
+    this.equipmentInput.form.valueChanges.subscribe(f => {
+      let inputs = f as InputBase;
+      this.valueChangedSubject.next(inputs);
+    });
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
 
 
@@ -38,7 +42,16 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
     this.cdRef.detectChanges();
+
+
   }
+
+  // get level(): number {
+  //   if (this.equipmentInput.form == undefined)
+  //     return null;
+
+  //   return this.equipmentInput.form.get("assessmentLevel").value;
+  // }
 
   ngOnInit() {
 

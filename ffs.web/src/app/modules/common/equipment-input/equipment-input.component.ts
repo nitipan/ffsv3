@@ -43,6 +43,9 @@ export class EquipmentInputComponent implements OnInit, AfterViewInit {
     this.assessmentLevel = this.http.get("/api/lookup/assessmentLevel")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.assessmentLevelID, value: a.assessmentLevelName }; }));
+    this.assessmentLevel.subscribe((m: KV[]) => {
+      this.form.get("assessmentLevel").setValue(m[0].key);
+    });
   }
 
   ngAfterViewInit(): void {
