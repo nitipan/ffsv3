@@ -14,24 +14,24 @@ namespace ffs.api
 {
     public class Startup
     {
-        const string dbFile = "db.sdf";
+        //const string dbFile = "db.sdf";
 
         public void Configuration(IAppBuilder app)
         {
-            if (!File.Exists(dbFile))
-            {
-                var assembly = Assembly.GetExecutingAssembly();
-                var resourceName = "ffs.api." + dbFile;
+            //if (!File.Exists(dbFile))
+            //{
+            //    var assembly = Assembly.GetExecutingAssembly();
+            //    var resourceName = "ffs.api." + dbFile;
 
-                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-                {
-                    using (var fileStream = File.Create(dbFile))
-                    {
-                        stream.Seek(0, SeekOrigin.Begin);
-                        stream.CopyTo(fileStream);
-                    }
-                }
-            }
+            //    using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            //    {
+            //        using (var fileStream = File.Create(dbFile))
+            //        {
+            //            stream.Seek(0, SeekOrigin.Begin);
+            //            stream.CopyTo(fileStream);
+            //        }
+            //    }
+            //}
             //var args = Environment.GetCommandLineArgs();
             //if (args.Length > 0 && !args[0].EndsWith("OwinHost.exe"))
             //{
