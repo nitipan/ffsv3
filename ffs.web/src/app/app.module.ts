@@ -19,6 +19,7 @@ import { DesignInputComponent } from './modules/common/design-input/design-input
 import { MaterialInputComponent } from './modules/common/material-input/material-input.component';
 import { LoadInputComponent } from './modules/common/load-input/load-input.component';
 import { HomeComponent } from './home/home.component';
+import { ResultComponent } from './modules/common/result/result.component';
 
 
 const appRoutes: Routes = [
@@ -51,7 +52,8 @@ const appRoutes: Routes = [
     DesignInputComponent,
     MaterialInputComponent,
     LoadInputComponent,
-    HomeComponent
+    HomeComponent,
+    ResultComponent
   ],
   imports: [
     RouterModule.forRoot(

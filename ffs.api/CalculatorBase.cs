@@ -4,27 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ffs.api.Model
+namespace ffs.api
 {
-
-    public static class UnitUtils
+    public abstract class CalculatorBase
     {
-        public static double getCalculateValue(string p_dblValue)
+        protected GlobalVar GlobalVar;
+
+        public CalculatorBase(GlobalVar var)
         {
-            return UnitUtils.getCalculateValue(Convert.ToDouble(p_dblValue));
+            this.GlobalVar = var;
         }
 
-        public static double getCalculateValue(double p_dblValue)
+        public double getCalculateValue(string p_dblValue)
+        {
+            return this.getCalculateValue(Convert.ToDouble(p_dblValue));
+        }
+
+        public double getCalculateValue(double p_dblValue)
         {
             return p_dblValue;
         }
 
-        public static double? getCalculateValue(double? p_dblValue)
+        public double? getCalculateValue(double? p_dblValue)
         {
             double? result;
             if (p_dblValue.HasValue)
             {
-                result = new double?(UnitUtils.getCalculateValue(p_dblValue.Value));
+                result = new double?(this.getCalculateValue(p_dblValue.Value));
             }
             else
             {
@@ -33,12 +39,12 @@ namespace ffs.api.Model
             return result;
         }
 
-        public static string getDisplayValue(double? p_dblValue)
+        public string getDisplayValue(double? p_dblValue)
         {
             string result;
             if (p_dblValue.HasValue)
             {
-                result = string.Format("{0:#,##0.##}", UnitUtils.roundToSignificantDigits(p_dblValue.Value, 3));
+                result = string.Format("{0:#,##0.##}", this.roundToSignificantDigits(p_dblValue.Value, 3));
             }
             else
             {
@@ -47,7 +53,7 @@ namespace ffs.api.Model
             return result;
         }
 
-        public static double roundToSignificantDigits(double d, int digits)
+        public double roundToSignificantDigits(double d, int digits)
         {
             double result;
             if (d == 0.0 || double.IsNaN(d))
@@ -71,7 +77,7 @@ namespace ffs.api.Model
             return result;
         }
 
-        public static string getDistanceUnitString()
+        public string getDistanceUnitString()
         {
             string result;
             if (GlobalVar.UNIT_CURRENT == GlobalVar.UNIT_SI)
@@ -85,7 +91,7 @@ namespace ffs.api.Model
             return result;
         }
 
-        public static string getDegreeUnitString()
+        public string getDegreeUnitString()
         {
             string result;
             if (GlobalVar.UNIT_CURRENT == GlobalVar.UNIT_SI)
@@ -99,7 +105,7 @@ namespace ffs.api.Model
             return result;
         }
 
-        public static string getPressureUnitString()
+        public string getPressureUnitString()
         {
             string result;
             if (GlobalVar.UNIT_CURRENT == GlobalVar.UNIT_SI)
@@ -113,7 +119,7 @@ namespace ffs.api.Model
             return result;
         }
 
-        public static string getPressureDistanceUnitString()
+        public string getPressureDistanceUnitString()
         {
             string result;
             if (GlobalVar.UNIT_CURRENT == GlobalVar.UNIT_SI)

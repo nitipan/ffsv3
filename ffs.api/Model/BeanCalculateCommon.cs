@@ -308,11 +308,11 @@ namespace ffs.api.Model
             set;
         }
 
-        public byte[] equipmentImage
-        {
-            get;
-            set;
-        }
+        //public byte[] equipmentImage
+        //{
+        //    get;
+        //    set;
+        //}
     }
 
 }

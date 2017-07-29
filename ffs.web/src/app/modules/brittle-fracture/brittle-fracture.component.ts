@@ -69,14 +69,15 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
         ...loadInput
       }
 
-      console.log(calculationParam);
-      this.eventService.calculatingSubject.emit(null);
-      setTimeout(() => {
-        let result = calculationParam;
 
-        this.eventService.calculatingSubject.emit(result);
-        this.eventService.calculatedSubject.emit(result);
-      }, 500);
+      this.eventService.calculatingSubject.emit(null);
+
+      this.http.post(`/api/brittle/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+        .map(r => r.json())
+        .subscribe(r => {
+          this.eventService.calculatingSubject.emit(r);
+          this.eventService.calculatedSubject.emit({ param: calculationParam, result: r });
+        });
     });
 
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
