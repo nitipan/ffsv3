@@ -11,7 +11,7 @@ import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
 export class LoadInputComponent implements OnInit, AfterViewInit {
 
 
-  @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;
+  @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
   form: FormGroup;
 
   constructor(private cdRef: ChangeDetectorRef) { }

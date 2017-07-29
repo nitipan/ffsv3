@@ -32,9 +32,9 @@ namespace ffs.api
                     }
                 }
             }
-            var args = Environment.GetCommandLineArgs();
-            if (args.Length > 0 && !args[0].EndsWith("OwinHost.exe"))
-            {
+            //var args = Environment.GetCommandLineArgs();
+            //if (args.Length > 0 && !args[0].EndsWith("OwinHost.exe"))
+            //{
                 const string rootFolder = "public";
                 var fileSystem = new PhysicalFileSystem(rootFolder);
                 var options = new FileServerOptions
@@ -45,7 +45,7 @@ namespace ffs.api
                 };
 
                 app.UseFileServer(options);
-            }
+           // }
             app.UseNancy();
             app.UseStageMarker(PipelineStage.MapHandler);
         }

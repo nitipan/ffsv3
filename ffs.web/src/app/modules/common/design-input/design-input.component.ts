@@ -13,10 +13,10 @@ import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
 })
 export class DesignInputComponent implements OnInit, AfterViewInit {
 
-  private componentType: Observable<KV[]>;
-  private componentShape: Observable<KV[]>;
+  componentType: Observable<KV[]>;
+  componentShape: Observable<KV[]>;
 
-  private codeDesign: Observable<KV[]>;
+  codeDesign: Observable<KV[]>;
 
   constructor(private http: Http) { }
   form: FormGroup;

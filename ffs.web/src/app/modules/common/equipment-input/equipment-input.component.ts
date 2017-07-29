@@ -15,12 +15,12 @@ import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
 })
 export class EquipmentInputComponent implements OnInit, AfterViewInit {
 
-  private equipmentTypes: Observable<KV[]>;
-  private methodologies: Observable<KV[]>;
-  private units: Observable<KV[]>
-  private assessmentLevel: Observable<KV[]>;
+  equipmentTypes: Observable<KV[]>;
+  methodologies: Observable<KV[]>;
+  units: Observable<KV[]>
+  assessmentLevel: Observable<KV[]>;
 
-  private previewEquipmentImage: any;
+  previewEquipmentImage: any;
   form: FormGroup;
 
   @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;

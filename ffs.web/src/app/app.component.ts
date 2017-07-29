@@ -9,7 +9,7 @@ import { ModuleBase } from "./modules/module-base.component";
 })
 export class AppComponent {
 
-  private currentModule: ModuleBase = null;
+  currentModule: ModuleBase = null;
 
   constructor(private eventService: EventService) {
 

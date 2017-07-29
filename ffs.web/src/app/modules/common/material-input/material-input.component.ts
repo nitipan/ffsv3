@@ -13,18 +13,18 @@ import { Subject } from "rxjs/Subject";
 })
 export class MaterialInputComponent implements OnInit, AfterViewInit {
 
-  private materialTypes: Observable<KV[]>;
-  private materials: Observable<KV[]>;
-  private asmeExemptionCurves: Observable<KV[]>;
+  materialTypes: Observable<KV[]>;
+  materials: Observable<KV[]>;
+  asmeExemptionCurves: Observable<KV[]>;
 
   form: FormGroup;
 
-  @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;
+  @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
 
   private materialObjects: any[];
   private currentMaterial: any;
 
-  private showOther: boolean = false;
+  showOther: boolean = false;
 
   private materialSubject: Subject<any> = new Subject();
 
