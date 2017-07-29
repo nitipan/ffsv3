@@ -1,3 +1,4 @@
+import { EventService } from './../../event.service';
 import { Component, forwardRef } from '@angular/core';
 import { WizardStepBase } from "../../common/wizard/wizard-step-base";
 
@@ -60,5 +61,12 @@ export class LoadsStepComponent extends WizardStepBase {
 })
 export class ResultStepComponent extends WizardStepBase {
     title = "Result";
+
+    constructor(private eventService: EventService) {
+        super();
+        this.eventService.calculatedSubject.subscribe(result => {
+            this.requestActive.emit(this);
+        });
+    }
 }
 

@@ -23,6 +23,8 @@ export class EquipmentInputComponent implements OnInit, AfterViewInit {
   previewEquipmentImage: any;
   form: FormGroup;
 
+  currentValue: InputBase;
+
   @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;
 
   constructor(private http: Http) { }
@@ -56,7 +58,7 @@ export class EquipmentInputComponent implements OnInit, AfterViewInit {
     });
 
     this.form.valueChanges.subscribe((v) => {
-      // custom event
+      this.currentValue = v as InputBase;
     });
   }
 

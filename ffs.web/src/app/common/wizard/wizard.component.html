@@ -22,7 +22,7 @@
           Next <span class="glyphicon glyphicon-menu-right"></span>
         </button>
 
-        <button type="button" class="btn btn-success" *ngIf="step.calculateVisible"><span class="glyphicon glyphicon-hourglass"></span>      Calculate
+        <button type="button" (click)="calculate()" class="btn btn-success" *ngIf="step.calculateVisible"><span class="glyphicon glyphicon-hourglass"></span>      Calculate
         </button>
 
         <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Open

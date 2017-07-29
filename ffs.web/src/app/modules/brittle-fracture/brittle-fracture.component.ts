@@ -1,3 +1,8 @@
+import { Http } from '@angular/http';
+import { KV } from './../../model/kv';
+import { Observable } from 'rxjs/Rx';
+import { LoadInputComponent } from './../common/load-input/load-input.component';
+import { MaterialInputComponent } from './../common/material-input/material-input.component';
 import { InputBase } from './../../model/inputbase';
 import { EventService } from './../../event.service';
 import { DesignInputComponent } from './../common/design-input/design-input.component';
@@ -22,28 +27,74 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
   @ViewChild(EquipmentInputComponent) equipmentInput: EquipmentInputComponent;
   @ViewChild(DesignInputComponent) designInput: DesignInputComponent;
+  @ViewChild(MaterialInputComponent) materialInput: MaterialInputComponent;
+  @ViewChild(LoadInputComponent) loadInput: LoadInputComponent;
 
   form: FormGroup;
 
-  constructor(private cdRef: ChangeDetectorRef, eventService: EventService) {
+  stressRatios: Observable<KV[]>;
+
+  constructor(
+    private http: Http,
+    private cdRef: ChangeDetectorRef,
+    eventService: EventService) {
     super(eventService);
   }
 
   ngAfterViewInit(): void {
+    this.form = FFSInputBase.toFormGroup(this.inputs);
+
     this.equipmentInput.form.valueChanges.subscribe(f => {
       let inputs = f as InputBase;
       this.valueChangedSubject.next(inputs);
     });
+
+    // calculate
+    this.eventService.requestCalculateSubject.subscribe(() => {
+      // TODO check form valid ?
+
+      // NEED GET RAWDATA because to include disabled value
+      let equipmentInput = this.equipmentInput.form.getRawValue() as InputBase;
+      let designInput = this.designInput.form.getRawValue() as InputBase;
+      let materialInput = this.materialInput.form.getRawValue() as InputBase;
+      let loadInput = this.loadInput.form.getRawValue() as InputBase;
+      let flawInput = this.form.getRawValue();
+
+      // merge
+      let calculationParam = {
+        ...equipmentInput,
+        ...designInput,
+        ...materialInput,
+        ...flawInput,
+        ...loadInput
+      }
+
+      console.log(calculationParam);
+      this.eventService.calculatingSubject.emit(null);
+      setTimeout(() => {
+        let result = calculationParam;
+
+        this.eventService.calculatingSubject.emit(result);
+        this.eventService.calculatedSubject.emit(result);
+      }, 500);
+    });
+
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
 
+    this.form.get("AutomaticcallyTheMinimumAllowableTemperature").valueChanges.subscribe((v: boolean) => {
+      if (v)
+        this.form.get("TheMinimumAllowableTemperature").disable();
+      else
+        this.form.get("TheMinimumAllowableTemperature").enable();
+    });
 
     this.designInput.form.get("componentShapeID").disable();
     this.designInput.form.get("autoCalculateMinRequireThickness").setValue(true);
-
+    this.form.get("ReductionInTheMATID").disable();
+    this.form.get("AutomaticcallyTheMinimumAllowableTemperature").disable();
+    this.form.get("AutomaticcallyTheMinimumAllowableTemperature").setValue(true);
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
     this.cdRef.detectChanges();
-
-
   }
 
   // get level(): number {
@@ -54,12 +105,11 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   // }
 
   ngOnInit() {
-
+    this.stressRatios = this.http.get("/api/lookup/reductions")
+      .map(response => response.json() as any[])
+      .map(arr => arr.map(a => { return { key: a.reductionInTheMATID, value: a.reductionInTheMATName }; }));
   }
 
-  onSubmit() {
-    console.log(this.form.value);
-  }
 
   initDesignInput() {
     this.designInput.init(this.equipmentInput.Inputs);

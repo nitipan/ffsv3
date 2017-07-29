@@ -12,20 +12,20 @@
     <div class="row">
       <div class="col-md-8">
         <app-panel>
-          <ffs-number label="The Critical Exporsure Temperature" unit="°C"></ffs-number>
-          <ffs-number label="The Uncorroded Governing Thickness" unit="mm"></ffs-number>
+          <ffs-number label="The Critical Exporsure Temperature" key="TheCriticalExposureTemperature" unit="°C"></ffs-number>
+          <ffs-number label="The Uncorroded Governing Thickness" key="TheUncorrodedGoverningThickness" unit="mm"></ffs-number>
         </app-panel>
         <app-panel>
-          <ffs-check label="The component was fabricated from ASME P1 Group 1 or P1 Group 2 material"></ffs-check>
-          <ffs-check label="The component has a wall thickness that is less than or equal to 38 mm (1.5 inches)"></ffs-check>
-          <ffs-check label="The component was subjected to PWHT"></ffs-check>
+          <ffs-check label="The component was fabricated from ASME P1 Group 1 or P1 Group 2 material" key="Fabricated"></ffs-check>
+          <ffs-check label="The component has a wall thickness that is less than or equal to 38 mm (1.5 inches)" key="WallThickness38"></ffs-check>
+          <ffs-check label="The component was subjected to PWHT" key="PWHT"></ffs-check>
         </app-panel>
         <app-panel>
-          <ffs-select label="Stress Ratio"></ffs-select>
+          <ffs-select label="Stress Ratio" key="ReductionInTheMATID" [options]="stressRatios | async" value="1"></ffs-select>
           <p>
-            <ffs-check label="Automatically The Minimum Allowable Temperature"></ffs-check>
+            <ffs-check label="Automatically The Minimum Allowable Temperature" key="AutomaticcallyTheMinimumAllowableTemperature" value="true"></ffs-check>
           </p>
-          <ffs-number label="The Minimum Allowable Temperature" unit="°C"></ffs-number>
+          <ffs-number label="The Minimum Allowable Temperature" key="TheMinimumAllowableTemperature" unit="°C"></ffs-number>
         </app-panel>
       </div>
       <div class="col-md-3">

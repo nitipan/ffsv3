@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { Input, EventEmitter } from '@angular/core';
 export abstract class WizardStepBase {
 
     @Input()
@@ -15,4 +15,7 @@ export abstract class WizardStepBase {
 
     @Input()
     calculateVisible = false;
+
+    @Input()
+    requestActive: EventEmitter<WizardStepBase> = new EventEmitter();
 }

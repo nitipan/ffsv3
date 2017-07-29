@@ -105,6 +105,16 @@ namespace ffs.api
                     return Response.AsJson(result);
                 }
             };
+
+            Get["/reductions"] = x =>
+            {
+                using (var db = DbContext.Get())
+                {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT * FROM [ReductionInTheMAT]");
+                    return Response.AsJson(result);
+                }
+            };
+
         }
     }
 }

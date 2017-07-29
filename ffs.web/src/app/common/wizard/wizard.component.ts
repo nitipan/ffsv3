@@ -1,3 +1,4 @@
+import { EventService } from './../../event.service';
 
 import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { WizardStepBase } from "./wizard-step-base";
@@ -15,12 +16,12 @@ export class WizardComponent implements OnInit, AfterContentInit {
 
   @Output() stepChanged: EventEmitter<WizardStepBase> = new EventEmitter();
 
-  step: WizardStepBase = { title: "", active: false, nextVisible: true, backVisible: true, calculateVisible: false };
+  step: WizardStepBase = { title: "", active: false, nextVisible: true, backVisible: true, calculateVisible: false, requestActive: new EventEmitter() };
 
   canBack = false;
   canNext = true;
 
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
   }
@@ -32,6 +33,12 @@ export class WizardComponent implements OnInit, AfterContentInit {
       this.selectStep(this.steps.first);
     else
       this.selectStep(activetab[0]);
+
+    this.steps.forEach(i => {
+      i.requestActive.subscribe(s => {
+        this.selectStep(s);
+      });
+    });
   }
 
   selectStep(step: WizardStepBase) {
@@ -62,6 +69,10 @@ export class WizardComponent implements OnInit, AfterContentInit {
       var nextStep = this.steps.toArray()[currentIndex + 1];
       this.selectStep(nextStep);
     }
+  }
+
+  calculate() {
+    this.eventService.requestCalculateSubject.emit();
   }
 }
 

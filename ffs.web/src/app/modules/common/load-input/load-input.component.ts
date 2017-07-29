@@ -1,3 +1,4 @@
+import { EventService } from './../../../event.service';
 import { InputBase } from './../../../model/inputbase';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
@@ -13,8 +14,15 @@ export class LoadInputComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
   form: FormGroup;
+  calculating: boolean;
 
-  constructor(private cdRef: ChangeDetectorRef) { }
+  constructor(private cdRef: ChangeDetectorRef, private eventService: EventService) {
+
+    eventService.calculatingSubject.subscribe(v => {
+      this.calculating = v == null;
+    });
+
+  }
 
   ngOnInit() {
   }

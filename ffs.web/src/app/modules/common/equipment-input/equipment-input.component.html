@@ -18,12 +18,16 @@
     </app-panel>
   </div>
   <div class="col-md-6">
-    <div class="row">
-      <img src="assets/equipment1.png" class="img-responsive" />
+    <div class="row" *ngIf="currentValue != undefined">
+      <img src="assets/equipment1.png" class="img-responsive" *ngIf="currentValue.equipmentType == 1 || currentValue.equipmentType == 2"
+      />
+      <div class="col-md-6 col-md-offset-3">
+        <img src="assets/equipment3.png" class="img-responsive" *ngIf="currentValue.equipmentType == 3" />
+      </div>
     </div>
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2 mt-md-3" style="margin-top:10px;">
-        <img [attr.src]="previewEquipmentImage" class="img-responsive" *ngIf="previewEquipmentImage != ''" />
+    <div class="row ">
+      <div class="col-md-8 col-md-offset-2 mt-md-3 " style="margin-top:10px; ">
+        <img [attr.src]="previewEquipmentImage " class="img-responsive " *ngIf="previewEquipmentImage !='' " />
       </div>
     </div>
   </div>

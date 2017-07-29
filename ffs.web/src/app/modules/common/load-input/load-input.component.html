@@ -1,8 +1,18 @@
+<div class="row" *ngIf="calculating">
+  <div class="col-md-12">
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+        style="width: 100%">
+
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-6">
     <app-panel title="Operating Load">
       <ffs-number label="Pressure" key="operatingPressure" unit="MPa"></ffs-number>
-      <ffs-number label="Temperature" unit="°C"></ffs-number>
+      <ffs-number label="Temperature" key="operatingTemperature" unit="°C"></ffs-number>
     </app-panel>
     <app-panel title="Norminal Stress">
       <p>
