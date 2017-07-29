@@ -13,8 +13,13 @@ export abstract class ModuleBase {
             this.initMaterialInput();
         else if (step instanceof FlawStepComponent)
             this.initFlawInput();
-        else if (step instanceof LoadsStepComponent)
+        else if (step instanceof LoadsStepComponent) {
+            step.nextVisible = false;
             this.initLoadInput();
+        } else if (step instanceof ResultStepComponent) {
+            step.nextVisible = false;
+            step.backVisible = false;
+        }
     }
 
     abstract initDesignInput();

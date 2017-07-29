@@ -29,7 +29,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
 
 
-    //this.designInput.form.get("componentShapeID").disable();
+    this.designInput.form.get("componentShapeID").disable();
     this.designInput.form.get("autoCalculateMinRequireThickness").setValue(true);
 
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE

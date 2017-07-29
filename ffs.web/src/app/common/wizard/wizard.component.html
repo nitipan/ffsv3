@@ -15,10 +15,10 @@
       </div>
       <div class="col-md-5 text-right" style="margin-top:20px;">
 
-        <button type="button" class="btn btn-primary" (click)="backStep()" [disabled]="!canBack">
+        <button type="button" class="btn btn-primary" (click)="backStep()" [disabled]="!canBack" *ngIf="step.backVisible">
           <span class="glyphicon glyphicon-menu-left"></span>  Back
         </button>
-        <button type="button" class="btn btn-primary" (click)="nextStep()" [disabled]="!canNext">
+        <button type="button" class="btn btn-primary" (click)="nextStep()" [disabled]="!canNext" *ngIf="step.nextVisible">
           Next <span class="glyphicon glyphicon-menu-right"></span>
         </button>
 

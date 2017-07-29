@@ -1,3 +1,9 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header"> <a href="#" class="navbar-brand"> <img alt="Brand"  src="https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Siam_Cement_Group_Logo.svg/1200px-Siam_Cement_Group_Logo.svg.png" height="50"> </a>      </div>
+  </div>
+</nav>
+
 <app-wizard (stepChanged)="onStepChange($event)">
   <equipment>
     <app-equipment-input></app-equipment-input>
@@ -9,7 +15,31 @@
     <app-material-input></app-material-input>
   </material>
   <flaw>
-    <label>flaw inputs</label>
+    <div class="row">
+      <div class="col-md-8">
+        <app-panel>
+          <ffs-number label="The Critical Exporsure Temperature" unit="°C"></ffs-number>
+          <ffs-number label="The Uncorroded Governing Thickness" unit="mm"></ffs-number>
+        </app-panel>
+        <app-panel>
+          <ffs-check label="The component was fabricated from ASME P1 Group 1 or P1 Group 2 material"></ffs-check>
+          <ffs-check label="The component has a wall thickness that is less than or equal to 38 mm (1.5 inches)"></ffs-check>
+          <ffs-check label="The component was subjected to PWHT"></ffs-check>
+        </app-panel>
+        <app-panel>
+          <ffs-select label="Stress Ratio"></ffs-select>
+          <p>
+            <ffs-check label="Automatically The Minimum Allowable Temperature"></ffs-check>
+          </p>
+          <ffs-number label="The Minimum Allowable Temperature" unit="°C"></ffs-number>
+        </app-panel>
+      </div>
+      <div class="col-md-3">
+        <div class="row">
+          <img src="assets/brittle.png" class="img-responsive" />
+        </div>
+      </div>
+    </div>
   </flaw>
   <loads>
     <app-load-input></app-load-input>

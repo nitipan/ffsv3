@@ -15,7 +15,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
 
   @Output() stepChanged: EventEmitter<WizardStepBase> = new EventEmitter();
 
-  step: WizardStepBase = { title: "", active: false };
+  step: WizardStepBase = { title: "", active: false, nextVisible: true, backVisible: true };
 
   canBack = false;
   canNext = true;
