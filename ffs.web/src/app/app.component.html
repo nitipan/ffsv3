@@ -1,7 +1,14 @@
-<nav class="ffs-nav navbar navbar-default navbar-fixed-top">
+<nav class="ffs-nav navbar navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header ffs-logo"> <a routerLink="/home" class="navbar-brand"> <img alt="Brand"  src="/assets/logo.png" height="50"> </a> </div>
-    <div class="navbar-header scg-logo"> <a routerLink="/home" class="navbar-brand"> <img alt="Brand"  src="/assets/scg_logo.png" height="50"> </a> </div>
+    <div class="navbar-header">
+      <a routerLink="/home" class="navbar-brand"> <img alt="REPCO Fitness For Service 3.0"  class="ffs-logo" src="/assets/logo.png" height="50"> </a>
+      <a routerLink="/home" class="navbar-brand"> <img alt="Brand" class="scg-logo" src="/assets/scg_logo.png" height="50"> </a>
+
+
+      <h2 class="navbar-brand module-title" *ngIf="currentModule != null">{{currentModule.name}}</h2>
+    </div>
+
+    <p class="nav-help navbar-text navbar-right" *ngIf="currentModule != null"><a href="#" class="navbar-link">Help</a></p>
   </div>
 </nav>
 <div class="container-fluid">

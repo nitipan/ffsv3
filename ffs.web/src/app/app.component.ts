@@ -1,4 +1,6 @@
+import { EventService } from './event.service';
 import { Component } from '@angular/core';
+import { ModuleBase } from "./modules/module-base.component";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+
+  private currentModule: ModuleBase = null;
+
+  constructor(private eventService: EventService) {
+
+    eventService.calculationModuleSubject.subscribe(c => {
+      this.currentModule = c;
+    });
+
+  }
 }

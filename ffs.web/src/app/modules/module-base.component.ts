@@ -1,10 +1,18 @@
+import { EventService } from './../event.service';
 import { DesignStepComponent, MaterialStepComponent, FlawStepComponent, LoadsStepComponent, ResultStepComponent, EquipmentStepComponent } from './steps/steps.component';
-import { QueryList } from '@angular/core';
+import { QueryList, OnDestroy } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { FFSInputBase } from "../common/inputs/ffs-input-base";
 import { WizardStepBase } from "../common/wizard/wizard-step-base";
 
-export abstract class ModuleBase {
+export abstract class ModuleBase implements OnDestroy {
+
+    constructor(protected eventService: EventService) {
+        eventService.calculationModuleSubject.next(this);
+    }
+    ngOnDestroy(): void {
+        this.eventService.calculationModuleSubject.next(null);
+    }
 
     onStepChange(step: WizardStepBase) {
         if (step instanceof EquipmentStepComponent) {
@@ -25,6 +33,8 @@ export abstract class ModuleBase {
             step.backVisible = false;
         }
     }
+
+    abstract name: string;
 
     abstract initDesignInput();
 

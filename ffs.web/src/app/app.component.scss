@@ -1,42 +1,24 @@
-/* .modal-fullscreen */
-
-.modal-fullscreen .modal-content {
-  border: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+.ffs-nav {
+  background-color: rgba(51, 51, 51, 0.9);
+  height: 80px;
+  .ffs-logo {
+    border-radius: 4px;
+  }
+  border-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0px;
+  .module-title {
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 40px;
+    line-height: 15px;
+    margin-left: 10px;
+  }
+  .nav-help {
+    padding: 10px;
+    font-size: 25px;
+    padding-right: 30px;
+    text-transform: uppercase;
+    a {
+      color: rgba(255, 255, 255, 0.87);
+    }
+  }
 }
-
-.modal-backdrop.modal-backdrop-fullscreen {
-  background: #ffffff;
-}
-
-.modal-backdrop.modal-backdrop-fullscreen.in {
-  opacity: .97;
-  filter: alpha(opacity=97);
-}
-
-
-/* .modal-fullscreen size: we use Bootstrap media query breakpoints */
-
-.modal-fullscreen .modal-dialog {
-  margin: 0;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
-}
-
-// @media (min-width: 768px) {
-//   .modal-fullscreen .modal-dialog {
-//     width: 750px;
-//   }
-// }
-// @media (min-width: 992px) {
-//   .modal-fullscreen .modal-dialog {
-//     width: 970px;
-//   }
-// }
-// @media (min-width: 1200px) {
-//   .modal-fullscreen .modal-dialog {
-//     width: 1170px;
-//   }
-// }

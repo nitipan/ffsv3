@@ -1,5 +1,4 @@
 .wizard-component {
-  background: white;
   * {
     border-radius: 0 !important;
   }
@@ -13,7 +12,19 @@
     border-left: 0;
     border-bottom: 13px solid transparent;
     border-top: 13px solid transparent;
-    border-left: 10px solid #337ab7;
+    border-left: 10px solid #0277BD;
+  }
+  .list-group-item {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.98);
+  }
+  .list-group-item.active,
+  .list-group-item.active:focus,
+  .list-group-item.active:hover {
+    z-index: 2;
+    color: white;
+    background-color: #0277BD;
+    border-color: #0277BD;
   }
   .icon-custom {
     display: block;
@@ -41,4 +52,10 @@
   .icon-custom-result {
     background-image: url("/assets/result.png");
   }
+}
+
+.wizard-component-container {
+  margin-left: -5px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }

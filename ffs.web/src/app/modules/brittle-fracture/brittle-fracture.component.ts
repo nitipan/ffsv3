@@ -1,3 +1,4 @@
+import { EventService } from './../../event.service';
 import { DesignInputComponent } from './../common/design-input/design-input.component';
 import { EquipmentInputComponent } from './../common/equipment-input/equipment-input.component';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
@@ -13,6 +14,9 @@ import { FFSInputBase } from "../../common/inputs/ffs-input-base";
 })
 export class BrittleFractureComponent extends ModuleBase implements OnInit, AfterViewInit {
 
+  // MUST BE NAMED
+  name = "Brittle Fracture";
+
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
 
   @ViewChild(EquipmentInputComponent) equipmentInput: EquipmentInputComponent;
@@ -20,8 +24,8 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
   form: FormGroup;
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    super();
+  constructor(private cdRef: ChangeDetectorRef, eventService: EventService) {
+    super(eventService);
   }
 
   ngAfterViewInit(): void {
