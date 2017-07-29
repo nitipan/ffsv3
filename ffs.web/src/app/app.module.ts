@@ -4,6 +4,7 @@ import { EquipmentStepComponent, DesignStepComponent, MaterialStepComponent, Fla
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { TopnavComponent } from './common/topnav/topnav.component';
@@ -16,6 +17,20 @@ import { EquipmentInputComponent } from './modules/common/equipment-input/equipm
 import { DesignInputComponent } from './modules/common/design-input/design-input.component';
 import { MaterialInputComponent } from './modules/common/material-input/material-input.component';
 import { LoadInputComponent } from './modules/common/load-input/load-input.component';
+import { HomeComponent } from './home/home.component';
+
+
+const appRoutes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'brittle', component: BrittleFractureComponent },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  }
+];
+
+
 
 @NgModule({
   declarations: [
@@ -34,9 +49,13 @@ import { LoadInputComponent } from './modules/common/load-input/load-input.compo
     EquipmentInputComponent,
     DesignInputComponent,
     MaterialInputComponent,
-    LoadInputComponent
+    LoadInputComponent,
+    HomeComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes
+    ),
     FFSInputModule,
     BrowserModule,
     FormsModule,

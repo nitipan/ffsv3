@@ -1,7 +1,7 @@
 <div class="wizard-component row">
   <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
     <div class="list-group">
-      <a href="#" class="list-group-item text-center" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active">
+      <a class="list-group-item text-center" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active">
         <span class="icon-custom icon-custom-{{step.title | lowercase}}"></span>
         <span>{{step.title}}</span>
       </a>
@@ -10,10 +10,10 @@
 
   <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 wizard-component-container">
     <div class="row" style="border-bottom:1px #ddd solid;">
-      <div class="col-md-7">
+      <div class="col-md-5">
         <h2 class="title">{{step.title}}</h2>
       </div>
-      <div class="col-md-5 text-right" style="margin-top:20px;">
+      <div class="col-md-7 text-right" style="margin-top:20px;">
 
         <button type="button" class="btn btn-primary" (click)="backStep()" [disabled]="!canBack" *ngIf="step.backVisible">
           <span class="glyphicon glyphicon-menu-left"></span>  Back
@@ -22,6 +22,13 @@
           Next <span class="glyphicon glyphicon-menu-right"></span>
         </button>
 
+        <button type="button" class="btn btn-success" *ngIf="step.calculateVisible"><span class="glyphicon glyphicon-hourglass"></span>      Calculate
+        </button>
+
+        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-folder-open"></span>      Open
+        </button>
+        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>       New
+        </button>
         <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span>  Save
         </button>
       </div>

@@ -12,4 +12,7 @@ export abstract class WizardStepBase {
 
     @Input()
     backVisible = true;
+
+    @Input()
+    calculateVisible = false;
 }
