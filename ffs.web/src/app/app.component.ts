@@ -19,6 +19,8 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.eventService.calculationModuleSubject.subscribe(c => {
+      if (c == null)
+        this.commonInput = null;
 
       this.currentModule = c;
 
