@@ -1,4 +1,5 @@
 <app-wizard (stepChanged)="onStepChange($event)">
+<<<<<<< HEAD
     <equipment>
         <app-equipment-input></app-equipment-input>
     </equipment>
@@ -57,14 +58,78 @@
                         Graph
                     </app-tab-item>
                 </app-tab>
+=======
+  <equipment>
+    <app-equipment-input></app-equipment-input>
+  </equipment>
+  <design>
+    <app-design-input></app-design-input>
+  </design>
+  <material>
+    <app-material-input></app-material-input>
+  </material>
+  <flaw active="true">
+    <div class="row">
+      <div class="col-md-12">
+        <app-tab>
+          <app-tab-item title="Dimension">
+            <div class="row">
+              <div class="col-md-7">
+                <app-panel title="Dimension">
+                  <ffs-select label="Thickness Data" key="thicknessDataID" [options]="thicknessDatas | async" value="2"></ffs-select>
+                  <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance"></ffs-number>
+                  <ffs-browse label="Import Data" key="" accept=".xlsx,.xls"></ffs-browse>
+                </app-panel>
+                <app-panel title="Grid Spacing">
+                  <ffs-number label="Longitudinal" key="widthOfTheLongGrid" [unit]="(unit | async)?.distance"></ffs-number>
+                  <ffs-number label="Circumferential" key="widthOfTheCirGrid" [unit]="(unit | async)?.distance"></ffs-number>
+                </app-panel>
+              </div>
+              <div class="col-md-5">
+                <div class="row">
+                  <div class="col-md-11 text-center">
+                    <img src="assets/profile.png" style="width:100%" class="img-responsive" />
+                  </div>
+                </div>
+                <div class="row" style="margin-top:20px;">
+                  <div class="col-md-12">
+                    <app-panel title="Remaining Strength Factor, RSF">
+                      <ffs-check label="Automatically Allowable RSF" key="autoAllowableRSF"></ffs-check>
+                      <ffs-number label="Allowable RSF" key="allowRSF"></ffs-number>
+                    </app-panel>
+                  </div>
+                </div>
+              </div>
+>>>>>>> 107afade9544daabd1f855d7ccb35ff601c69ccf
             </div>
+            <div class="row">
+              <div class="col-md-7">
+                <app-panel title="Number of Grid">
+                  <ffs-number label="Longitudinal" key="numberOfInspectionRow"></ffs-number>
+                  <ffs-number label="Circumferential" key="numberOfInspectionColumn"></ffs-number>
+                </app-panel>
+              </div>
 
-        </div>
-    </flaw>
-    <loads>
-        <app-load-input></app-load-input>
-    </loads>
-    <result>
-        <app-result></app-result>
-    </result>
+            </div>
+          </app-tab-item>
+          <app-tab-item title="Color Dimension">
+            Color Dimension
+          </app-tab-item>
+          <app-tab-item title="Inspection Grid">
+            Inspection Grid
+          </app-tab-item>
+          <app-tab-item title="Graph">
+            Graph
+          </app-tab-item>
+        </app-tab>
+      </div>
+
+    </div>
+  </flaw>
+  <loads>
+    <app-load-input></app-load-input>
+  </loads>
+  <result>
+    <app-result></app-result>
+  </result>
 </app-wizard>
