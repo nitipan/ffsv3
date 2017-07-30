@@ -11,11 +11,14 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { ModuleBase } from './../module-base.component';
 import { Component, OnInit, Injectable, Input, QueryList, ContentChildren, AfterContentInit, forwardRef, AfterViewInit, ViewChildren, ViewChild, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { FFSInputBase } from '../../common/inputs/ffs-input-base';
+import { routerTransition } from "../../common/router.animations";
 
 @Component({
   selector: 'app-local-metal-loss',
   templateUrl: './local-metal-loss.component.html',
-  styleUrls: ['./local-metal-loss.component.scss']
+  styleUrls: ['./local-metal-loss.component.scss'],
+  animations: [routerTransition()],
+  host: { '[@routerTransition]': '' }
 })
 export class LocalMetalLossComponent extends ModuleBase implements OnInit, AfterViewInit {
 
