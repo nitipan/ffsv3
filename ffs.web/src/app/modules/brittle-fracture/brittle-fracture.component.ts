@@ -16,11 +16,14 @@ import { FFSInputBase } from "../../common/inputs/ffs-input-base";
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { routerTransition } from "../../common/router.animations";
 
 @Component({
   selector: 'app-brittle-fracture',
   templateUrl: './brittle-fracture.component.html',
-  styleUrls: ['./brittle-fracture.component.scss']
+  styleUrls: ['./brittle-fracture.component.scss'],
+  animations: [routerTransition()],
+  host: { '[@routerTransition]': '' }
 })
 export class BrittleFractureComponent extends ModuleBase implements OnInit, AfterViewInit {
 

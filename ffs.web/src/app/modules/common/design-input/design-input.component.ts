@@ -44,20 +44,6 @@ export class DesignInputComponent implements OnInit, AfterViewInit {
         this.form.get("minRequireCircumferentialThickness").enable();
       }
     });
-  }
-
-  init(input: InputBase) {
-
-    this.form.get("componentTypeID").setValue("");
-    this.componentType = this.http.get(`/api/lookup/componenttypes/${input.equipmentType}`)
-      .map(response => response.json() as any[])
-      .map(arr => arr.map(a => { return { key: a.componentTypeID, value: a.componentTypeName }; }));
-
-    this.componentType.subscribe(c => {
-      if (c.length > 0 && this.form.get("componentTypeID").value === "") {
-        this.form.get("componentTypeID").setValue(c[0].key);
-      }
-    });
 
     this.form.get("componentShapeID").setValue("");
     this.componentShape = this.http.get(`/api/lookup/componentshapes`)
@@ -70,19 +56,39 @@ export class DesignInputComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.form.get("designCode").setValue("");
-    this.codeDesign = this.http.get(`/api/lookup/designcodes/${input.equipmentType}`)
-      .map(response => response.json() as any[])
-      .map(arr => arr.map(a => { return { key: a.designCodeID, value: a.designCodeName }; }));
 
-    this.codeDesign.subscribe(c => {
-      if (c.length > 0 && this.form.get("designCode").value === "") {
-        this.form.get("designCode").setValue(c[0].key);
-      }
+    this.eventService.equipmentTypeSubject.subscribe(equipmentType => {
+
+      this.form.get("componentTypeID").setValue("");
+      this.componentType = this.http.get(`/api/lookup/componenttypes/${equipmentType}`)
+        .map(response => response.json() as any[])
+        .map(arr => arr.map(a => { return { key: a.componentTypeID, value: a.componentTypeName }; }));
+
+      this.componentType.subscribe(c => {
+        if (c.length > 0 && this.form.get("componentTypeID").value === "") {
+          this.form.get("componentTypeID").setValue(c[0].key);
+        }
+      });
+
+
+      this.form.get("designCode").setValue("");
+      this.codeDesign = this.http.get(`/api/lookup/designcodes/${equipmentType}`)
+        .map(response => response.json() as any[])
+        .map(arr => arr.map(a => { return { key: a.designCodeID, value: a.designCodeName }; }));
+
+      this.codeDesign.subscribe(c => {
+        if (c.length > 0 && this.form.get("designCode").value === "") {
+          this.form.get("designCode").setValue(c[0].key);
+        }
+      });
     });
 
 
+    // SPECIAL CODE
+    this.eventService.equipmentTypeSubject.emit(1);
   }
+
+
 
 
 }

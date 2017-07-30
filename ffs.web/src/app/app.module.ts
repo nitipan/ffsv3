@@ -1,6 +1,7 @@
 import { TabItemComponent } from './common/tab/tab-item.component';
 import { EventService } from './event.service';
 import { FFSInputModule } from './app.modue.ffs-input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EquipmentStepComponent, DesignStepComponent, MaterialStepComponent, FlawStepComponent, LoadsStepComponent, ResultStepComponent } from './modules/steps/steps.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -71,6 +72,7 @@ const appRoutes: Routes = [
     ),
     FFSInputModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule
