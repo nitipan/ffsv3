@@ -6,7 +6,24 @@
     <p *ngIf="result?.result?.resultBool" class="bg-success" style="padding:15px;"><i class="glyphicon glyphicon-ok"></i>&nbsp;&nbsp;{{result?.result?.result}}</p>
     <p *ngIf="!result?.result?.resultBool" class="bg-danger" style="padding:15px;"><i class="glyphicon glyphicon glyphicon-remove"></i>&nbsp;&nbsp;{{result?.result?.result}}</p>
   </div>
-  <div class="col-md-12" *ngIf="result?.param.assessmentLevel == 2">
+  <div class="col-md-6" *ngIf="result?.param.assessmentLevel == 2">
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th>Pratio*Pdesign</th>
+          <th>TR</th>
+          <th>MATreduce</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of level2Grid" [class.danger]="!row.result" [class.success]="row.result">
+          <td>{{row.col1}}</td>
+          <td>{{row.col2}}</td>
+          <td>{{row.col3}}</td>
+          <td>{{row.col4}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  {{result | json}}
 </div>
