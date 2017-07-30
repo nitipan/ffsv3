@@ -27,13 +27,12 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="row">
-                                    <div class="col-md-10 col-md-offset-2">
-                                        <img src="assets/profile.png" class="thickness-data-img" />
+                                    <div class="col-md-11 text-center">
+                                        <img src="assets/profile.png" style="width:100%" class="img-responsive" *ngIf="thicknessImage == 1" />
+                                        <img src="assets/point.png" style="width:100%" class="img-responsive" *ngIf="thicknessImage == 2" />
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-7">
                                 <app-panel title="Number of Grid">
                                     <ffs-number label="Longitudinal" key="numberOfInspectionRow"></ffs-number>

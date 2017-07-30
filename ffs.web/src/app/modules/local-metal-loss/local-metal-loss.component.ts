@@ -103,6 +103,10 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
     this.thicknessDatas = this.http.get("/api/lookup/thicknessdatas")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.thicknessDataID, value: a.thicknessDataName }; }));
+
+    this.thicknessDatas.subscribe((m: KV[]) => {
+      this.form.get('thicknessDataID').setValue(m[1].key);
+    });
   }
 
 

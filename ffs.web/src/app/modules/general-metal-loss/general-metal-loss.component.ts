@@ -34,7 +34,7 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
   @ViewChild(LoadInputComponent) loadInput: LoadInputComponent;
 
   form: FormGroup;
-
+  thicknessImage: any;
   thicknessDatas: Observable<KV[]>;
   unit: Observable<IUnit>;
 
@@ -49,7 +49,9 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
 
-
+    this.form.get('thicknessDataID').valueChanges.subscribe(x => {
+      this.thicknessImage = x;
+    });
 
     // calculate
     this.eventService.requestCalculateSubject.subscribe(() => {
@@ -83,10 +85,9 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
 
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
     // this.form.get('ThicknessDataTypeID').disable();
-
+    //this.thicknessImage = this.form.get('thicknessDataID').value();
     this.form.get('autoAllowableRSF').setValue(true);
     this.form.get('allowRSF').disable();
-    this.form.get('thicknessDataID').disable();
     this.designInput.form.get('autoCalculateMinRequireThickness').setValue(true);
 
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
@@ -97,6 +98,9 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
     this.thicknessDatas = this.http.get("/api/lookup/thicknessdatas")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.thicknessDataID, value: a.thicknessDataName }; }));
+    this.thicknessDatas.subscribe((m: KV[]) => {
+      this.form.get('thicknessDataID').setValue(m[0].key);
+    });
   }
 
 
