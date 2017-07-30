@@ -22,6 +22,7 @@ import { LoadInputComponent } from './modules/common/load-input/load-input.compo
 import { HomeComponent } from './home/home.component';
 import { ResultComponent } from './modules/common/result/result.component';
 import { LocalMetalLossComponent } from './modules/local-metal-loss/local-metal-loss.component';
+import { GeneralMetalLossComponent } from './modules/general-metal-loss/general-metal-loss.component';
 import { TabComponent } from './common/tab/tab.component';
 
 
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'brittle', component: BrittleFractureComponent },
   { path: 'localmetalloss', component: LocalMetalLossComponent },
+  { path: 'generalmetalloss', component: GeneralMetalLossComponent },
   {
     path: '',
     redirectTo: '/home',
@@ -59,6 +61,7 @@ const appRoutes: Routes = [
     HomeComponent,
     ResultComponent,
     LocalMetalLossComponent,
+    GeneralMetalLossComponent,
     TabComponent,
     TabItemComponent
   ],
