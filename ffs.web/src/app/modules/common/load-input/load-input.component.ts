@@ -1,3 +1,5 @@
+import { IUnit } from './../../../common/unit';
+import { Observable } from 'rxjs/Rx';
 import { EventService } from './../../../event.service';
 import { InputBase } from './../../../model/inputbase';
 import { FormGroup } from '@angular/forms';
@@ -15,13 +17,14 @@ export class LoadInputComponent implements OnInit, AfterViewInit {
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
   form: FormGroup;
   calculating: boolean;
-
+  unit: Observable<IUnit>;
   constructor(private cdRef: ChangeDetectorRef, private eventService: EventService) {
 
     eventService.calculatingSubject.subscribe(v => {
       this.calculating = v == null;
     });
 
+    this.unit = this.eventService.unit.asObservable();
   }
 
   ngOnInit() {

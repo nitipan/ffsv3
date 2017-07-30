@@ -1,3 +1,4 @@
+import { IUnit } from './../../common/unit';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
@@ -38,7 +39,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   @ViewChild(LoadInputComponent) loadInput: LoadInputComponent;
 
   form: FormGroup;
-
+  unit: Observable<IUnit>;
   stressRatios: Observable<KV[]>;
 
   constructor(
@@ -46,6 +47,8 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     private cdRef: ChangeDetectorRef,
     eventService: EventService) {
     super(eventService);
+
+    this.unit = this.eventService.unit.asObservable();
   }
 
   ngAfterViewInit(): void {
