@@ -67,6 +67,10 @@ export class EquipmentInputComponent implements OnInit, AfterViewInit {
       this.eventService.unit.next(v == 1 ? new SIUnit() : new MatricUnit());
     });
     this.form.get("unitID").setValue(1);
+
+    this.form.get("equipmentType").valueChanges.subscribe(v => {
+      this.eventService.equipmentTypeSubject.emit(v);
+    });
   }
 
   get Inputs(): InputBase {

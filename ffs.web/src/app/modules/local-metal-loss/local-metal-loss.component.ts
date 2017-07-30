@@ -111,7 +111,7 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
 
 
   initDesignInput() {
-    this.designInput.init(this.equipmentInput.Inputs);
+    // NO NEED
   }
 
   initMaterialInput() {
