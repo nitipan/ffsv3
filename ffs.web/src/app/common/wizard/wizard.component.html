@@ -1,11 +1,17 @@
 <div class="wizard-component row">
-  <div class="col-md-2">
+  <div class="col-md-2 hidden-sm hidden-xs">
     <div class="list-group">
       <a class="list-group-item text-center" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active">
         <span class="icon-custom icon-custom-{{step.title | lowercase}}"></span>
         <span>{{step.title}}</span>
       </a>
     </div>
+  </div>
+
+  <div class="col-md-12 hidden-md hidden-lg" style="background:whitesmoke;">
+    <ul class="nav nav-pills">
+      <li role="presentation" style="cursor:pointer;" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active"><a>{{step.title}}</a></li>
+    </ul>
   </div>
 
   <div class="col-md-10 wizard-component-container">

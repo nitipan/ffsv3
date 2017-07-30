@@ -17,11 +17,11 @@
 
 
 
-      <h2 class="navbar-brand module-title" *ngIf="currentModule != null">{{currentModule.name}}</h2>
-      <h1 class="navbar-brand" *ngIf="commonInput != null"><span class="label label-default" style="font-size:20px;">Level {{commonInput.assessmentLevel}}</span></h1>
+      <h2 class="hidden-sm hidden-xs navbar-brand module-title" *ngIf="currentModule != null">{{currentModule.name}}</h2>
+      <h1 class="hidden-sm hidden-xs navbar-brand" *ngIf="commonInput != null"><span class="label label-default" style="font-size:20px;">Level {{commonInput.assessmentLevel}}</span></h1>
     </div>
 
-    <p class="nav-help navbar-text navbar-right " *ngIf="currentModule !=null "><a href="# " class="navbar-link ">Help</a></p>
+    <p class="hidden-sm hidden-xs nav-help navbar-text navbar-right" *ngIf="currentModule !=null "><a href="# " class="navbar-link ">Help</a></p>
   </div>
 </nav>
 <div class="container-fluid ">
