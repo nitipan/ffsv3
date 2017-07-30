@@ -6,10 +6,10 @@
       <ffs-select label="Code Design" key="designCode" [options]="codeDesign | async"></ffs-select>
     </app-panel>
     <app-panel title="Geometry Design">
-      <ffs-number label="Internal Diameter" key="insideDiameter" unit="mm"></ffs-number>
-      <ffs-number label="Norminal Thickness" key="nominalThickness" unit="mm"></ffs-number>
-      <ffs-number label="Uniform Metal Loss" key="loss" unit="mm"></ffs-number>
-      <ffs-number label="Future Corrosion Allowance" key="fca" unit="mm"></ffs-number>
+      <ffs-number label="Internal Diameter" key="insideDiameter" [unit]="(unit | async)?.distance"></ffs-number>
+      <ffs-number label="Norminal Thickness" key="nominalThickness" [unit]="(unit | async)?.distance"></ffs-number>
+      <ffs-number label="Uniform Metal Loss" key="loss" [unit]="(unit | async)?.distance"></ffs-number>
+      <ffs-number label="Future Corrosion Allowance" key="fca" [unit]="(unit | async)?.distance"></ffs-number>
       <ffs-number label="Weld Join Efficiency" key="weldJointEfficiency"></ffs-number>
     </app-panel>
   </div>
@@ -18,12 +18,12 @@
       <p>
         <ffs-check label="Automatically Calculation Min. Thinkness" key="autoCalculateMinRequireThickness"></ffs-check>
       </p>
-      <ffs-number label="Longitudinal Direction" unit="mm" key="minRequireLongitutinalThickness"></ffs-number>
-      <ffs-number label="Circumferaintial Direction" key="minRequireCircumferentialThickness" unit="mm"></ffs-number>
+      <ffs-number label="Longitudinal Direction" [unit]="(unit | async)?.distance" key="minRequireLongitutinalThickness"></ffs-number>
+      <ffs-number label="Circumferaintial Direction" key="minRequireCircumferentialThickness" [unit]="(unit | async)?.distance"></ffs-number>
     </app-panel>
     <app-panel title="Load Design">
-      <ffs-number label="Pressure" unit="MPa" key="externalPressure"></ffs-number>
-      <ffs-number label="Temperature" unit="°C" key="operatingTemperature"></ffs-number>
+      <ffs-number label="Pressure" [unit]="(unit | async)?.pressure" key="externalPressure"></ffs-number>
+      <ffs-number label="Temperature" [unit]="(unit | async)?.temperature" key="operatingTemperature"></ffs-number>
     </app-panel>
   </div>
 </div>

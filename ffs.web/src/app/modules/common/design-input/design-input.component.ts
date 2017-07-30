@@ -1,4 +1,6 @@
+import { IUnit } from './../../../common/unit';
 import { Observable } from 'rxjs/Rx';
+import { EventService } from './../../../event.service';
 import { FormGroup } from '@angular/forms';
 import { InputBase } from './../../../model/inputbase';
 import { Http } from '@angular/http';
@@ -18,7 +20,11 @@ export class DesignInputComponent implements OnInit, AfterViewInit {
 
   codeDesign: Observable<KV[]>;
 
-  constructor(private http: Http) { }
+  unit: Observable<IUnit>;
+
+  constructor(private http: Http, private eventService: EventService) {
+    this.unit = this.eventService.unit.asObservable();
+  }
   form: FormGroup;
 
   @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;

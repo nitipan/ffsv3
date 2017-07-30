@@ -14,13 +14,13 @@
       </p>
       <div class="row">
         <div class="col-md-6">
-          <ffs-number label="Allowable Stress" key="allowableStress" unit="psi"></ffs-number>
-          <ffs-number label="Ultimate Tensile Strength" key="ultimatedTensileStrength" unit="psi"></ffs-number>
-          <ffs-number label="Young Modulus" key="youngModulus" unit="psi"></ffs-number>
+          <ffs-number label="Allowable Stress" key="allowableStress" [unit]="(unit | async)?.stress"></ffs-number>
+          <ffs-number label="Ultimate Tensile Strength" key="ultimatedTensileStrength" [unit]="(unit | async)?.stress"></ffs-number>
+          <ffs-number label="Young Modulus" key="youngModulus" [unit]="(unit | async)?.stress"></ffs-number>
         </div>
         <div class="col-md-6">
-          <ffs-number label="Yield Strength" key="yieldStrength" unit="psi"></ffs-number>
-          <ffs-number label="Possion Ratio" key="poissonRatio" unit="psi"></ffs-number>
+          <ffs-number label="Yield Strength" key="yieldStrength" [unit]="(unit | async)?.stress"></ffs-number>
+          <ffs-number label="Possion Ratio" key="poissonRatio" [unit]="(unit | async)?.stress"></ffs-number>
         </div>
       </div>
     </app-panel>
@@ -30,7 +30,7 @@
       </p>
       <div class="row">
         <div class="col-md-6">
-          <ffs-number label="Reference temperature" key="referenceTemperature" unit="°F"></ffs-number>
+          <ffs-number label="Reference temperature" key="referenceTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
         </div>
       </div>
     </app-panel>

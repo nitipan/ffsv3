@@ -11,14 +11,14 @@
 <div class="row">
   <div class="col-md-6">
     <app-panel title="Operating Load">
-      <ffs-number label="Pressure" key="operatingPressure" unit="MPa"></ffs-number>
-      <ffs-number label="Temperature" key="operatingTemperature" unit="°C"></ffs-number>
+      <ffs-number label="Pressure" key="operatingPressure" [unit]="(unit | async)?.pressure"></ffs-number>
+      <ffs-number label="Temperature" key="operatingTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
     </app-panel>
     <app-panel title="Norminal Stress">
       <p>
         <ffs-check label="Automatically Calculation Norminal Stress" key="automaticallyCalculationTheNominalStressOfTheComponent"></ffs-check>
       </p>
-      <ffs-number label="Norminal Stress" key="theNominalStressOfTheComponent" unit="MPa"></ffs-number>
+      <ffs-number label="Norminal Stress" key="theNominalStressOfTheComponent" [unit]="(unit | async)?.pressure"></ffs-number>
     </app-panel>
     <app-panel title="Norminal Membrance Stress">
       <p>

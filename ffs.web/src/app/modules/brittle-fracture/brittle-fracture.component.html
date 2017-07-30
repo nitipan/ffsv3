@@ -12,8 +12,8 @@
     <div class="row">
       <div class="col-md-8">
         <app-panel>
-          <ffs-number label="The Critical Exporsure Temperature" key="TheCriticalExposureTemperature" unit="°C"></ffs-number>
-          <ffs-number label="The Uncorroded Governing Thickness" key="TheUncorrodedGoverningThickness" unit="mm"></ffs-number>
+          <ffs-number label="The Critical Exporsure Temperature" key="TheCriticalExposureTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
+          <ffs-number label="The Uncorroded Governing Thickness" key="TheUncorrodedGoverningThickness" [unit]="(unit | async)?.distance"></ffs-number>
         </app-panel>
         <app-panel>
           <ffs-check label="The component was fabricated from ASME P1 Group 1 or P1 Group 2 material" key="Fabricated"></ffs-check>
@@ -25,7 +25,7 @@
           <p>
             <ffs-check label="Automatically The Minimum Allowable Temperature" key="AutomaticcallyTheMinimumAllowableTemperature" value="true"></ffs-check>
           </p>
-          <ffs-number label="The Minimum Allowable Temperature" key="TheMinimumAllowableTemperature" unit="°C"></ffs-number>
+          <ffs-number label="The Minimum Allowable Temperature" key="TheMinimumAllowableTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
         </app-panel>
       </div>
       <div class="col-md-3">

@@ -1,3 +1,5 @@
+import { SIUnit, MatricUnit } from './../../../common/unit';
+import { EventService } from './../../../event.service';
 import { InputBase } from './../../../model/inputbase';
 import { ModuleBase } from './../../module-base.component';
 import { FormGroup } from '@angular/forms';
@@ -27,7 +29,7 @@ export class EquipmentInputComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private eventService: EventService) { }
 
   ngOnInit() {
     this.equipmentTypes = this.http.get("/api/lookup/equipmenttypes")
@@ -60,6 +62,11 @@ export class EquipmentInputComponent implements OnInit, AfterViewInit {
     this.form.valueChanges.subscribe((v) => {
       this.currentValue = v as InputBase;
     });
+
+    this.form.get("unitID").valueChanges.subscribe(v => {
+      this.eventService.unit.next(v == 1 ? new SIUnit() : new MatricUnit());
+    });
+    this.form.get("unitID").setValue(1);
   }
 
   get Inputs(): InputBase {

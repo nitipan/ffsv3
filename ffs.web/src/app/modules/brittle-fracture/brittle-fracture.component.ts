@@ -1,6 +1,7 @@
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { KV } from './../../model/kv';
-import { Observable } from 'rxjs/Rx';
 import { LoadInputComponent } from './../common/load-input/load-input.component';
 import { MaterialInputComponent } from './../common/material-input/material-input.component';
 import { InputBase } from './../../model/inputbase';
@@ -120,9 +121,8 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
       .map(arr => arr.map(a => { return { key: a.reductionInTheMATID, value: a.reductionInTheMATName }; }));
   }
 
-
   initDesignInput() {
-    this.designInput.init(this.equipmentInput.Inputs);
+
   }
 
   initMaterialInput() {
@@ -132,6 +132,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   initFlawInput() {
 
   }
+
   initLoadInput() {
 
   }

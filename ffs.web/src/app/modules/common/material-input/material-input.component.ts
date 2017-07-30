@@ -1,3 +1,5 @@
+import { EventService } from './../../../event.service';
+import { IUnit, SIUnit } from './../../../common/unit';
 import { Observable } from 'rxjs/Rx';
 import { FormGroup } from '@angular/forms';
 import { KV } from './../../../model/kv';
@@ -28,7 +30,13 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
 
   private materialSubject: Subject<any> = new Subject();
 
-  constructor(private http: Http) { }
+  unit: Observable<IUnit>;
+
+  currentUnit: IUnit = new SIUnit();
+
+  constructor(private http: Http, private eventService: EventService) {
+    this.unit = this.eventService.unit.asObservable();
+  }
 
   ngOnInit() {
     this.materialTypes = this.http.get("/api/lookup/materialtypes")
@@ -57,6 +65,8 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
     this.asmeExemptionCurves.subscribe((m: KV[]) => {
       this.form.get("asmeExemptionCurvesID").setValue(m[0].key);
     });
+
+
   }
 
   ngAfterViewInit(): void {
@@ -79,6 +89,8 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
       else
         this.form.get("referenceTemperature").enable();
     });
+
+
 
     this.form.get("automaticallyCalculationAllowableStress").valueChanges.subscribe((v: boolean) => {
       if (v) {
@@ -105,16 +117,27 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
         this.form.get("asmeExemptionCurvesID").enable();
       }
 
-      // get by unit
-      this.form.get("allowableStress").setValue(m.yieldStrength);
-      this.form.get("ultimatedTensileStrength").setValue(m.tensileStrength);
-      this.form.get("youngModulus").setValue(m.youngModulas);
-      this.form.get("yieldStrength").setValue(m.yieldStrength);
-      this.form.get("poissonRatio").setValue(m.possionRatio);
+      if (this.currentUnit instanceof SIUnit) {
+        this.form.get("allowableStress").setValue(m.allowableStress);
+        this.form.get("ultimatedTensileStrength").setValue(m.tensileStrength);
+        this.form.get("youngModulus").setValue(m.youngModulas);
+        this.form.get("yieldStrength").setValue(m.yieldStrength);
+        this.form.get("poissonRatio").setValue(m.possionRatio);
+      } else {
+        this.form.get("allowableStress").setValue(m.allowableStressKSI);
+        this.form.get("ultimatedTensileStrength").setValue(m.tensileStrengthKSI);
+        this.form.get("youngModulus").setValue(m.youngModulasKSI);
+        this.form.get("yieldStrength").setValue(m.yieldStrengthKSI);
+        this.form.get("poissonRatio").setValue(m.possionRatio);
+      }
+
     });
 
 
-
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+      this.form.get("material").setValue(this.form.get("material").value);
+    });
 
   }
 }
