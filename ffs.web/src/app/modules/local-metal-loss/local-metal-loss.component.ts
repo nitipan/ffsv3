@@ -1,3 +1,4 @@
+import { IUnit } from './../../common/unit';
 import { Http } from '@angular/http';
 import { KV } from './../../model/kv';
 import { Observable } from 'rxjs/Rx';
@@ -30,22 +31,21 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
 
   form: FormGroup;
 
-  stressRatios: Observable<KV[]>;
+  thicknessDatas: Observable<KV[]>;
+  unit: Observable<IUnit>;
 
   constructor(
     private http: Http,
     private cdRef: ChangeDetectorRef,
     eventService: EventService) {
     super(eventService);
+    this.unit = this.eventService.unit.asObservable();
   }
 
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
 
-    this.equipmentInput.form.valueChanges.subscribe(f => {
-      const inputs = f as InputBase;
-      this.valueChangedSubject.next(inputs);
-    });
+
 
     // calculate
     this.eventService.requestCalculateSubject.subscribe(() => {
@@ -78,20 +78,13 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
     });
 
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
+    // this.form.get('ThicknessDataTypeID').disable();
 
-    this.form.get('AutomaticcallyTheMinimumAllowableTemperature').valueChanges.subscribe((v: boolean) => {
-      if (v) {
-        this.form.get('TheMinimumAllowableTemperature').disable();
-      } else {
-        this.form.get('TheMinimumAllowableTemperature').enable();
-      }
-    });
-
-    this.designInput.form.get('componentShapeID').disable();
+    this.form.get('autoAllowableRSF').setValue(true);
+    this.form.get('allowRSF').disable();
+    this.form.get('thicknessDataID').disable();
     this.designInput.form.get('autoCalculateMinRequireThickness').setValue(true);
-    this.form.get('ReductionInTheMATID').disable();
-    this.form.get('AutomaticcallyTheMinimumAllowableTemperature').disable();
-    this.form.get('AutomaticcallyTheMinimumAllowableTemperature').setValue(true);
+
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
     this.cdRef.detectChanges();
   }
@@ -104,9 +97,9 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
   // }
 
   ngOnInit() {
-    this.stressRatios = this.http.get('/api/lookup/reductions')
+    this.thicknessDatas = this.http.get("/api/lookup/thicknessdatas")
       .map(response => response.json() as any[])
-      .map(arr => arr.map(a => { return { key: a.reductionInTheMATID, value: a.reductionInTheMATName }; }));
+      .map(arr => arr.map(a => { return { key: a.thicknessDataID, value: a.thicknessDataName }; }));
   }
 
 

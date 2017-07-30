@@ -115,6 +115,15 @@ namespace ffs.api
                 }
             };
 
+            Get["/thicknessdatas"] = x =>
+            {
+                using (var db = DbContext.Get())
+                {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT * FROM ThicknessData");
+                    return Response.AsJson(result);
+                }
+            };
+
         }
     }
 }
