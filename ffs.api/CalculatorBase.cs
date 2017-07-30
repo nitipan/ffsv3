@@ -132,6 +132,164 @@ namespace ffs.api
             }
             return result;
         }
+
+        public double getMinData(double[,] p_inspectionGridData, int p_intNumberOfColumn, int p_intNumberOfRow)
+        {
+            IEnumerable<double> source = p_inspectionGridData.Cast<double>();
+            return source.Min();
+        }
+
+        public double[] getMinLongitudinalDataUpperLower(double[,] p_inspectionGridData, int p_intNumberOfColumn, int p_intNumberOfRow)
+        {
+            double[] array = new double[p_intNumberOfColumn];
+            for (int i = 0; i < p_intNumberOfColumn; i++)
+            {
+                array[i] = 100.0;
+                for (int j = 0; j < p_intNumberOfRow; j++)
+                {
+                    if (p_inspectionGridData[j, i] < array[i])
+                    {
+                        array[i] = p_inspectionGridData[j, i];
+                    }
+                }
+            }
+            int num = 1;
+            double num2 = 100.0;
+            for (int i = 0; i < p_intNumberOfColumn; i++)
+            {
+                if (array[i] < num2)
+                {
+                    num2 = array[i];
+                    num = i;
+                }
+            }
+            double[] array2 = new double[3];
+            array2[0] = array[num];
+            if (num - 1 >= 0)
+            {
+                array2[1] = array[num - 1];
+            }
+            else
+            {
+                array2[1] = 0.0;
+            }
+            if (num + 1 < p_intNumberOfColumn)
+            {
+                array2[2] = array[num + 1];
+            }
+            else
+            {
+                array2[2] = array[p_intNumberOfColumn - 1];
+            }
+            return array2;
+        }
+
+        public double[] getMinLongitudinal(double[,] p_inspectionGridData, int p_intNumberOfColumn, int p_intNumberOfRow)
+        {
+            double[] array = new double[p_intNumberOfColumn];
+            for (int i = 0; i < p_intNumberOfColumn; i++)
+            {
+                array[i] = 100.0;
+                for (int j = 0; j < p_intNumberOfRow; j++)
+                {
+                    if (p_inspectionGridData[j, i] < array[i])
+                    {
+                        array[i] = p_inspectionGridData[j, i];
+                    }
+                }
+            }
+            return array;
+        }
+
+        public double getMinDataPTR(double[,] p_inspectionGridData, int p_intNumberOfRow)
+        {
+            double num = 100.0;
+            for (int i = 0; i < p_intNumberOfRow; i++)
+            {
+                if (num > p_inspectionGridData[i, 1])
+                {
+                    num = p_inspectionGridData[i, 1];
+                }
+            }
+            return num;
+        }
+
+        public double getAVGDataPTR(double[,] p_inspectionGridData, int p_intNumberOfRow)
+        {
+            double[] array = new double[p_intNumberOfRow];
+            for (int i = 0; i < p_intNumberOfRow; i++)
+            {
+                array[i] = p_inspectionGridData[i, 1];
+            }
+            return array.Average();
+        }
+
+        public double[] getMinCircumferentialData(double[,] p_inspectionGridData, int p_intNumberOfColumn, int p_intNumberOfRow)
+        {
+            double[] array = new double[p_intNumberOfColumn];
+            for (int i = 0; i < p_intNumberOfRow; i++)
+            {
+                array[i] = 100.0;
+                for (int j = 0; j < p_intNumberOfColumn; j++)
+                {
+                    if (p_inspectionGridData[i, j] < array[i])
+                    {
+                        array[i] = p_inspectionGridData[i, j];
+                    }
+                }
+            }
+            int num = 1;
+            double num2 = 100.0;
+            for (int i = 0; i < p_intNumberOfRow; i++)
+            {
+                if (array[i] < num2)
+                {
+                    num2 = array[i];
+                    num = i;
+                }
+            }
+            return new double[]
+            {
+                array[num],
+                array[num - 1],
+                array[num + 1]
+            };
+        }
+
+        public double[] getMinLongitudinalDataArray(double[,] p_inspectionGridData, int p_intNumberOfColumn, int p_intNumberOfRow)
+        {
+            double[] array = new double[p_intNumberOfColumn];
+            for (int i = 0; i < p_intNumberOfColumn; i++)
+            {
+                array[i] = 100.0;
+                for (int j = 0; j < p_intNumberOfRow; j++)
+                {
+                    if (p_inspectionGridData[j, i] < array[i])
+                    {
+                        array[i] = p_inspectionGridData[j, i];
+                    }
+                }
+            }
+            return array;
+        }
+
+        public double[] getMinCircumferentialDataArray(double[,] p_inspectionGridData, int p_intNumberOfColumn, int p_intNumberOfRow)
+        {
+            double[] array = new double[p_intNumberOfRow];
+            for (int i = 0; i < p_intNumberOfRow; i++)
+            {
+                array[i] = 100.0;
+                for (int j = 0; j < p_intNumberOfColumn; j++)
+                {
+                    if (p_inspectionGridData[i, j] < array[i])
+                    {
+                        array[i] = p_inspectionGridData[i, j];
+                    }
+                }
+            }
+            return array;
+        }
+
     }
 
 }

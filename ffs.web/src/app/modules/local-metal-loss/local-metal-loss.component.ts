@@ -67,14 +67,14 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
         ...loadInput
       };
 
-      console.log(calculationParam);
       this.eventService.calculatingSubject.emit(null);
-      setTimeout(() => {
-        const result = calculationParam;
 
-        this.eventService.calculatingSubject.emit(result);
-        this.eventService.calculatedSubject.emit(result);
-      }, 500);
+      this.http.post(`/api/localmetalloss/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+        .map(r => r.json())
+        .subscribe(r => {
+          this.eventService.calculatingSubject.emit(r);
+          this.eventService.calculatedSubject.emit({ param: calculationParam, result: r });
+        });
     });
 
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
