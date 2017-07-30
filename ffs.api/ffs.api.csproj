@@ -118,10 +118,13 @@
     <Compile Include="CustomJsonSerializer.cs" />
     <Compile Include="DbContext.cs" />
     <Compile Include="GlobalVar.cs" />
+    <Compile Include="LocalMetalLossModule.cs" />
     <Compile Include="LookupModule.cs" />
     <Compile Include="Model\BeanBrittle.cs" />
     <Compile Include="Model\BeanBrittleResult.cs" />
     <Compile Include="Model\BeanCalculateCommon.cs" />
+    <Compile Include="Model\BeanLocalMetalLoss.cs" />
+    <Compile Include="Model\BeanLocalMetalLossResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RootModule.cs" />
     <Compile Include="Startup.cs" />

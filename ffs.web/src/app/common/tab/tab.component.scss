@@ -1,0 +1,15 @@
+.app-tab {
+  .app-tab-content {
+    padding: 10px;
+    border: 1px #ddd solid;
+    border-top: none;
+  }
+  .app-tab-menu {
+    a {
+      background: none;
+      cursor: pointer;
+      color: #0277BD !important;
+      font-weight: 600;
+    }
+  }
+}

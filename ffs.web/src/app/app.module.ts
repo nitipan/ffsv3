@@ -1,3 +1,4 @@
+import { TabItemComponent } from './common/tab/tab-item.component';
 import { EventService } from './event.service';
 import { FFSInputModule } from './app.modue.ffs-input';
 
@@ -22,6 +23,7 @@ import { HomeComponent } from './home/home.component';
 import { ResultComponent } from './modules/common/result/result.component';
 import { LocalMetalLossComponent } from './modules/local-metal-loss/local-metal-loss.component';
 import { GeneralMetalLossComponent } from './modules/general-metal-loss/general-metal-loss.component';
+import { TabComponent } from './common/tab/tab.component';
 
 
 const appRoutes: Routes = [
@@ -59,7 +61,9 @@ const appRoutes: Routes = [
     HomeComponent,
     ResultComponent,
     LocalMetalLossComponent,
-    GeneralMetalLossComponent
+    GeneralMetalLossComponent,
+    TabComponent,
+    TabItemComponent
   ],
   imports: [
     RouterModule.forRoot(
