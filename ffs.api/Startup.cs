@@ -20,8 +20,7 @@ namespace ffs.api
 
             const string rootFolder = "public";
 
-            if (!Directory.Exists(rootFolder))
-                Directory.CreateDirectory(rootFolder);
+           
 
             var fileSystem = new PhysicalFileSystem(rootFolder);
             var options = new FileServerOptions
