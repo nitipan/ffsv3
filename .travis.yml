@@ -4,4 +4,4 @@ node_js:
 before_script:
   - "cd ffs.web"
   - "npm install"
-script: "ng build"
+script: "ng build --prod"
