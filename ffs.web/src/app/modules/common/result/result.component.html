@@ -2,7 +2,11 @@
 
 
 
-  <div class="col-md-12">
-    {{result | json}}
+  <div class="col-md-12" *ngIf="result?.param.assessmentLevel == 1">
+    <p *ngIf="result?.result?.resultBool" class="bg-success" style="padding:15px;"><i class="glyphicon glyphicon-ok"></i>&nbsp;&nbsp;{{result?.result?.result}}</p>
+    <p *ngIf="!result?.result?.resultBool" class="bg-danger" style="padding:15px;"><i class="glyphicon glyphicon glyphicon-remove"></i>&nbsp;&nbsp;{{result?.result?.result}}</p>
   </div>
+  <div class="col-md-12" *ngIf="result?.param.assessmentLevel == 2">
+  </div>
+  {{result | json}}
 </div>
