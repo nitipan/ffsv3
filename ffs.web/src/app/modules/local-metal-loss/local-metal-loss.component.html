@@ -1,20 +1,42 @@
 <app-wizard (stepChanged)="onStepChange($event)">
-    <equipment>
-        <app-equipment-input></app-equipment-input>
-    </equipment>
-    <design>
-        <app-design-input></app-design-input>
-    </design>
-    <material>
-        <app-material-input></app-material-input>
-    </material>
-    <flaw>
-        Can't using tab by plain bootstrap (link issue)
-    </flaw>
-    <loads>
-        <app-load-input></app-load-input>
-    </loads>
-    <result>
-        <app-result></app-result>
-    </result>
+  <equipment>
+    <app-equipment-input></app-equipment-input>
+  </equipment>
+  <design>
+    <app-design-input></app-design-input>
+  </design>
+  <material>
+    <app-material-input></app-material-input>
+  </material>
+  <flaw active="true">
+    <div class="row">
+      <div class="col-md-7">
+        <app-tab>
+          <app-tab-item title="Dimension">
+            <app-panel title="Dimension">
+              <ffs-text label="test"></ffs-text>
+            </app-panel>
+            <app-panel title="Dimension">
+              <ffs-text label="test"></ffs-text>
+            </app-panel>
+          </app-tab-item>
+          <app-tab-item title="Color Dimension">
+            Color Dimension
+          </app-tab-item>
+          <app-tab-item title="Inspection Grid">
+            Inspection Grid
+          </app-tab-item>
+          <app-tab-item title="Graph">
+            Graph
+          </app-tab-item>
+        </app-tab>
+      </div>
+    </div>
+  </flaw>
+  <loads>
+    <app-load-input></app-load-input>
+  </loads>
+  <result>
+    <app-result></app-result>
+  </result>
 </app-wizard>
