@@ -32,6 +32,10 @@ namespace ffs.api
     {
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
+            Nancy.Json.JsonSettings.MaxJsonLength = int.MaxValue;
+            Nancy.Json.JsonSettings.MaxRecursions = 100;
+          
+
             CookieBasedSessions.Enable(pipelines);
         }
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
