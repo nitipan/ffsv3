@@ -62,11 +62,11 @@ export class LoadsStepComponent extends WizardStepBase {
 export class ResultStepComponent extends WizardStepBase {
     title = "Result";
 
-    constructor(private eventService: EventService) {
-        super();
-        this.eventService.calculatedSubject.subscribe(result => {
-            this.requestActive.emit(this);
-        });
-    }
+    // constructor(private eventService: EventService) {
+    //     super();
+    //     this.eventService.calculatedSubject.subscribe(result => {
+    //         this.requestActive.emit(this);
+    //     });
+    // }
 }
 

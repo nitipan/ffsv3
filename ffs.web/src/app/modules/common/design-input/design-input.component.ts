@@ -7,13 +7,14 @@ import { Http } from '@angular/http';
 import { KV } from './../../../model/kv';
 import { Component, OnInit, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
+import { InputBaseComponent } from "../input-base.component";
 
 @Component({
   selector: 'app-design-input',
   templateUrl: './design-input.component.html',
   styleUrls: ['./design-input.component.scss']
 })
-export class DesignInputComponent implements OnInit, AfterViewInit {
+export class DesignInputComponent extends InputBaseComponent implements OnInit, AfterViewInit {
 
   componentType: Observable<KV[]>;
   componentShape: Observable<KV[]>;
@@ -22,18 +23,20 @@ export class DesignInputComponent implements OnInit, AfterViewInit {
 
   unit: Observable<IUnit>;
 
-  constructor(private http: Http, private eventService: EventService) {
-    this.unit = this.eventService.unit.asObservable();
+  constructor(private http: Http) {
+    super();
+
   }
   form: FormGroup;
 
   @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;
 
   ngOnInit() {
-
+    this.unit = this.moduleEvent.unit.asObservable();
   }
 
   ngAfterViewInit(): void {
+
     this.form = FFSInputBase.toFormGroup(this.inputs);
     this.form.get("autoCalculateMinRequireThickness").valueChanges.subscribe((v: boolean) => {
       if (v) {
@@ -57,7 +60,7 @@ export class DesignInputComponent implements OnInit, AfterViewInit {
     });
 
 
-    this.eventService.equipmentTypeSubject.subscribe(equipmentType => {
+    this.moduleEvent.equipmentTypeSubject.subscribe(equipmentType => {
 
       this.form.get("componentTypeID").setValue("");
       this.componentType = this.http.get(`/api/lookup/componenttypes/${equipmentType}`)
@@ -85,7 +88,7 @@ export class DesignInputComponent implements OnInit, AfterViewInit {
 
 
     // SPECIAL CODE
-    this.eventService.equipmentTypeSubject.emit(1);
+    this.moduleEvent.equipmentTypeSubject.emit(1);
   }
 
 

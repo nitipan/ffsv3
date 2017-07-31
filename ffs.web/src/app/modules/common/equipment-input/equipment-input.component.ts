@@ -9,13 +9,14 @@ import { Http } from "@angular/http";
 import 'rxjs/Rx';
 import { Observable } from "rxjs/Rx";
 import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
+import { InputBaseComponent } from "../input-base.component";
 
 @Component({
   selector: 'app-equipment-input',
   templateUrl: './equipment-input.component.html',
   styleUrls: ['./equipment-input.component.scss']
 })
-export class EquipmentInputComponent implements OnInit, AfterViewInit {
+export class EquipmentInputComponent extends InputBaseComponent implements OnInit, AfterViewInit {
 
   equipmentTypes: Observable<KV[]>;
   methodologies: Observable<KV[]>;
@@ -29,7 +30,9 @@ export class EquipmentInputComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;
 
-  constructor(private http: Http, private eventService: EventService) { }
+  constructor(private http: Http) {
+    super();
+  }
 
   ngOnInit() {
     this.equipmentTypes = this.http.get("/api/lookup/equipmenttypes")
@@ -64,12 +67,12 @@ export class EquipmentInputComponent implements OnInit, AfterViewInit {
     });
 
     this.form.get("unitID").valueChanges.subscribe(v => {
-      this.eventService.unit.next(v == 1 ? new SIUnit() : new MatricUnit());
+      this.moduleEvent.unit.next(v == 1 ? new SIUnit() : new MatricUnit());
     });
     this.form.get("unitID").setValue(1);
 
     this.form.get("equipmentType").valueChanges.subscribe(v => {
-      this.eventService.equipmentTypeSubject.emit(v);
+      this.moduleEvent.equipmentTypeSubject.emit(v);
     });
   }
 

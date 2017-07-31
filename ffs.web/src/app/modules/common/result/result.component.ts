@@ -1,23 +1,23 @@
 import { EventService } from './../../../event.service';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { InputBaseComponent } from "../input-base.component";
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.scss']
 })
-export class ResultComponent implements OnInit {
+export class ResultComponent extends InputBaseComponent implements OnInit, AfterViewInit {
+
 
   result: any;
 
   level2Grid: any[];
 
-  constructor(private eventService: EventService) {
 
-  }
 
   ngOnInit() {
-    this.eventService.calculatedSubject.subscribe(r => {
+    this.moduleEvent.calculatedSubject.subscribe(r => {
       this.result = r;
 
       if (this.result.param.assessmentLevel == 2) {
@@ -37,4 +37,8 @@ export class ResultComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+
+
+  }
 }

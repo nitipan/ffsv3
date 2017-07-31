@@ -5,29 +5,30 @@ import { InputBase } from './../../../model/inputbase';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
+import { InputBaseComponent } from "../input-base.component";
 
 @Component({
   selector: 'app-load-input',
   templateUrl: './load-input.component.html',
   styleUrls: ['./load-input.component.scss']
 })
-export class LoadInputComponent implements OnInit, AfterViewInit {
+export class LoadInputComponent extends InputBaseComponent implements OnInit, AfterViewInit {
 
 
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
   form: FormGroup;
   calculating: boolean;
   unit: Observable<IUnit>;
-  constructor(private cdRef: ChangeDetectorRef, private eventService: EventService) {
-
-    eventService.calculatingSubject.subscribe(v => {
-      this.calculating = v == null;
-    });
-
-    this.unit = this.eventService.unit.asObservable();
+  constructor(private cdRef: ChangeDetectorRef) {
+    super();
   }
 
   ngOnInit() {
+    this.moduleEvent.calculatingSubject.subscribe(v => {
+      this.calculating = v == null;
+    });
+
+    this.unit = this.moduleEvent.unit.asObservable();
   }
 
   ngAfterViewInit(): void {
@@ -69,5 +70,4 @@ export class LoadInputComponent implements OnInit, AfterViewInit {
     this.form.get("supplementalLoad").disable();
     this.cdRef.detectChanges();
   }
-
 }

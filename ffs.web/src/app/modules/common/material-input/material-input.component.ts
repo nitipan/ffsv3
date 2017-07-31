@@ -7,13 +7,14 @@ import { Http } from '@angular/http';
 import { Component, OnInit, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
 import { FFSInputBase } from "../../../common/inputs/ffs-input-base";
 import { Subject } from "rxjs/Subject";
+import { InputBaseComponent } from "../input-base.component";
 
 @Component({
   selector: 'app-material-input',
   templateUrl: './material-input.component.html',
   styleUrls: ['./material-input.component.scss']
 })
-export class MaterialInputComponent implements OnInit, AfterViewInit {
+export class MaterialInputComponent extends InputBaseComponent implements OnInit, AfterViewInit {
 
   materialTypes: Observable<KV[]>;
   materials: Observable<KV[]>;
@@ -34,11 +35,14 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
 
   currentUnit: IUnit = new SIUnit();
 
-  constructor(private http: Http, private eventService: EventService) {
-    this.unit = this.eventService.unit.asObservable();
+  constructor(private http: Http) {
+    super();
+
   }
 
   ngOnInit() {
+    this.unit = this.moduleEvent.unit.asObservable();
+
     this.materialTypes = this.http.get("/api/lookup/materialtypes")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.materialTypeID, value: a.materialTypeName }; }));
@@ -70,6 +74,7 @@ export class MaterialInputComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
     this.form = FFSInputBase.toFormGroup(this.inputs);
     this.form.get("material").valueChanges.subscribe(m => {
       this.showOther = m == '999';

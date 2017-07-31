@@ -9,10 +9,4 @@ export class EventService {
   constructor() { }
 
   calculationModuleSubject: Subject<ModuleBase> = new Subject();
-  requestCalculateSubject: EventEmitter<any> = new EventEmitter();
-  calculatingSubject: EventEmitter<any> = new EventEmitter();
-  calculatedSubject: EventEmitter<any> = new EventEmitter();
-  equipmentTypeSubject: EventEmitter<any> = new EventEmitter();
-
-  unit: Subject<IUnit> = new Subject();
 }

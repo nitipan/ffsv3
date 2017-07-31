@@ -15,8 +15,9 @@ export class WizardComponent implements OnInit, AfterContentInit {
   @ContentChildren(WizardStepBase) steps: QueryList<WizardStepBase>;
 
   @Output() stepChanged: EventEmitter<WizardStepBase> = new EventEmitter();
+  @Output() onStepsInit: EventEmitter<QueryList<WizardStepBase>> = new EventEmitter();
 
-  step: WizardStepBase = { title: "", active: false, nextVisible: true, backVisible: true, calculateVisible: false, requestActive: new EventEmitter() };
+  step: WizardStepBase = { title: "", active: false, nextVisible: true, backVisible: true, calculateVisible: false, requestActive: new EventEmitter(), onCalculate: new EventEmitter() };
 
   canBack = false;
   canNext = true;
@@ -28,6 +29,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
 
 
   ngAfterContentInit(): void {
+    this.onStepsInit.emit(this.steps);
     let activetab = this.steps.filter((t) => t.active);
     if (activetab.length == 0)
       this.selectStep(this.steps.first);
@@ -72,7 +74,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
   calculate() {
-    this.eventService.requestCalculateSubject.emit();
+    this.step.onCalculate.emit(this.step);
   }
 }
 

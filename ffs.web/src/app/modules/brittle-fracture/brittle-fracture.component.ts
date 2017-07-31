@@ -47,8 +47,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     private cdRef: ChangeDetectorRef,
     eventService: EventService) {
     super(eventService);
-
-    this.unit = this.eventService.unit.asObservable();
+    this.unit = this.moduleEvent.unit.asObservable();
   }
 
   ngAfterViewInit(): void {
@@ -60,7 +59,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     });
 
     // calculate
-    this.eventService.requestCalculateSubject.subscribe(() => {
+    this.moduleEvent.requestCalculateSubject.subscribe(() => {
 
       // var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
 
@@ -86,13 +85,13 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
       }
 
 
-      this.eventService.calculatingSubject.emit(null);
+      this.moduleEvent.calculatingSubject.emit(null);
 
       this.http.post(`/api/brittle/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
-          this.eventService.calculatingSubject.emit(r);
-          this.eventService.calculatedSubject.emit({ param: calculationParam, result: r });
+          this.moduleEvent.calculatingSubject.emit(r);
+          this.moduleEvent.calculatedSubject.emit({ param: calculationParam, result: r });
         });
     });
 

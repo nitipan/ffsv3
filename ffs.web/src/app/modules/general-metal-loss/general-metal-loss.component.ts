@@ -42,7 +42,7 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
     private cdRef: ChangeDetectorRef,
     eventService: EventService) {
     super(eventService);
-    this.unit = this.eventService.unit.asObservable();
+    this.unit = this.moduleEvent.unit.asObservable();
   }
 
 
@@ -54,7 +54,7 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
     });
 
     // calculate
-    this.eventService.requestCalculateSubject.subscribe(() => {
+    this.moduleEvent.requestCalculateSubject.subscribe(() => {
       // TODO check form valid ?
 
       // NEED GET RAWDATA because to include disabled value
@@ -73,13 +73,13 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
         ...loadInput
       };
 
-      this.eventService.calculatingSubject.emit(null);
+      this.moduleEvent.calculatingSubject.emit(null);
 
       this.http.post(`/api/localmetalloss/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
-          this.eventService.calculatingSubject.emit(r);
-          this.eventService.calculatedSubject.emit({ param: calculationParam, result: r });
+          this.moduleEvent.calculatingSubject.emit(r);
+          this.moduleEvent.calculatedSubject.emit({ param: calculationParam, result: r });
         });
     });
 

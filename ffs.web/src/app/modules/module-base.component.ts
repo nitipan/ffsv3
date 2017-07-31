@@ -1,3 +1,4 @@
+
 import { InputBase } from './../model/inputbase';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
@@ -7,9 +8,11 @@ import { QueryList, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { FFSInputBase } from "../common/inputs/ffs-input-base";
 import { WizardStepBase } from "../common/wizard/wizard-step-base";
+import { ModuleEvent } from "./module-event";
 
 export abstract class ModuleBase implements OnDestroy {
 
+    protected steps: QueryList<WizardStepBase>;
     protected valueChangedSubject: Subject<InputBase> = new Subject();
 
     constructor(protected eventService: EventService) {
@@ -17,6 +20,12 @@ export abstract class ModuleBase implements OnDestroy {
         this.valueChanges = this.valueChangedSubject.asObservable();
 
         this.eventService.calculationModuleSubject.next(this);
+
+        this.moduleEvent.calculatedSubject.subscribe(result => {
+            var resultStep = this.steps.find(s => s instanceof ResultStepComponent);
+            resultStep.requestActive.emit(resultStep);
+        });
+
     }
     ngOnDestroy(): void {
         this.eventService.calculationModuleSubject.next(null);
@@ -54,4 +63,15 @@ export abstract class ModuleBase implements OnDestroy {
 
     @Input()
     valueChanges: Observable<InputBase>
+
+    @Input()
+    moduleEvent: ModuleEvent = new ModuleEvent();
+
+    onCalculate(step: WizardStepBase) {
+        this.moduleEvent.requestCalculateSubject.emit();
+    }
+
+    onStepsInit(steps: QueryList<WizardStepBase>) {
+        this.steps = steps;
+    }
 }
