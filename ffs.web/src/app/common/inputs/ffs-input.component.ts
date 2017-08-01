@@ -37,8 +37,9 @@ export class FFSTextComponent extends FFSInputBase {
             <div class="form-group">
                 <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
                 <div class="input-group col-xs-7">
-                     <select [id]="key" [formControlName]="key" class="form-control">
-                         <option *ngFor="let opt of options" [value]="opt.key">{{opt.value}}</option>
+                    <input type="hidden" *ngIf="text != undefined" [formControlName]="text" />
+                     <select  [id]="key" [formControlName]="key" class="form-control">
+                         <option  *ngFor="let opt of options" [value]="opt.key">{{opt.value}}</option>
                     </select>         
                     <label class="input-group-addon control-label" *ngIf="unit != undefined">{{unit}}</label>
                 </div>
@@ -48,8 +49,23 @@ export class FFSTextComponent extends FFSInputBase {
         providers: [{ provide: FFSInputBase, useExisting: forwardRef(() => FFSSelectComponent) }]
     }
 )
-export class FFSSelectComponent extends FFSInputBase {
+export class FFSSelectComponent extends FFSInputBase implements OnInit {
+
+
+    @Input() text: string;
+
     @Input() options: { key: string, value: string }[] = [];
+
+    ngOnInit(): void {
+        super.ngOnInit();
+        if (this.text != undefined) {
+            this.form.addControl(this.text, new FormControl(''));
+            this.form.get(this.key).valueChanges.subscribe(v => {
+                var item = this.options.find(o => o.key == v);
+                this.form.get(this.text).setValue(item.value);
+            });
+        }
+    }
 }
 
 @Component(
