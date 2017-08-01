@@ -25,9 +25,11 @@ import { ResultComponent } from './modules/common/result/result.component';
 import { LocalMetalLossComponent } from './modules/local-metal-loss/local-metal-loss.component';
 import { GeneralMetalLossComponent } from './modules/general-metal-loss/general-metal-loss.component';
 import { TabComponent } from './common/tab/tab.component';
+import { PlaygroundComponent } from './playground/playground.component';
 
 
 const appRoutes: Routes = [
+  { path: 'playground', component: PlaygroundComponent },
   { path: 'home', component: HomeComponent },
   { path: 'brittle', component: BrittleFractureComponent },
   { path: 'localmetalloss', component: LocalMetalLossComponent },
@@ -64,7 +66,8 @@ const appRoutes: Routes = [
     LocalMetalLossComponent,
     GeneralMetalLossComponent,
     TabComponent,
-    TabItemComponent
+    TabItemComponent,
+    PlaygroundComponent
   ],
   imports: [
     RouterModule.forRoot(
