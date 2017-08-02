@@ -124,6 +124,14 @@ namespace ffs.api
                 }
             };
 
+            Get["/standardpitcharts"] = x =>
+            {
+                using (var db = DbContext.Get()) {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT * FROM TheStandardPitChart");
+                    return Response.AsJson(result);
+                }
+            };
+
         }
     }
 }
