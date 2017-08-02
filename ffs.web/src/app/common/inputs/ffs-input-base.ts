@@ -1,4 +1,3 @@
-import { FFSSelectComponent } from './ffs-input.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OnInit, Input, QueryList } from '@angular/core';
 export abstract class FFSInputBase implements OnInit {
@@ -29,10 +28,10 @@ export abstract class FFSInputBase implements OnInit {
         inputs.forEach((i) => {
             formItems[i.key] = i.form.controls[i.key];
 
-            if (i instanceof FFSSelectComponent) {
-                if ((i as FFSSelectComponent).text != undefined)
-                    formItems[i.text] = i.form.controls[i.text];
-            }
+
+            if ((i as any).text != undefined)
+                formItems[(i as any).text] = i.form.controls[(i as any).text];
+
         });
 
         return new FormGroup(formItems);
