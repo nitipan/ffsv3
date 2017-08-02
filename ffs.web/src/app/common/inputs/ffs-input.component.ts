@@ -188,6 +188,7 @@ export class FFSDateComponent extends FFSInputBase implements AfterViewInit {
 export class FFSBrowseComponent extends FFSInputBase implements AfterViewInit {
 
     @Input() accept = "*.*";
+    @Input() type;
 
     @ViewChild("file") fileBrowserInput;
     filename: string = '';
@@ -207,7 +208,10 @@ export class FFSBrowseComponent extends FFSInputBase implements AfterViewInit {
 
             this.filename = input.files[0].name;
 
-            reader.readAsDataURL(input.files[0]);
+            if (this.type == 'text')
+                reader.readAsText(input.files[0]);
+            else
+                reader.readAsDataURL(input.files[0]);
         }
     }
 
