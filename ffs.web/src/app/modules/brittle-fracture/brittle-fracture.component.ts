@@ -15,8 +15,7 @@ import { Component, OnInit, Injectable, Input, QueryList, ContentChildren, After
 import { FFSInputBase } from "../../common/inputs/ffs-input-base";
 
 
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 import { routerTransition } from "../../common/router.animations";
 
 @Component({
@@ -61,10 +60,6 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     // calculate
     this.moduleEvent.requestCalculateSubject.subscribe(() => {
 
-      // var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
-
-      // pdfMake.vfs = pdfFonts.pdfMake.vfs;
-      // pdfMake.createPdf(docDefinition).print();
 
       // TODO check form valid ?
 
@@ -91,7 +86,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);
-          this.moduleEvent.calculatedSubject.emit({ param: calculationParam, result: r });
+          this.moduleEvent.calculatedSubject.emit({ param: calculationParam, result: r, module: this });
         });
     });
 
