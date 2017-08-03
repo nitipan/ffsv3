@@ -27,6 +27,7 @@ import { GeneralMetalLossComponent } from './modules/general-metal-loss/general-
 import { TabComponent } from './common/tab/tab.component';
 import { PlaygroundComponent } from './playground/playground.component';
 import { PittingCorrosionComponent } from './modules/pitting-corrosion/pitting-corrosion.component';
+import { WeldMisalignmentComponent } from './modules/weld-misalignment/weld-misalignment.component';
 
 const appRoutes: Routes = [
   { path: 'playground', component: PlaygroundComponent },
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
   { path: 'localmetalloss', component: LocalMetalLossComponent },
   { path: 'generalmetalloss', component: GeneralMetalLossComponent },
   { path: 'pittingcorrosion', component: PittingCorrosionComponent },
+  { path: 'weld', component: WeldMisalignmentComponent },
   {
     path: '',
     redirectTo: '/home',
@@ -69,7 +71,8 @@ const appRoutes: Routes = [
     TabComponent,
     TabItemComponent,
     PlaygroundComponent,
-    PittingCorrosionComponent
+    PittingCorrosionComponent,
+    WeldMisalignmentComponent
   ],
   imports: [
     RouterModule.forRoot(

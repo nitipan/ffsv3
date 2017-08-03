@@ -132,6 +132,26 @@ namespace ffs.api
                 }
             };
 
+            Get["/fabricationTolerance/{equipmentTypeId}"] = x =>
+            {
+                var equipmentTypeId = (int)x.equipmentTypeId;
+                using (var db = DbContext.Get())
+                {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT FabricationToleranceID,FabricationToleranceName FROM FabricationTolerance Where EquipmentTypeID = @EquipmentTypeID", new { EquipmentTypeID = equipmentTypeId });
+                    return Response.AsJson(result);
+                }
+            };
+
+            Get["/weldorientarion"] = x =>
+            {
+                using (var db = DbContext.Get())
+                {
+                    IEnumerable<dynamic> result = db.Connection.Query<dynamic>("SELECT * FROM WeldOrientarion");
+                    return Response.AsJson(result);
+                }
+            };
+
+
         }
     }
 }
