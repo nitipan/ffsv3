@@ -16,7 +16,7 @@
             <app-panel title="Data">
               <ffs-number label="The Maximum Pit Depth" key="theMaximumPitDepth" [unit]="(unit | async)?.distance"></ffs-number>
               <ffs-select label="The Standard Pit Chart" key="theStandardPitChart" [options]="theStandardPitCharts | async" value="1"></ffs-select>
-              <ffs-browse label="Import Data" key="" accept=".xlsx,.xls"></ffs-browse>
+              <ffs-browse label="Import Data" key="browseBtn" accept=".xlsx,.xls"></ffs-browse>
               <ffs-number label="Number of Data Row" key="dataRow"></ffs-number>
             </app-panel>
             <app-panel title="Remaining Strength Factor, RSF">
@@ -27,13 +27,15 @@
           <div class="col-md-5">
             <div class="row">
               <div class="col-md-11 text-center">
-                <img src="{{imgPath}}" class="img-responsive" />
+                <img src="{{imgPath}}" class="img-responsive" *ngIf="assessmentLevel == 1" />
+                <img src="assets/pitting1.png" class="img-responsive" *ngIf="assessmentLevel == 2" />
+                <img src="assets/pitting2.png" class="img-responsive" *ngIf="assessmentLevel == 2" />
               </div>
             </div>
           </div>
         </div>
       </app-tab-item>
-      <app-tab-item title="Pit Data">
+      <app-tab-item title="Pit Data" *ngIf="assessmentLevel == 2">
       </app-tab-item>
     </app-tab>
   </flaw>

@@ -19,7 +19,6 @@ import { MaterialInputComponent } from './../common/material-input/material-inpu
   styleUrls: ['./pitting-corrosion.component.scss'],
   animations: [routerTransition()],
   host: { '[@routerTransition]': '' }
-
 })
 
 export class PittingCorrosionComponent extends ModuleBase implements OnInit, AfterViewInit {
@@ -36,6 +35,8 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
   unit: Observable<IUnit>;
   theStandardPitCharts: Observable<KV[]>;
   imgPath: String;
+  assessmentLevel: any = 1;
+
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
@@ -43,6 +44,21 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
 
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
+
+    this.equipmentInput.form.get('assessmentLevel').valueChanges.subscribe((assessmentLevel) => {
+      this.assessmentLevel = assessmentLevel;
+      if (this.assessmentLevel == 1) {
+        this.form.get('theMaximumPitDepth').enable();
+        this.form.get('theStandardPitChart').enable();
+        this.form.get('browseBtn').disable();
+        this.form.get('dataRow').disable();
+      } else if (this.assessmentLevel == 2) {
+        this.form.get('theMaximumPitDepth').disable();
+        this.form.get('theStandardPitChart').disable();
+        this.form.get('browseBtn').enable();
+        this.form.get('dataRow').enable();
+      }
+    });
 
     this.form.get('theStandardPitChart').valueChanges.subscribe(x => {
       this.imgPath = 'assets/chart' + x + '.bmp';
