@@ -32,27 +32,31 @@ export abstract class FFSInputBase implements OnInit {
         this.form = new FormGroup(group);
 
         this.form.controls[this.key].valueChanges.subscribe(v => {
-
-
-
-            // check error
-            this.errorMessages = [];
-            var errors = this.form.get(this.key).errors;
-            if (errors != null) {
-                if (errors['required'] == true) {
-                    this.errorMessages.push(`${this.label} is required`);
-                    errors['required'] = undefined;
-                }
-                var vals = _.chain(errors)
-                    .values()
-                    .filter(v => v != undefined)
-                    .map(v => `${this.label} ${v}`)
-                    .value();
-
-                this.errorMessages.push(...vals);
-            }
+            this.checkErrors();
         });
 
+    }
+
+    checkErrors(markDirty: boolean = false) {
+
+        if (markDirty)
+            this.form.get(this.key).markAsDirty();
+
+        this.errorMessages = [];
+        var errors = this.form.get(this.key).errors;
+        if (errors != null) {
+            if (errors['required'] == true) {
+                this.errorMessages.push(`${this.label} is required`);
+                errors['required'] = undefined;
+            }
+            var vals = _.chain(errors)
+                .values()
+                .filter(v => v != undefined)
+                .map(v => `${this.label} ${v}`)
+                .value();
+
+            this.errorMessages.push(...vals);
+        }
     }
 
     get hasError() {

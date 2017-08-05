@@ -26,6 +26,10 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
   }
 
   getValue() {
+    this.input.forEach(i => {
+      i.checkErrors(true);
+    });
+
     console.log(this.form.getRawValue());
   }
 
