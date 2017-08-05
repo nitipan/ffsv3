@@ -1,6 +1,11 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OnInit, Input, QueryList } from '@angular/core';
+
+
+import * as _ from 'underscore';
+
 export abstract class FFSInputBase implements OnInit {
+
 
     @Input() label: string;
     @Input() key: string;
@@ -8,15 +13,50 @@ export abstract class FFSInputBase implements OnInit {
     @Input() unit: string;
     @Input() form: FormGroup;
     @Input() required = false;
+    @Input() validators: any[] = [];
+
+    errorMessages: string[];
 
     ngOnInit(): void {
         let group: any = {};
-        group[this.key] = this.required ? new FormControl(this.value || '', Validators.required) : new FormControl(this.value || '');
+
+        let validators: any[] = [];
+        if (this.required)
+            validators.push(Validators.required);
+
+        this.validators.forEach(e => {
+            validators.push(e);
+        });
+
+        group[this.key] = new FormControl(this.value || '', Validators.compose(validators));
         this.form = new FormGroup(group);
+
+        this.form.controls[this.key].valueChanges.subscribe(v => {
+
+
+
+            // check error
+            this.errorMessages = [];
+            var errors = this.form.get(this.key).errors;
+            if (errors != null) {
+                if (errors['required'] == true) {
+                    this.errorMessages.push(`${this.label} is required`);
+                    errors['required'] = undefined;
+                }
+                var vals = _.chain(errors)
+                    .values()
+                    .filter(v => v != undefined)
+                    .map(v => `${this.label} ${v}`)
+                    .value();
+
+                this.errorMessages.push(...vals);
+            }
+        });
+
     }
 
-    get isValid() {
-        return this.form.controls[this.key].valid;
+    get hasError() {
+        return this.form.get(this.key).invalid && (this.form.get(this.key).dirty || this.form.get(this.key).touched);
     }
 
     get enabled() {

@@ -48,7 +48,10 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
 
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
-
+    this.equipmentInput.form.valueChanges.subscribe(f => {
+      let inputs = f as InputBase;
+      this.valueChangedSubject.next(inputs);
+    });
     this.form.get('thicknessDataID').valueChanges.subscribe(x => {
       this.thicknessImage = x;
     });

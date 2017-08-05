@@ -125,9 +125,12 @@
     <Compile Include="Model\BeanCalculateCommon.cs" />
     <Compile Include="Model\BeanLocalMetalLoss.cs" />
     <Compile Include="Model\BeanLocalMetalLossResult.cs" />
+    <Compile Include="Model\BeanWeld.cs" />
+    <Compile Include="Model\BeanWeldResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RootModule.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WeldCalculationModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

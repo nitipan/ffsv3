@@ -1,6 +1,12 @@
 <div class="row">
   <div class="col-md-6">
-    <ffs-select label="Test" key="valueId" text="xx" [options]="[{key : 1, value:'A'} , {key : 2, value:'B'},{key : 3, value:'C'}]"></ffs-select>
+
+    <ffs-browse label="browse" key="file"></ffs-browse>
+    <ffs-text label="test" key="value1" required="true"></ffs-text>
+
+    <ffs-number label="test" key="value" required="true" [validators]="[rule1(),rule2()]"></ffs-number>
+
+
     <button (click)="getValue()">OK</button>
   </div>
 </div>

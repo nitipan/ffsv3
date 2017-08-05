@@ -1,3 +1,4 @@
+import { InputBase } from './../../model/inputbase';
 import { IUnit } from '../../common/unit';
 import { Observable } from 'rxjs/Rx';
 import { FormGroup } from '@angular/forms';
@@ -44,7 +45,10 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
 
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
-
+    this.equipmentInput.form.valueChanges.subscribe(f => {
+      let inputs = f as InputBase;
+      this.valueChangedSubject.next(inputs);
+    });
     this.equipmentInput.form.get('assessmentLevel').valueChanges.subscribe((assessmentLevel) => {
       this.assessmentLevel = assessmentLevel;
       if (this.assessmentLevel == 1) {

@@ -48,7 +48,10 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
 
-
+    this.equipmentInput.form.valueChanges.subscribe(f => {
+      let inputs = f as InputBase;
+      this.valueChangedSubject.next(inputs);
+    });
 
     // calculate
     this.moduleEvent.requestCalculateSubject.subscribe(() => {

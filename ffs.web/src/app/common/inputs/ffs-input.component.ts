@@ -10,13 +10,13 @@ import 'bootstrap-datepicker';
         styleUrls: ['./ffs-input.component.scss'],
         template: `
         <div class="ffs-input form-horizontal" [formGroup]="form">
-            <div class="form-group" [class.has-error]="!isValid && enabled">
+            <div class="form-group" [class.has-error]="hasError">
                 <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
                 <div class="input-group col-xs-7">
                     <input [formControlName]="key" [id]="key" class="form-control">                
                     <label class="input-group-addon control-label" *ngIf="unit != undefined">{{unit}}</label>                  
                 </div>
-                <div class="col-xs-offset-5 col-xs-7 control-label errorText" *ngIf="!isValid && required">* {{label}} is required</div>
+                 <div class="col-xs-offset-5 col-xs-7 control-label errorText" *ngFor="let error of errorMessages" >* {{error}}</div>
             </div>
            
         </div>
@@ -95,7 +95,7 @@ export class FFSCheckComponent extends FFSInputBase {
         styleUrls: ['./ffs-input.component.scss'],
         template: `
         <div class="ffs-input form-horizontal" [formGroup]="form">
-            <div class="form-group" [class.has-error]="!isValid && enabled">
+            <div class="form-group" [class.has-error]="hasError">
                 <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
                 <div class="input-group col-xs-5">
                     <input [formControlName]="key" type="number" [id]="key" class="form-control">                
@@ -103,8 +103,7 @@ export class FFSCheckComponent extends FFSInputBase {
                     
                 </div>
                 
-                <div class="col-xs-offset-5 col-xs-7 control-label errorText" *ngIf="!isValid && required">* {{label}} is required</div>
-                
+                <div class="col-xs-offset-5 col-xs-7 control-label errorText" *ngFor="let error of errorMessages" >* {{error}}</div>
             </div>
            
         </div>
@@ -124,7 +123,7 @@ export class FFSNumberComponent extends FFSInputBase {
         styleUrls: ['./ffs-input.component.scss'],
         template: `
        <div class="ffs-input form-horizontal" [formGroup]="form">
-            <div class="form-group" [class.has-error]="!isValid">
+            <div class="form-group" [class.has-error]="hasError">
                 <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
                 <div class="input-group date col-xs-7" #datepicker>
                 <input [formControlName]="key" [id]="key" class="form-control">
@@ -132,7 +131,7 @@ export class FFSNumberComponent extends FFSInputBase {
                     <span class="glyphicon glyphicon-calendar"></span>
                 </div>
                 </div>
-                <div class="col-xs-offset-5 col-xs-7 control-label errorText" *ngIf="!isValid && required">* {{label}} is required</div>
+                 <div class="col-xs-offset-5 col-xs-7 control-label errorText" *ngFor="let error of errorMessages" >* {{error}}</div>
             </div>
         </div>
         `,
@@ -172,7 +171,7 @@ export class FFSDateComponent extends FFSInputBase implements AfterViewInit {
             <div class="form-group">
                 <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
                 <input type="file" [attr.accept]="accept" [attr.for]="key" size="chars" #file (change)="fileBrowserChanged($event)">
-                <button class="btn btn-primary col-xs-7" (click)="browseFile()">Browse</button>
+                <button class="btn btn-primary col-xs-7" (click)="browseFile()" [disabled]="this.form.get(this.key).disabled">Browse</button>
             </div>
             <div class=" col-xs-7 col-xs-offset-5" *ngIf="filename != ''">
                 <div class="chip">

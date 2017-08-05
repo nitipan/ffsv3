@@ -76,6 +76,10 @@ export class WizardComponent implements OnInit, AfterContentInit {
   calculate() {
     this.step.onCalculate.emit(this.step);
   }
+
+  newInput() {
+    location.reload();
+  }
 }
 
 
