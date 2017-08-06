@@ -1,0 +1,39 @@
+<app-wizard (stepChanged)="onStepChange($event)" (onStepsInit)="onStepsInit($event)">
+  <equipment>
+    <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
+  </equipment>
+  <design>
+    <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
+  </design>
+  <material>
+    <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
+  </material>
+  <flaw>
+    <div class="row">
+      <div class="col-md-6">
+        <app-panel title="Flaw dimension">
+          <ffs-number label="Dent Depth" key="DentDepth" [unit]="(unit | async)?.distance"></ffs-number>
+        </app-panel>
+        <app-panel title="Flaw to Facility">
+          <ffs-number label="Weld Joint" key="WeldJoint" [unit]="(unit | async)?.distance"></ffs-number>
+          <ffs-number label="Major Structural Discontinuity" key="MajorStructuralDiscontinuity" [unit]="(unit | async)?.distance"></ffs-number>
+          <div [hidden]="assessmentLevel == 1">
+            <ffs-number label="Number of Cycle" key="NumberOfCycle"></ffs-number>
+            <ffs-number label="Max Operating Pressure" key="MaxOperatingPressure" [unit]="(unit | async)?.pressure"></ffs-number>
+            <ffs-number label="Min Operating Pressure" key="MinOperatingPressure" [unit]="(unit | async)?.pressure"></ffs-number>
+          </div>
+        </app-panel>
+      </div>
+
+      <div class="col-md-6">
+      </div>
+
+    </div>
+  </flaw>
+  <loads (onCalculate)="onCalculate($event)">
+    <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
+  </loads>
+  <result>
+    <app-result [moduleEvent]="moduleEvent"></app-result>
+  </result>
+</app-wizard>

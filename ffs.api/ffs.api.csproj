@@ -123,12 +123,15 @@
     <Compile Include="Model\BeanBrittle.cs" />
     <Compile Include="Model\BeanBrittleResult.cs" />
     <Compile Include="Model\BeanCalculateCommon.cs" />
+    <Compile Include="Model\BeanDent.cs" />
+    <Compile Include="Model\BeanDentResult.cs" />
     <Compile Include="Model\BeanLocalMetalLoss.cs" />
     <Compile Include="Model\BeanLocalMetalLossResult.cs" />
     <Compile Include="Model\BeanPitting.cs" />
     <Compile Include="Model\BeanPittingResult.cs" />
     <Compile Include="Model\BeanWeld.cs" />
     <Compile Include="Model\BeanWeldResult.cs" />
+    <Compile Include="DentModule.cs" />
     <Compile Include="PittingModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RootModule.cs" />
