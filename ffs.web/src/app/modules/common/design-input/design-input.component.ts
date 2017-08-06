@@ -1,3 +1,4 @@
+import { FFSSelectComponent } from './../../../common/inputs/ffs-input.component';
 import { IUnit } from './../../../common/unit';
 import { Observable } from 'rxjs/Rx';
 import { EventService } from './../../../event.service';
@@ -53,12 +54,6 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.componentShapeID, value: a.componentShapeName }; }));
 
-    this.componentShape.subscribe(c => {
-      if (c.length > 0 && this.form.get("componentShapeID").value === "") {
-        this.form.get("componentShapeID").setValue(c[0].key);
-      }
-    });
-
 
     this.moduleEvent.equipmentTypeSubject.subscribe(equipmentType => {
 
@@ -67,23 +62,11 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
         .map(response => response.json() as any[])
         .map(arr => arr.map(a => { return { key: a.componentTypeID, value: a.componentTypeName }; }));
 
-      this.componentType.subscribe(c => {
-        if (c.length > 0 && this.form.get("componentTypeID").value === "") {
-          this.form.get("componentTypeID").setValue(c[0].key);
-        }
-      });
-
-
       this.form.get("designCode").setValue("");
       this.codeDesign = this.http.get(`/api/lookup/designcodes/${equipmentType}`)
         .map(response => response.json() as any[])
         .map(arr => arr.map(a => { return { key: a.designCodeID, value: a.designCodeName }; }));
 
-      this.codeDesign.subscribe(c => {
-        if (c.length > 0 && this.form.get("designCode").value === "") {
-          this.form.get("designCode").setValue(c[0].key);
-        }
-      });
     });
 
 
@@ -91,7 +74,12 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
     this.moduleEvent.equipmentTypeSubject.emit(1);
   }
 
-
+  optionReady(select: FFSSelectComponent) {
+    if (select.options.length > 0)
+      select.setValue(select.options[0].key);
+    else
+      select.setValue("");
+  }
 
 
 }

@@ -1,3 +1,4 @@
+import { FFSSelectComponent } from './../../../common/inputs/ffs-input.component';
 import { SIUnit, MatricUnit } from './../../../common/unit';
 import { EventService } from './../../../event.service';
 import { InputBase } from './../../../model/inputbase';
@@ -79,5 +80,4 @@ export class EquipmentInputComponent extends InputBaseComponent implements OnIni
   get Inputs(): InputBase {
     return this.form.value as InputBase;
   }
-
 }

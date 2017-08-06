@@ -2,10 +2,10 @@
   <div class="col-md-6">
     <app-panel>
       <ffs-text label="Equipment Number" key="equipmentNumber"></ffs-text>
-      <ffs-select label="Equipment Type" key="equipmentType" [options]="equipmentTypes | async" value="1"></ffs-select>
+      <ffs-select label="Equipment Type" key="equipmentType" text="equipmentTypeText" [options]="equipmentTypes | async" value="1"></ffs-select>
     </app-panel>
     <app-panel>
-      <ffs-select label="Methodology" key="methodology" [options]="methodologies | async" value="1"></ffs-select>
+      <ffs-select label="Methodology" key="methodology" text="methodologyText" [options]="methodologies | async" value="1"></ffs-select>
       <ffs-select label="Assessment Level" key="assessmentLevel" [options]="assessmentLevel | async" value="1"></ffs-select>
     </app-panel>
     <app-panel>

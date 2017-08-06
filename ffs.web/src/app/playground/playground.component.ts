@@ -1,6 +1,8 @@
 import { FormGroup, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
 import { FFSInputBase } from "../common/inputs/ffs-input-base";
+import '../common/functions';
+import { toDataURL } from "../common/functions";
 
 @Component({
   selector: 'app-playground',
@@ -23,6 +25,19 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
+
+    toDataURL("/assets/logo_round.png").subscribe(v => {
+      console.log(v);
+    });
+
+
+    //  var reader = new FileReader();
+    // reader.onload = function (e) {
+    //   console.log(e);
+    //   //inputForm.setValue((e.target as any).result);
+    // }
+
+    // reader.readAsDataURL()
   }
 
   getValue() {

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { TabItemComponent } from './common/tab/tab-item.component';
 import { EventService } from './event.service';
 import { FFSInputModule } from './app.modue.ffs-input';
@@ -85,7 +86,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [EventService],
+  providers: [EventService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

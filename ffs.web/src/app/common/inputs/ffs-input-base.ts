@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { OnInit, Input, QueryList } from '@angular/core';
+import { OnInit, Input, QueryList, Output, EventEmitter } from '@angular/core';
 
 
 import * as _ from 'underscore';
@@ -14,6 +14,8 @@ export abstract class FFSInputBase implements OnInit {
     @Input() form: FormGroup;
     @Input() required = false;
     @Input() validators: any[] = [];
+
+    @Output() onReady: EventEmitter<FFSInputBase> = new EventEmitter();
 
     errorMessages: string[];
 
@@ -43,7 +45,8 @@ export abstract class FFSInputBase implements OnInit {
             this.form.get(this.key).markAsDirty();
 
         this.errorMessages = [];
-        var errors = this.form.get(this.key).errors;
+        var errors = _.clone(this.form.get(this.key).errors);
+
         if (errors != null) {
             if (errors['required'] == true) {
                 this.errorMessages.push(`${this.label} is required`);
@@ -65,6 +68,10 @@ export abstract class FFSInputBase implements OnInit {
 
     get enabled() {
         return this.form.controls[this.key].enabled;
+    }
+
+    setValue(value: any) {
+        this.form.get(this.key).setValue(value);
     }
 
     static toFormGroup(inputs: QueryList<FFSInputBase>) {

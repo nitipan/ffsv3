@@ -20,17 +20,20 @@ namespace ffs.api
 
             const string rootFolder = "public";
 
-           
 
-            var fileSystem = new PhysicalFileSystem(rootFolder);
-            var options = new FileServerOptions
+            try
             {
-                EnableDefaultFiles = true,
+                var fileSystem = new PhysicalFileSystem(rootFolder);
+                var options = new FileServerOptions
+                {
+                    EnableDefaultFiles = true,
 
-                FileSystem = fileSystem
-            };
+                    FileSystem = fileSystem
+                };
 
-            app.UseFileServer(options);
+                app.UseFileServer(options);
+            }
+            catch { }
 
             app.UseNancy();
             app.UseStageMarker(PipelineStage.MapHandler);

@@ -1,5 +1,5 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { Input, Component, OnInit, forwardRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Input, Component, OnInit, forwardRef, ViewChild, AfterViewInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FFSInputBase } from "./ffs-input-base";
 import * as $ from 'jquery';
 import 'bootstrap-datepicker';
@@ -49,8 +49,16 @@ export class FFSTextComponent extends FFSInputBase {
         providers: [{ provide: FFSInputBase, useExisting: forwardRef(() => FFSSelectComponent) }]
     }
 )
-export class FFSSelectComponent extends FFSInputBase implements OnInit {
+export class FFSSelectComponent extends FFSInputBase implements OnInit, OnChanges {
 
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this.text != undefined) {
+            if (changes.options != undefined && changes.options.currentValue != undefined) {
+                this.setText(this.value);
+                this.onReady.emit(this);
+            }
+        }
+    }
 
     @Input() text: string;
 
@@ -61,9 +69,17 @@ export class FFSSelectComponent extends FFSInputBase implements OnInit {
         if (this.text != undefined) {
             this.form.addControl(this.text, new FormControl(''));
             this.form.get(this.key).valueChanges.subscribe(v => {
-                var item = this.options.find(o => o.key == v);
-                this.form.get(this.text).setValue(item.value);
+                this.setText(v);
             });
+        }
+    }
+
+    private setText(v) {
+        if (v == '' || v == undefined) {
+            this.form.get(this.text).setValue('');
+        } else {
+            var item = this.options.find(o => o.key == v);
+            this.form.get(this.text).setValue(item.value);
         }
     }
 }

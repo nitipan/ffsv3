@@ -1,3 +1,4 @@
+import { ResultComponent } from './../common/result/result.component';
 import { IUnit } from './../../common/unit';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
@@ -36,6 +37,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   @ViewChild(DesignInputComponent) designInput: DesignInputComponent;
   @ViewChild(MaterialInputComponent) materialInput: MaterialInputComponent;
   @ViewChild(LoadInputComponent) loadInput: LoadInputComponent;
+  @ViewChild(ResultComponent) result: ResultComponent;
 
   form: FormGroup;
   unit: Observable<IUnit>;
@@ -51,6 +53,8 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
+
+    this.result.reportFactory = this.reportFactory;
 
     this.equipmentInput.form.valueChanges.subscribe(f => {
       let inputs = f as InputBase;
@@ -108,13 +112,6 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     this.cdRef.detectChanges();
   }
 
-  // get level(): number {
-  //   if (this.equipmentInput.form == undefined)
-  //     return null;
-
-  //   return this.equipmentInput.form.get("assessmentLevel").value;
-  // }
-
   ngOnInit() {
     this.stressRatios = this.http.get("/api/lookup/reductions")
       .map(response => response.json() as any[])
@@ -137,6 +134,17 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
   }
 
+
+
+  reportFactory(result) {
+    var content: any[] = [
+      // { text: "STEP 1 – Determine the starting point for the MAT", style: 'h3' },
+      // { text: "STEP 1.1 – Determine the following parameters", style: 'h4' },
+      // { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' },
+      // { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' }
+    ];
+    return content;
+  }
 
 }
 
