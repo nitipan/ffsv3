@@ -71,6 +71,48 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
     this.form.get('autoAllowableRSF').setValue(true);
     this.form.get('allowRSF').disable();
     this.designInput.form.get('autoCalculateMinRequireThickness').setValue(true);
+
+
+
+
+
+
+    // calculate
+    this.moduleEvent.requestCalculateSubject.subscribe(() => {
+
+
+      // TODO check form valid ?
+
+      // NEED GET RAWDATA because to include disabled value
+      let equipmentInput = this.equipmentInput.form.getRawValue() as InputBase;
+      let designInput = this.designInput.form.getRawValue() as InputBase;
+      let materialInput = this.materialInput.form.getRawValue() as InputBase;
+      let loadInput = this.loadInput.form.getRawValue() as InputBase;
+      let flawInput = this.form.getRawValue();
+
+      // merge
+      let calculationParam = {
+        ...equipmentInput,
+        ...designInput,
+        ...materialInput,
+        ...flawInput,
+        ...loadInput
+      }
+
+
+      this.moduleEvent.calculatingSubject.emit(null);
+
+      this.http.post(`/api/pitting/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+        .map(r => r.json())
+        .subscribe(r => {
+          this.moduleEvent.calculatingSubject.emit(r);
+          this.moduleEvent.calculatedSubject.emit({ param: calculationParam, result: r, module: this });
+        });
+    });
+
+
+
+
     this.cdRef.detectChanges();
 
   }
