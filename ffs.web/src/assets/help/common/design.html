@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+</head>
+<body>
+<div class="header">Design Data</div>
+<hr/>
+<div class="detail">
+    <div>
+        This window inputs the design data of the equipment for assessment. The data definition may be used follows; Component Type: Type of the equipment such as Straight pipe, Cylindrical Shell, Spherical Shell, Hemispherical Head and Storage Tank (required).<br/><br/>
+        
+		<ul class="itemList">
+			<li><span class="lblHead">Design Code</span><span class="lblDetail"> : The standard or code which used for design the component (not required).</span></li>
+			<li><span class="lblHead">Design Pressure</span><span class="lblDetail"> : The design pressure for the equipment (required). </span></li>
+			<li><span class="lblHead">Design Temperature</span><span class="lblDetail"> : The design temperature for the equipment (required).</span></li>
+			<li><span class="lblHead">Inside Diameter</span><span class="lblDetail"> : The original or design inside diameter (required).</span></li>
+			<li><span class="lblHead">Nominal Thickness, <span class="txtBrr">t<sub>nom</sub></span></span><span class="lblDetail"> : Previous metal loss associated with the governing thickness see Figure 2, (required).</span></li>
+			<li><span class="lblHead">Future Corrosion Allowance, <span class="txtBrr">FCA</span></span><span class="lblDetail"> : Specified future corrosion allowance see Figure 2 (required). </span></li>
+			<li><span class="lblHead">Uniform Metal Loss, <span class="txtBrr">LOSS</span></span><span class="lblDetail"> : Metal loss in the equipment prior to the assessment equal to the nominal minus the measured minimum thickness at the time of the inspection see Figure 2 (required). </span></li>
+			
+		</ul>
+		
+		<table class="tblDescription" cellpadding="15" cellspacing="0">
+            
+            <tr >
+                <td colspan="2"><br><img src="../images/design.png" width="500px"><br><br></td>
+            </tr>
+
+        </table>
+		
+		<ul class="itemList">
+			<li><span class="lblHead">Min. Required Longitudinal Thickness</span><span class="lblDetail"> : Minimum required thickness based on the longitudinal membrane stress for a cylinder or cone, as applicable (required). </span></li>
+			<li><span class="lblHead">Min. Required Circumferential Thickness</span><span class="lblDetail"> : minimum required thickness based on the circumferential membrane stress for a cylinder or cone, as applicable (required).</span></li>
+			<li><span class="lblHead">Weld joint efficiency</span><span class="lblDetail"> : weld joint efficiency or quality factor from the original construction code, if unknown use 0.7.</span></li>
+			<li><span class="lblHead">Allowable RSF</span><span class="lblDetail"> : Allowable remaining strength factor which is defined as<br><br> <span class="txtBrr">RSF=L<sub>DC</sub> /L<sub>UC</sub></span> <br/>When <span class="txtBrr">L<sub>DC</sub></span>&nbsp;&nbsp; is limit or plastic collapse load of the damaged component (component with flaws) and <span class="txtBrr">L<sub>UC</sub></span>&nbsp;&nbsp; is limit or plastic collapse load of the undamaged component (required). </span></li>
+			
+		</ul>
+		
+		
+        </div><br/><br/>
+
+
+
+
+    </div>
+</div>
+</body>
+</html>

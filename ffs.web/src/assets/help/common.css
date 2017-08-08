@@ -1,0 +1,52 @@
+body {
+    font-family: tahoma, verdana, arial;
+    font-size:12px;
+}
+
+.header {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+.header2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+
+.header3 {
+    font-weight: bold;
+    color: black;
+}
+
+.lblHead {
+    font-weight: bold;
+    color:cornflowerblue;
+}
+
+.txtBrr {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 11px;
+}
+
+.tblData {
+    border-collapse: collapse;
+}
+
+table.tblData td, th {
+    border: 1px solid black;
+}
+
+table.tblData th {
+    background-color: #95B2D8;
+}
+
+table.tblData td {
+    background-color: #D0D8E8;
+}
+
+table.tblData td.even {
+    background-color: aliceblue;
+}
