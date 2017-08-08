@@ -55,6 +55,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     this.form = FFSInputBase.toFormGroup(this.inputs);
 
     this.result.reportFactory = this.reportFactory;
+    this.result.summaryFactory = this.summaryFactory;
 
     this.equipmentInput.form.valueChanges.subscribe(f => {
       let inputs = f as InputBase;
@@ -138,10 +139,20 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
   reportFactory(result) {
     var content: any[] = [
-      // { text: "STEP 1 – Determine the starting point for the MAT", style: 'h3' },
-      // { text: "STEP 1.1 – Determine the following parameters", style: 'h4' },
-      // { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' },
-      // { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' }
+      { text: "STEP 1 – Determine the starting point for the MAT", style: 'h3' },
+      { text: "STEP 1.1 – Determine the following parameters", style: 'h4' },
+      { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' },
+      { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' }
+    ];
+    return content;
+  }
+
+  summaryFactory(result) {
+    var content: any[] = [
+      { text: "mix code", style: 'h3' },
+      { text: "STEP 1.1 – Determine the following parameters", style: 'h4' },
+      { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' },
+      { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' }
     ];
     return content;
   }

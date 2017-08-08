@@ -21,4 +21,6 @@ export abstract class WizardStepBase {
 
     @Output()
     onCalculate: EventEmitter<WizardStepBase> = new EventEmitter();
+
+
 }

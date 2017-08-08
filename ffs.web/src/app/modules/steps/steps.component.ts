@@ -1,3 +1,4 @@
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { EventService } from './../../event.service';
 import { Component, forwardRef } from '@angular/core';
 import { WizardStepBase } from "../../common/wizard/wizard-step-base";
@@ -7,7 +8,18 @@ import { WizardStepBase } from "../../common/wizard/wizard-step-base";
     selector: 'equipment',
     templateUrl: './steps.component.html',
     styleUrls: ['./steps.component.scss'],
-    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => EquipmentStepComponent) }]
+    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => EquipmentStepComponent) }],
+    animations: [
+        trigger('fadeInOut', [
+            transition(':enter', [   // :enter is alias to 'void => *'
+                style({ opacity: 0 }),
+                animate(300, style({ opacity: 1 }))
+            ]),
+            transition(':leave', [   // :leave is alias to '* => void'
+                animate(1, style({ opacity: 0 }))
+            ])
+        ])
+    ]
 })
 export class EquipmentStepComponent extends WizardStepBase {
     title = "Equipment";
@@ -17,7 +29,18 @@ export class EquipmentStepComponent extends WizardStepBase {
     selector: 'design',
     templateUrl: './steps.component.html',
     styleUrls: ['./steps.component.scss'],
-    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => DesignStepComponent) }]
+    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => DesignStepComponent) }],
+    animations: [
+        trigger('fadeInOut', [
+            transition(':enter', [   // :enter is alias to 'void => *'
+                style({ opacity: 0 }),
+                animate(300, style({ opacity: 1 }))
+            ]),
+            transition(':leave', [   // :leave is alias to '* => void'
+                animate(1, style({ opacity: 0 }))
+            ])
+        ])
+    ]
 })
 export class DesignStepComponent extends WizardStepBase {
     title = "Design";

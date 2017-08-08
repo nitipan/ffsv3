@@ -26,6 +26,7 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
   logo: any;
 
   reportFactory: any;
+  summaryFactory: any;
 
   constructor(private datePipe: DatePipe) {
 
@@ -164,6 +165,46 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
 
   summary() {
 
+    var contents: any[] = [
+      {
+        layout: 'noBorders',
+        table: {
+          widths: [50, '*'],
+          body: [
+            [{ width: 50, image: this.logo }, { text: this.module.name + ' Summary', style: 'h1', margin: [10, 10, 0, 0] }],
+          ]
+        }
+      },
+      { text: 'Level ' + this.result.param.assessmentLevel + ' Assessment', style: 'h2' },
+
+      //   {
+      //   style : 't1',
+      //   margin : [20,20,0,0],
+      //   layout: 'noBorders',
+      //   table: {
+
+      //     widths: [ 150, '*' ],
+      //     body: [
+      //       [ {text : 'Equipment number' , bold:true}, '1234'  ],
+      //       [ {text : 'Equipment type', bold:true}, 'Pipe Components'  ],
+      //       [ {text : 'Component type', bold:true}, 'Straight Pipe'  ],
+      //       [ {text : 'Design Code', bold:true}, 'ASME 012'  ],
+      //       [ {text : 'Failure Mode', bold:true}, 'Brittle Fracture'  ],
+      //       [ {text : 'Methodology', bold:true}, 'API 579-1/ASME FFS-1 2007 Fitness-For-Service'  ],
+
+      //       [ {text : 'Analysis By', bold:true}, 'Nitipan Pompan'  ],
+      //       [ {text : 'Analysis Date', bold:true}, '27/7/2017'  ],
+      //       [ {text : 'Analysis Detail', bold:true}, ''  ],
+      //     ]
+      //   }
+      // }
+
+    ];
+
+    if (this.summaryFactory != undefined) {
+      contents.push({ text: '', pageBreak: 'after' });
+      contents.push(...this.summaryFactory(this.result));
+    }
     var docDefinition = {
       "pageSize": "A4",
       "pageOrientation": "portrait",
@@ -174,42 +215,7 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
         20
       ],
       watermark: { text: 'Fitness for service software v3', opacity: 0.2 },
-      "content": [
-
-        {
-          layout: 'noBorders',
-          table: {
-            widths: [50, '*'],
-            body: [
-              [{ width: 50, image: this.logo }, { text: this.module.name + ' Summary', style: 'h1', margin: [10, 10, 0, 0] }],
-            ]
-          }
-        },
-        { text: 'Level ' + this.result.param.assessmentLevel + ' Assessment', style: 'h2' },
-
-        //   {
-        //   style : 't1',
-        //   margin : [20,20,0,0],
-        //   layout: 'noBorders',
-        //   table: {
-
-        //     widths: [ 150, '*' ],
-        //     body: [
-        //       [ {text : 'Equipment number' , bold:true}, '1234'  ],
-        //       [ {text : 'Equipment type', bold:true}, 'Pipe Components'  ],
-        //       [ {text : 'Component type', bold:true}, 'Straight Pipe'  ],
-        //       [ {text : 'Design Code', bold:true}, 'ASME 012'  ],
-        //       [ {text : 'Failure Mode', bold:true}, 'Brittle Fracture'  ],
-        //       [ {text : 'Methodology', bold:true}, 'API 579-1/ASME FFS-1 2007 Fitness-For-Service'  ],
-
-        //       [ {text : 'Analysis By', bold:true}, 'Nitipan Pompan'  ],
-        //       [ {text : 'Analysis Date', bold:true}, '27/7/2017'  ],
-        //       [ {text : 'Analysis Detail', bold:true}, ''  ],
-        //     ]
-        //   }
-        // }
-
-      ],
+      "content": contents,
       styles: {
         h1: {
           fontSize: 22,
