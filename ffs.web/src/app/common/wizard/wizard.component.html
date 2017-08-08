@@ -2,8 +2,14 @@
   <div class="col-md-2 hidden-sm hidden-xs">
     <div class="list-group">
       <a class="list-group-item text-center" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active">
-        <span class="icon-custom icon-custom-{{step.title | lowercase}}"></span>
-        <span>{{step.title}}</span>
+        <div class="row">
+          <div class="col-md-5 no-margin no-padding icon-custom icon-custom-{{step.title | lowercase}}">
+          </div>
+          <div class="no-margin no-padding col-md-7 text-left">
+            <h4>{{step.title}}</h4>
+          </div>
+
+        </div>
       </a>
     </div>
   </div>

@@ -90,9 +90,10 @@ export class FFSSelectComponent extends FFSInputBase implements OnInit, OnChange
         styleUrls: ['./ffs-input.component.scss'],
         template: `
         <div class="ffs-input form-horizontal" [formGroup]="form">
-           <div class="checkbox">
-                <label>
+           <div>
+                <label class="control control-checkbox">
                     <input type="checkbox" [id]="key" [formControlName]="key"> {{label}}
+                     <div class="control_indicator"></div>
                 </label>
             </div>
         </div>
@@ -114,7 +115,7 @@ export class FFSCheckComponent extends FFSInputBase {
             <div class="form-group" [class.has-error]="hasError">
                 <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
                 <div class="input-group col-xs-5">
-                    <input [formControlName]="key" type="number" [id]="key" class="form-control">                
+                    <input [formControlName]="key" type="number" [id]="key" class="form-control" [class.with-unit]="unit != undefined">                
                     <label class="input-group-addon control-label" *ngIf="unit != undefined">{{unit}}</label>
                     
                 </div>

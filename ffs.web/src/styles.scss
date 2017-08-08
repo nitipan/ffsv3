@@ -2,9 +2,11 @@
 
 @import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
 @import url("../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css");
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 body {
   //color: white;
-  background-color: rgb(65, 65, 65);
+  background-color: rgb(248, 249, 251); //background: black;
+  font-family: apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .vcenter {
@@ -21,7 +23,7 @@ body {
 }
 
 .btn-ffs {
-  background-image: url("/assets/menu_bg.png");
+  background-image: url("/assets/menu_bg2.png");
   background-repeat: no-repeat;
   width: 330px;
   height: 123px;
@@ -33,51 +35,51 @@ body {
 }
 
 .btn-general-metal-loss {
-  background-position: -9px -22px;
+  background-position: -9px -13px;
 }
 
 .btn-local-metal-loss {
-  background-position: -366px -22px;
+  background-position: -366px -13px;
 }
 
 .btn-brittle-fracture {
-  background-position: -724px -22px;
+  background-position: -724px -13px;
 }
 
 .btn-pitting-corrosion {
-  background-position: -1081px -22px;
+  background-position: -1081px -13px;
 }
 
 .btn-hydrogen-damange {
-  background-position: -9px -174px;
+  background-position: -9px -166px;
 }
 
 .btn-weld-misalignment {
-  background-position: -366px -174px;
+  background-position: -366px -165px;
 }
 
 .btn-crack-like-flaw {
-  background-position: -724px -174px;
+  background-position: -724px -165px;
 }
 
 .btn-creep-rupture {
-  background-position: -1081px -174px;
+  background-position: -1081px -165px;
 }
 
 .btn-fire-damage {
-  background-position: -9px -324px;
+  background-position: -9px -317px;
 }
 
 .btn-dent-gouge {
-  background-position: -366px -324px;
+  background-position: -366px -317px;
 }
 
 .btn-laminations {
-  background-position: -724px -324px;
+  background-position: -724px -317px;
 }
 
 .btn-fatigue {
-  background-position: -1081px -324px;
+  background-position: -1081px -317px;
 }
 
 .panel-primary>.panel-heading {
@@ -88,4 +90,12 @@ body {
 .btn-primary {
   background-color: #0277BD !important;
   color: rgba(255, 255, 255, 0.87);
+}
+
+.no-margin {
+  margin: 0px !important;
+}
+
+.no-padding {
+  padding: 0px !important;
 }
