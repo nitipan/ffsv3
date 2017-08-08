@@ -38,6 +38,15 @@ $primary-color: white;
     background-blend-mode: hue;
     background-repeat: no-repeat;
   }
+  .list-group-item:first-child {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 0px;
+  }
+  .list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 20px;
+  }
   .icon-custom-equipment {
     background-image: url("/assets/equipment.png");
   }
@@ -64,4 +73,5 @@ $primary-color: white;
   margin-left: -16px;
   padding-left: 30px;
   border: 1px solid #ddd;
+  min-height: 427px;
 }
