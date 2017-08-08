@@ -1,9 +1,6 @@
 $primary-color: white;
 .wizard-component {
-  * {
-    border-radius: 0 !important;
-  }
-  margin-right:0px;
+  margin-right: 0px;
   div.list-group>a.active:after {
     // content: '';
     position: absolute;
