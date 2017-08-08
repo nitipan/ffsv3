@@ -1,7 +1,7 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { EventService } from './../../event.service';
 import { Component, forwardRef } from '@angular/core';
 import { WizardStepBase } from "../../common/wizard/wizard-step-base";
+import { fadeInOut } from "../../common/router.animations";
 
 
 @Component({
@@ -9,17 +9,7 @@ import { WizardStepBase } from "../../common/wizard/wizard-step-base";
     templateUrl: './steps.component.html',
     styleUrls: ['./steps.component.scss'],
     providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => EquipmentStepComponent) }],
-    animations: [
-        trigger('fadeInOut', [
-            transition(':enter', [   // :enter is alias to 'void => *'
-                style({ opacity: 0 }),
-                animate(300, style({ opacity: 1 }))
-            ]),
-            transition(':leave', [   // :leave is alias to '* => void'
-                animate(1, style({ opacity: 0 }))
-            ])
-        ])
-    ]
+    animations: [fadeInOut()]
 })
 export class EquipmentStepComponent extends WizardStepBase {
     title = "Equipment";
@@ -30,17 +20,7 @@ export class EquipmentStepComponent extends WizardStepBase {
     templateUrl: './steps.component.html',
     styleUrls: ['./steps.component.scss'],
     providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => DesignStepComponent) }],
-    animations: [
-        trigger('fadeInOut', [
-            transition(':enter', [   // :enter is alias to 'void => *'
-                style({ opacity: 0 }),
-                animate(300, style({ opacity: 1 }))
-            ]),
-            transition(':leave', [   // :leave is alias to '* => void'
-                animate(1, style({ opacity: 0 }))
-            ])
-        ])
-    ]
+    animations: [fadeInOut()]
 })
 export class DesignStepComponent extends WizardStepBase {
     title = "Design";
@@ -50,7 +30,8 @@ export class DesignStepComponent extends WizardStepBase {
     selector: 'material',
     templateUrl: './steps.component.html',
     styleUrls: ['./steps.component.scss'],
-    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => MaterialStepComponent) }]
+    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => MaterialStepComponent) }],
+    animations: [fadeInOut()]
 })
 export class MaterialStepComponent extends WizardStepBase {
     title = "Material";
@@ -60,7 +41,8 @@ export class MaterialStepComponent extends WizardStepBase {
     selector: 'flaw',
     templateUrl: './steps.component.html',
     styleUrls: ['./steps.component.scss'],
-    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => FlawStepComponent) }]
+    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => FlawStepComponent) }],
+    animations: [fadeInOut()]
 })
 export class FlawStepComponent extends WizardStepBase {
     title = "Flaw";
@@ -70,7 +52,8 @@ export class FlawStepComponent extends WizardStepBase {
     selector: 'loads',
     templateUrl: './steps.component.html',
     styleUrls: ['./steps.component.scss'],
-    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => LoadsStepComponent) }]
+    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => LoadsStepComponent) }],
+    animations: [fadeInOut()]
 })
 export class LoadsStepComponent extends WizardStepBase {
     title = "Loads";
@@ -80,16 +63,10 @@ export class LoadsStepComponent extends WizardStepBase {
     selector: 'result',
     templateUrl: './steps.component.html',
     styleUrls: ['./steps.component.scss'],
-    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => ResultStepComponent) }]
+    providers: [{ provide: WizardStepBase, useExisting: forwardRef(() => ResultStepComponent) }],
+    animations: [fadeInOut()]
 })
 export class ResultStepComponent extends WizardStepBase {
     title = "Result";
-
-    // constructor(private eventService: EventService) {
-    //     super();
-    //     this.eventService.calculatedSubject.subscribe(result => {
-    //         this.requestActive.emit(this);
-    //     });
-    // }
 }
 

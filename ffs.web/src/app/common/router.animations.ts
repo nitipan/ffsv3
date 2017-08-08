@@ -17,15 +17,13 @@ export function noAnimation() {
   ]);
 }
 export function fadeInOut() {
-  return trigger('routerTransition', [
-    state('void', style({ position: 'fixed' })),
-    state('*', style({})),
+  return trigger('fadeInOut', [
     transition(':enter', [   // :enter is alias to 'void => *'
       style({ opacity: 0 }),
-      animate(400, style({ opacity: 1 }))
+      animate(300, style({ opacity: 1 }))
     ]),
     transition(':leave', [   // :leave is alias to '* => void'
-      animate(200, style({ opacity: 0, position: 'fixed' }))
+      animate(1, style({ opacity: 0 }))
     ])
   ]);
 }
