@@ -77,7 +77,7 @@ export class FFSSelectComponent extends FFSInputBase implements OnInit, OnChange
     private setText(v) {
         if (v == '' || v == undefined) {
             this.form.get(this.text).setValue('');
-        } else {
+        } else if (this.options != null) {
             var item = this.options.find(o => o.key == v);
             this.form.get(this.text).setValue(item.value);
         }

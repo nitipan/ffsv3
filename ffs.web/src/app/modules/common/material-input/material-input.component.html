@@ -3,7 +3,7 @@
     <app-panel title="Material Specification">
       <div class="col-md-6">
         <ffs-select label="Material Type" key="materialTypeID" [options]="materialTypes | async"></ffs-select>
-        <ffs-select label="Material Specification" key="material" [options]="materials | async"></ffs-select>
+        <ffs-select label="Material Specification" key="material" text="materialText" (onReady)="optionReady($event)" [options]="materials | async"></ffs-select>
         <ffs-text label="" key="materialName" *ngIf="showOther"></ffs-text>
         <ffs-select label="ASME Excemtion Curves" [options]="asmeExemptionCurves | async" key="asmeExemptionCurvesID"></ffs-select>
       </div>

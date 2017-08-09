@@ -1,3 +1,4 @@
+import { FFSSelectComponent } from './../../../common/inputs/ffs-input.component';
 import { EventService } from './../../../event.service';
 import { IUnit, SIUnit } from './../../../common/unit';
 import { Observable } from 'rxjs/Rx';
@@ -58,9 +59,6 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
       })
       .map(arr => arr.map(a => { return { key: a.materialID, value: a.materialName }; }));
 
-    this.materials.subscribe((m: KV[]) => {
-      this.form.get("material").setValue(m[0].key);
-    });
 
     this.asmeExemptionCurves = this.http.get("/api/lookup/asmeexemptioncurves")
       .map(response => response.json() as any[])
@@ -71,6 +69,13 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
     });
 
 
+  }
+
+  optionReady(select: FFSSelectComponent) {
+    if (select.options.length > 0)
+      select.setValue(select.options[0].key);
+    else
+      select.setValue("");
   }
 
   ngAfterViewInit(): void {

@@ -157,6 +157,9 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
         t1: {
           fontSize: 14,
         },
+        tableHeader: {
+          bold: true
+        }
       }
     }
 

@@ -42,6 +42,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   form: FormGroup;
   unit: Observable<IUnit>;
   stressRatios: Observable<KV[]>;
+  currentUnit: IUnit;
 
   constructor(
     private http: Http,
@@ -49,6 +50,9 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     eventService: EventService) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -138,12 +142,112 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
 
   reportFactory(result) {
+    var module = result.module;
+
     var content: any[] = [
-      { text: "STEP 1 – Determine the starting point for the MAT", style: 'h3' },
-      { text: "STEP 1.1 – Determine the following parameters", style: 'h4' },
-      { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' },
-      { text: "A. Nominal uncorroded thickness at each weld joint", style: 'h5' }
+      {
+        "text": "STEP 1 – Determine the starting point for the MAT",
+        "style": "h3"
+      },
+      {
+        "text": "STEP 1.1 – Determine the following parameters",
+        "style": "h4"
+      },
+      {
+        "text": "A. Nominal uncorroded thickness at each weld joint",
+        "style": "h5"
+      },
+      {
+        layout: 'noBorders',
+        margin: [50, 15, 0, 10],
+        table: {
+          "widths": [
+            200,
+            "*"
+          ],
+          body: [['t.nom', `${result.param.TheUncorrodedGoverningThickness} ${module.currentUnit.distance}`]]
+        }
+      },
+      {
+        "text": "B. Material of construction",
+        "style": "h5"
+      },
+      {
+        layout: 'noBorders',
+        margin: [50, 15, 0, 10],
+        table: {
+          "widths": [
+            200,
+            "*"
+          ],
+          body: [['Material', result.param.materialText]]
+        }
+      }, {
+        "text": "STEP 1.2 – Determine the uncorroded governing thickness",
+        "style": "h4"
+      }, {
+        layout: 'noBorders',
+        margin: [50, 15, 0, 10],
+        table: {
+          "widths": [
+            200,
+            "*"
+          ],
+          body: [['t,g', `${result.param.TheUncorrodedGoverningThickness}`]]
+        }
+      }, {
+        "text": "STEP 1.3 – Determine the applicable materialtoughness curve",
+        "style": "h4"
+      }, {
+        layout: 'noBorders',
+        margin: [50, 15, 0, 10],
+        table: {
+          "widths": [
+            200,
+            "*"
+          ],
+          body: [['MAT,LV' + result.param.assessmentLevel, `${module.currentUnit.temperature}`], ['CET', `${module.currentUnit.temperature}`]]
+        }
+      }
+
     ];
+
+
+    var r: any = {};
+
+    if (result.param.assessmentLevel == 1) {
+      r = {
+        text: result.result.result, style: 'h3'
+      };
+
+      content.push(r);
+    } else {
+      var level2Grid = [[{ text: 'Pratio*Pdesign', style: 'tableHeader' }, { text: 'TR', style: 'tableHeader' }, { text: 'MATreduce', style: 'tableHeader' }, { text: 'Result', style: 'tableHeader' }]];
+      for (let i = 0; i < this.result.result.resultDataGrid.length; i += 4) {
+        level2Grid.push([
+          this.result.result.resultDataGrid[i],
+          this.result.result.resultDataGrid[i + 1],
+          this.result.result.resultDataGrid[i + 2],
+          this.result.result.resultDataGrid[i + 3]
+        ]);
+      }
+
+      r = {
+        margin: [30, 30, 0, 0],
+        table: {
+          headerRows: 1,
+          body: level2Grid
+        },
+        layout: 'lightHorizontalLines'
+      };
+      content.push({
+        text: 'Result', pageBreak: 'before', style: 'h2'
+      }
+      );
+      content.push(r);
+    }
+
+
     return content;
   }
 
