@@ -1,8 +1,8 @@
-<div class="col-xs-4 col-md-3 nav-side-menu">
+<div class="nav-side-menu">
 
 
   <div class="brand text-center">
-    <img src="assets/logo.png" class="logo" />
+    <img src="assets/logo_round.png" class="logo" />
     <h1>REPCO</h1>
     <h4>fitness for service software</h4>
   </div>
@@ -11,16 +11,18 @@
   <div class="loginbox">
     <h2>LOGIN</h2>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Username">
+      <input [focus]="focusEmittier" type="text" class="form-control" [(ngModel)]="username" placeholder="Username">
     </div>
     <div class="form-group">
       <input type="password" class="form-control" placeholder="Password">
     </div>
+    <div class="form-group" *ngIf="errorMessage != ''">
+      <label class="errorMsg">Username or Password invalid</label>
+    </div>
     <div class="text-center">
-      <button type="button" class="btn btn-default">LOGIN</button>
-      <button type="button" class="btn btn-default">CLOSE</button>
+      <button type="button" class="btn btn-default" (click)="login()">LOGIN</button>
+      <button type="button" class="btn btn-default" (click)="close()">CLOSE</button>
     </div>
   </div>
-
 
 </div>

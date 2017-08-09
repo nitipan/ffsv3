@@ -1,20 +1,61 @@
+import { CanActivateViaAuthGuard } from './can-activate-via-auth-guard';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { InputBase } from './model/inputbase';
 import { EventService } from './event.service';
 import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { ModuleBase } from "./modules/module-base.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('loginSlideInOut', [
+      state('in', style({
+        transform: 'translate3d(0, 0, 0)',
+        opacity: 1
+      })),
+      state('out', style({
+        transform: 'translate3d(-100%, 0, 0)',
+        opacity: 0
+      })),
+      transition('in => out', animate('200ms ease-in-out')),
+      transition('out => in', animate('200ms ease-in-out'))
+    ]), trigger('mainSlideInOut', [
+      state('in', style({
+        transform: 'translate3d(25%, 0, 0)',
+      })),
+      state('out', style({
+        transform: 'translate3d(0, 0, 0)',
+      })),
+      transition('in => out', animate('200ms ease-in-out')),
+      transition('out => in', animate('200ms ease-in-out'))
+    ])
+  ]
 })
 export class AppComponent implements AfterViewInit {
 
   commonInput: InputBase = null;
   currentModule: ModuleBase = null;
 
-  constructor(private eventService: EventService) {
+  state = 'out';
 
+  user: any;
+
+  constructor(private eventService: EventService, private router: Router, private canActivateViaAuthGuard: CanActivateViaAuthGuard) {
+    this.eventService.afterLogin.subscribe((u) => {
+      localStorage.setItem("user", JSON.stringify(u));
+      this.user = u;
+      this.state = 'out';
+    });
+
+    if (!this.canActivateViaAuthGuard.canActivate()) {
+      this.state = 'in';
+    } else {
+      this.state = 'out';
+      this.user = JSON.parse(localStorage.getItem('user'));
+    }
   }
 
   ngAfterViewInit(): void {
@@ -32,5 +73,13 @@ export class AppComponent implements AfterViewInit {
       }
 
     });
+  }
+
+  logout() {
+    this.router.navigateByUrl('/home');
+    this.user = undefined;
+    localStorage.removeItem("user");
+    this.state = 'in';
+    this.eventService.requestLogin.next(null);
   }
 }

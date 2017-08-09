@@ -55,7 +55,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     this.form = FFSInputBase.toFormGroup(this.inputs);
 
     this.result.reportFactory = this.reportFactory;
-    this.result.summaryFactory = this.summaryFactory;
+    //this.result.summaryFactory = this.summaryFactory;
 
     this.equipmentInput.form.valueChanges.subscribe(f => {
       let inputs = f as InputBase;

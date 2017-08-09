@@ -319,8 +319,13 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
 
     const contents: any[] = [
       {
-        text: this.module.name + ' Assessment Report',
-        style: 'h1', margin: [0, 0, 0, 0],
+        layout: 'noBorders',
+        table: {
+          widths: [50, '*'],
+          body: [
+            [{ width: 50, image: this.logo }, { text: this.module.name + ' Assessment Reports', style: 'h1', margin: [10, 10, 0, 0] }],
+          ]
+        }
       },
       {
         layout: 'noBorders',

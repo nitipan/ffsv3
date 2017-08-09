@@ -1,3 +1,4 @@
+import { CanActivateViaAuthGuard } from './can-activate-via-auth-guard';
 import { DatePipe } from '@angular/common';
 import { TabItemComponent } from './common/tab/tab-item.component';
 import { EventService } from './event.service';
@@ -30,16 +31,21 @@ import { PlaygroundComponent } from './playground/playground.component';
 import { PittingCorrosionComponent } from './modules/pitting-corrosion/pitting-corrosion.component';
 import { WeldMisalignmentComponent } from './modules/weld-misalignment/weld-misalignment.component';
 import { DentComponent } from './modules/dent/dent.component';
+import { HelpComponent } from './help/help.component';
+import { FocusDirective } from './common/focus.directive';
+
 
 const appRoutes: Routes = [
   { path: 'playground', component: PlaygroundComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'brittle', component: BrittleFractureComponent },
-  { path: 'localmetalloss', component: LocalMetalLossComponent },
-  { path: 'generalmetalloss', component: GeneralMetalLossComponent },
-  { path: 'pittingcorrosion', component: PittingCorrosionComponent },
-  { path: 'weld', component: WeldMisalignmentComponent },
-  { path: 'dent', component: DentComponent },
+  {
+    path: 'brittle', component: BrittleFractureComponent, canActivate: [CanActivateViaAuthGuard]
+  },
+  { path: 'localmetalloss', component: LocalMetalLossComponent, canActivate: [CanActivateViaAuthGuard] },
+  { path: 'generalmetalloss', component: GeneralMetalLossComponent, canActivate: [CanActivateViaAuthGuard] },
+  { path: 'pittingcorrosion', component: PittingCorrosionComponent, canActivate: [CanActivateViaAuthGuard] },
+  { path: 'weld', component: WeldMisalignmentComponent, canActivate: [CanActivateViaAuthGuard] },
+  { path: 'dent', component: DentComponent, canActivate: [CanActivateViaAuthGuard] },
   {
     path: '',
     redirectTo: '/home',
@@ -76,7 +82,9 @@ const appRoutes: Routes = [
     PlaygroundComponent,
     PittingCorrosionComponent,
     WeldMisalignmentComponent,
-    DentComponent
+    DentComponent,
+    HelpComponent,
+    FocusDirective,
   ],
   imports: [
     RouterModule.forRoot(
@@ -89,7 +97,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [EventService, DatePipe],
+  providers: [EventService, DatePipe, CanActivateViaAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

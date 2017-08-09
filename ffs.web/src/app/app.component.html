@@ -1,29 +1,44 @@
-<nav class="ffs-nav navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
+<div [@mainSlideInOut]='state'>
+  <nav class="ffs-nav navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header" *ngIf="state == 'out'">
 
-      <!-- <a routerLink="/home" class="navbar-brand"> <img alt="Brand" class="scg-logo" src="/assets/scg_logo.png" height="50"> </a> -->
-      <a routerLink="/home" class="navbar-brand" style="padding-right:5px;"> <img alt="REPCO Fitness For Service 3.0"  class="ffs-logo" src="/assets/logo_round.png" height="50"> </a>
+        <!-- <a routerLink="/home" class="navbar-brand"> <img alt="Brand" class="scg-logo" src="/assets/scg_logo.png" height="50"> </a> -->
+        <a routerLink="/home" class="navbar-brand" style="padding-right:5px;"> <img alt="REPCO Fitness For Service 3.0"  class="ffs-logo" src="/assets/logo_round.png" height="50"> </a>
 
-      <div class="navbar-text logo-link">
-        <a routerLink="/home">
-          <h2 style="margin: 0px;">REPCO</h2>
-        </a>
-        <a routerLink="/home">
-          <h5 style="margin: 0px;">fitness for service software</h5>
-        </a>
+        <div class="navbar-text logo-link">
+          <a routerLink="/home">
+            <h2 style="margin: 0px;">REPCO</h2>
+          </a>
+          <a routerLink="/home">
+            <h5 style="margin: 0px;">fitness for service software</h5>
+          </a>
+        </div>
+
+
+
+
+        <h2 class="hidden-sm hidden-xs navbar-brand module-title" *ngIf="currentModule != null">{{currentModule.name}}</h2>
+        <h1 class="hidden-sm hidden-xs navbar-brand" *ngIf="commonInput != null"><span class="label label-default" style="font-size:20px;">Level {{commonInput.assessmentLevel}}</span></h1>
       </div>
 
 
+      <div class="dropdown navbar-right" *ngIf="user">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+          style="color:#555;" aria-expanded="true">
+          <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;&nbsp;{{user?.username}}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 
-
-      <h2 class="hidden-sm hidden-xs navbar-brand module-title" *ngIf="currentModule != null">{{currentModule.name}}</h2>
-      <h1 class="hidden-sm hidden-xs navbar-brand" *ngIf="commonInput != null"><span class="label label-default" style="font-size:20px;">Level {{commonInput.assessmentLevel}}</span></h1>
+          <li><a (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
     </div>
-
-    <p class="hidden-sm hidden-xs nav-help navbar-text navbar-right" *ngIf="currentModule !=null "><a href="# " class="navbar-link ">Help</a></p>
+  </nav>
+  <div class="container-fluid ">
+    <router-outlet></router-outlet>
   </div>
-</nav>
-<div class="container-fluid ">
-  <router-outlet></router-outlet>
 </div>
+<app-sidenav [@loginSlideInOut]='state'></app-sidenav>
+<!-- <app-help></app-help> -->

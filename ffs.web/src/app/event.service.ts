@@ -9,4 +9,8 @@ export class EventService {
   constructor() { }
 
   calculationModuleSubject: Subject<ModuleBase> = new Subject();
+
+  afterLogin: Subject<any> = new Subject();
+
+  requestLogin: Subject<any> = new Subject();
 }
