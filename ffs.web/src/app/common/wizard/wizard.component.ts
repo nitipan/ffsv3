@@ -22,6 +22,17 @@ export class WizardComponent implements OnInit, AfterContentInit {
   canBack = false;
   canNext = true;
 
+
+  icons: any = {
+    equipment: 'wrench',
+    design: 'pencil-square-o',
+    material: 'codepen',
+    flaw: 'expand',
+    loads: 'tachometer',
+    result: 'wpforms'
+  }
+
+
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
@@ -80,6 +91,8 @@ export class WizardComponent implements OnInit, AfterContentInit {
   newInput() {
     location.reload();
   }
+
+
 }
 
 

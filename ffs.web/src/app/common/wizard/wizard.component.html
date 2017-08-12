@@ -3,7 +3,8 @@
     <div class="list-group">
       <a class="list-group-item text-center" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active">
         <div class="row">
-          <div class="col-md-5 no-margin no-padding icon-custom icon-custom-{{step.title | lowercase}}">
+          <div class="col-md-5 no-margin no-padding">
+            <i class="ffs-icons fa fa-{{icons[step.title | lowercase]}} fa-fw fa-3x" aria-hidden="true"></i>
           </div>
           <div class="no-margin no-padding col-md-7 text-left">
             <h4>{{step.title}}</h4>
