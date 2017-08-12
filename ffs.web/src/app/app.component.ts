@@ -14,20 +14,29 @@ import { Router } from "@angular/router";
     trigger('loginSlideInOut', [
       state('in', style({
         transform: 'translate3d(0, 0, 0)',
-        opacity: 1
+        opacity: 1,
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 'auto',
+        margin: 0,
+        padding: 0,
+        zIndex: 9999,
+        height: '100%'
       })),
       state('out', style({
         transform: 'translate3d(-100%, 0, 0)',
-        opacity: 0
+        opacity: 0,
+        display: 'none'
       })),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
     ]), trigger('mainSlideInOut', [
       state('in', style({
-        transform: 'translate3d(25%, 0, 0)',
+        transform: 'translateX(25%)'
       })),
       state('out', style({
-        transform: 'translate3d(0, 0, 0)',
+        transform: 'translateX(0)'
       })),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))

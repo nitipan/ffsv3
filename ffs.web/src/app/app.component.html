@@ -1,4 +1,4 @@
-<div [@mainSlideInOut]='state'>
+<div>
   <nav class="ffs-nav navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header" *ngIf="state == 'out'">
@@ -37,8 +37,15 @@
     </div>
   </nav>
   <div class="container-fluid ">
-    <router-outlet></router-outlet>
+    <div class="row">
+      <div [class.col-md-12]="user" [class.hidden-sm]="!user" [class.hidden-xs]="!user" [@mainSlideInOut]='state'>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </div>
 </div>
-<app-sidenav [@loginSlideInOut]='state'></app-sidenav>
-<!-- <app-help></app-help> -->
+
+
+<div class="col-md-3 col-sm-4 col-xs-12" [@loginSlideInOut]='state'>
+  <app-sidenav></app-sidenav>
+</div>

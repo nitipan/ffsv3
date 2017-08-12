@@ -1,28 +1,16 @@
-:host {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: auto;
-  bottom: 0;
-  width: 25%;
-  min-width: 250px;
-  z-index: 9999;
-  height: 100%;
-}
-
 .nav-side-menu {
-  height: 100%;
-  padding: 20px;
+  background-color: rgba(209, 62, 54, 0.99);
   color: white;
   z-index: 9999;
-  background-color: rgba(209, 62, 54, 0.99);
+  height: 100%;
+  padding: 10%;
   .logo {
     border-radius: 38px;
+    display: inline-block;
   }
 }
 
 .brand {
-  margin-top: 50px;
   h1 {
     font-weight: 700;
     font-size: 4em;
@@ -36,7 +24,7 @@
 }
 
 .loginbox {
-  margin-top: 50px;
+  margin-top: 40px;
   input[type=text],
   input[type=password] {
     background: rgb(216, 91, 84);
