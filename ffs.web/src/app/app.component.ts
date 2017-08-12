@@ -33,10 +33,10 @@ import { Router } from "@angular/router";
       transition('out => in', animate('200ms ease-in-out'))
     ]), trigger('mainSlideInOut', [
       state('in', style({
-        transform: 'translateX(25%)'
+        marginLeft: '25%'
       })),
       state('out', style({
-        transform: 'translateX(0)'
+        marginLeft: '0'
       })),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
