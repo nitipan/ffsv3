@@ -67,6 +67,12 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
         .map(response => response.json() as any[])
         .map(arr => arr.map(a => { return { key: a.designCodeID, value: a.designCodeName }; }));
 
+      if (equipmentType == 1) {
+        this.form.get("componentShapeID").disable();
+        this.form.get("componentShapeID").setValue(1);
+      } else {
+        this.form.get("componentShapeID").enable();
+      }
     });
 
 

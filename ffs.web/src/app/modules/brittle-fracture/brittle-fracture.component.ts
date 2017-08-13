@@ -108,7 +108,6 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
         this.form.get("TheMinimumAllowableTemperature").enable();
     });
 
-    this.designInput.form.get("componentShapeID").disable();
     this.designInput.form.get("autoCalculateMinRequireThickness").setValue(true);
     this.form.get("ReductionInTheMATID").disable();
     this.form.get("AutomaticcallyTheMinimumAllowableTemperature").disable();
