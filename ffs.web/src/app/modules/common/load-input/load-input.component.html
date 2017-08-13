@@ -8,8 +8,9 @@
     </div>
   </div>
 </div>
+
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-6">
     <app-panel title="Operating Load">
       <ffs-number label="Pressure" key="operatingPressure" [unit]="(unit | async)?.pressure"></ffs-number>
       <ffs-number label="Temperature" key="operatingTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
@@ -20,15 +21,22 @@
       </p>
       <ffs-number label="Norminal Stress" key="theNominalStressOfTheComponent" [unit]="(unit | async)?.pressure"></ffs-number>
     </app-panel>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+
     <app-panel title="Norminal Membrance Stress">
-      <div style="color:#555">
-        <h4>Primary Stress</h4>
-        <p>Fourth Order Polynomial Stress Distribution</p>
-        <app-fourth-order-poly-nomial prefix="primaryStress"></app-fourth-order-poly-nomial>
-        <p>&nbsp;</p>
-        <h4>Secondary Stress</h4>
-        <p>Fourth Order Polynomial Stress Distribution</p>
-        <app-fourth-order-poly-nomial prefix="secondaryStress"></app-fourth-order-poly-nomial>
+      <div class="col-md-8">
+        <div style="color:#555">
+          <h4>Primary Stress</h4>
+          <p>Fourth Order Polynomial Stress Distribution</p>
+          <app-fourth-order-poly-nomial prefix="primaryStress"></app-fourth-order-poly-nomial>
+          <p>&nbsp;</p>
+          <h4>Secondary Stress</h4>
+          <p>Fourth Order Polynomial Stress Distribution</p>
+          <app-fourth-order-poly-nomial prefix="secondaryStress"></app-fourth-order-poly-nomial>
+        </div>
       </div>
       <!-- <p>
         <ffs-check label="Automatically Primary Stress" key="automaticcallyPrimaryStress"></ffs-check>
@@ -38,6 +46,10 @@
         <ffs-check label="Supplemental Load" key="supplementalLoad"></ffs-check>
       </p>
       <ffs-number label="Supplemental Stress" key="supplementalStress"></ffs-number> -->
+      <div class="col-md-4">
+        <img src="/assets/stress_formular.png" class="img-responsive" />
+      </div>
     </app-panel>
   </div>
+
 </div>
