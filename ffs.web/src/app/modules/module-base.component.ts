@@ -44,6 +44,7 @@ export abstract class ModuleBase implements OnDestroy {
         else if (step instanceof LoadsStepComponent) {
             step.nextVisible = false;
             step.calculateVisible = true;
+            this.moduleEvent.stepChanged.emit(null);
             this.initLoadInput();
         } else if (step instanceof ResultStepComponent) {
             step.nextVisible = false;

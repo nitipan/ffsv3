@@ -1,0 +1,22 @@
+  .sigma-label {
+    padding-left: 20px;
+    padding-right: 0px;
+    width: auto;
+    label {
+      line-height: 40px;
+      font-size: 18px;
+    }
+  }
+
+  .sigma-input {
+    padding: 2px;
+  }
+
+  @media (min-width: 992px) {
+    .sigma-input {
+      width: 13%;
+    }
+    .sigma-label {
+      text-align: right;
+    }
+  }

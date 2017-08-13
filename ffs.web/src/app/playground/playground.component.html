@@ -1,24 +1,20 @@
 <div class="row">
-  <div class="col-md-6">
 
-    <ffs-browse label="browse" key="file"></ffs-browse>
-    <ffs-text label="test" key="value1" required="true"></ffs-text>
+  <button class="btn btn-primary" (click)="getPValue()">Get Value</button>
 
-    <ffs-number label="test" key="value" required="true" [validators]="[rule1(),rule2()]"></ffs-number>
-
-    <ffs-check label="test check" key="test3"></ffs-check>
-
-    <button (click)="getValue()">OK</button>
+  <div class="row">
+    <div class="col-md-6">
+      <app-panel title="Primary Stress">
+        <p>Fourth Order Polynomial Stress Distribution</p>
+        <app-fourth-order-poly-nomial prefix="primaryStress"></app-fourth-order-poly-nomial>
+      </app-panel>
+    </div>
   </div>
 
 
 
-</div>
-<div class="row">
-  <div class="list-group">
-    <a class="list-group-item" href="#"><i class="fa fa-home fa-fw fa-3x" aria-hidden="true"></i>&nbsp; Home</a>
-    <a class="list-group-item" href="#"><i class="fa fa-book fa-fw fa-3x" aria-hidden="true"></i>&nbsp; Library</a>
-    <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw fa-3x" aria-hidden="true"></i>&nbsp; Applications</a>
-    <a class="list-group-item" href="#"><i class="fa fa-wrench fa-fw fa-3x" aria-hidden="true"></i>&nbsp; Settings</a>
-  </div>
+
+
+
+
 </div>

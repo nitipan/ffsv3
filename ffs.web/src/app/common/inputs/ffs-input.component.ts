@@ -113,8 +113,8 @@ export class FFSCheckComponent extends FFSInputBase {
         template: `
         <div class="ffs-input form-horizontal" [formGroup]="form">
             <div class="form-group" [class.has-error]="hasError">
-                <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
-                <div class="input-group col-xs-5">
+                <label *ngIf="label != undefined" class="control-label" [class.col-xs-5]="label != undefined" [attr.for]="key">{{label}}</label>
+                <div class="input-group" [class.col-xs-5]="label != undefined" [class.col-xs-12]="label == undefined" >
                     <input [formControlName]="key" type="number" [id]="key" class="form-control" [class.with-unit]="unit != undefined">                
                     <label class="input-group-addon control-label" *ngIf="unit != undefined">{{unit}}</label>
                     

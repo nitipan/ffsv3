@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-8">
     <app-panel title="Operating Load">
       <ffs-number label="Pressure" key="operatingPressure" [unit]="(unit | async)?.pressure"></ffs-number>
       <ffs-number label="Temperature" key="operatingTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
@@ -21,14 +21,23 @@
       <ffs-number label="Norminal Stress" key="theNominalStressOfTheComponent" [unit]="(unit | async)?.pressure"></ffs-number>
     </app-panel>
     <app-panel title="Norminal Membrance Stress">
-      <p>
+      <div style="color:#555">
+        <h4>Primary Stress</h4>
+        <p>Fourth Order Polynomial Stress Distribution</p>
+        <app-fourth-order-poly-nomial prefix="primaryStress"></app-fourth-order-poly-nomial>
+        <p>&nbsp;</p>
+        <h4>Secondary Stress</h4>
+        <p>Fourth Order Polynomial Stress Distribution</p>
+        <app-fourth-order-poly-nomial prefix="secondaryStress"></app-fourth-order-poly-nomial>
+      </div>
+      <!-- <p>
         <ffs-check label="Automatically Primary Stress" key="automaticcallyPrimaryStress"></ffs-check>
       </p>
       <ffs-number label="Primary Stress" key="primaryStress"></ffs-number>
       <p>
         <ffs-check label="Supplemental Load" key="supplementalLoad"></ffs-check>
       </p>
-      <ffs-number label="Supplemental Stress" key="supplementalStress"></ffs-number>
+      <ffs-number label="Supplemental Stress" key="supplementalStress"></ffs-number> -->
     </app-panel>
   </div>
 </div>

@@ -1,5 +1,6 @@
+import { FourthOrderPolyNomialComponent } from './../common/inputs/fourth-order-poly-nomial/fourth-order-poly-nomial.component';
 import { FormGroup, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
-import { Component, OnInit, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, AfterViewInit, QueryList, ViewChildren, ViewChild } from '@angular/core';
 import { FFSInputBase } from "../common/inputs/ffs-input-base";
 import '../common/functions';
 import { toDataURL } from "../common/functions";
@@ -13,24 +14,25 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FFSInputBase) input: QueryList<FFSInputBase>
 
+
+  @ViewChild(FourthOrderPolyNomialComponent) polyNomial: FourthOrderPolyNomialComponent;
+
   form: FormGroup;
+
 
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.input);
-
-
   }
 
 
   constructor() { }
 
+  getPValue() {
+    console.log(this.polyNomial.form.getRawValue());
+  }
+
   ngOnInit() {
-
-    toDataURL("/assets/logo_round.png").subscribe(v => {
-      console.log(v);
-    });
-
-
+    // MathJax.Hub.Queue(["Typeset", MathJax.Hub, this.el.nativeElement]);
     //  var reader = new FileReader();
     // reader.onload = function (e) {
     //   console.log(e);
