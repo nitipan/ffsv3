@@ -1,4 +1,3 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FFSSelectComponent } from './../../../common/inputs/ffs-input.component';
 import { SIUnit, MatricUnit } from './../../../common/unit';
 import { EventService } from './../../../event.service';
@@ -16,27 +15,7 @@ import { InputBaseComponent } from "../input-base.component";
 @Component({
   selector: 'app-equipment-input',
   templateUrl: './equipment-input.component.html',
-  styleUrls: ['./equipment-input.component.scss'],
-  animations: [
-    trigger('slideInOutAnimation', [
-      transition(':enter', [
-        style({
-          transform: 'translateX(-100%)',
-          opacity: 0
-        }),
-        animate('.15s ease-in-out', style({
-          transform: 'translateX(0)',
-          opacity: 1
-        }))
-      ]),
-      transition(':leave', [
-        animate('.1s ease-in-out', style({
-          transform: 'translateX(400%)',
-          opacity: 0
-        }))
-      ])
-    ])
-  ]
+  styleUrls: ['./equipment-input.component.scss']
 })
 export class EquipmentInputComponent extends InputBaseComponent implements OnInit, AfterViewInit {
 
