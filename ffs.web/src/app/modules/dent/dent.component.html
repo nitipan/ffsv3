@@ -12,11 +12,11 @@
     <div class="row">
       <div class="col-md-6">
         <app-panel title="Flaw dimension">
-          <ffs-number label="Dent Depth" key="DentDepth" [unit]="(unit | async)?.distance"></ffs-number>
+          <ffs-number label="Dent Depth" key="DentDepth" [unit]="(unit | async)?.distance" min="0"></ffs-number>
         </app-panel>
         <app-panel title="Flaw to Facility">
-          <ffs-number label="Weld Joint" key="WeldJoint" [unit]="(unit | async)?.distance"></ffs-number>
-          <ffs-number label="Major Structural Discontinuity" key="MajorStructuralDiscontinuity" [unit]="(unit | async)?.distance"></ffs-number>
+          <ffs-number label="Weld Joint" key="WeldJoint" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+          <ffs-number label="Major Structural Discontinuity" key="MajorStructuralDiscontinuity" [unit]="(unit | async)?.distance" min="0"></ffs-number>
           <div [hidden]="assessmentLevel == 1">
             <ffs-number label="Number of Cycle" key="NumberOfCycle"></ffs-number>
             <ffs-number label="Max Operating Pressure" key="MaxOperatingPressure" [unit]="(unit | async)?.pressure"></ffs-number>

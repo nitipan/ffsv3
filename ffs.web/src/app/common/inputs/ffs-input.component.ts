@@ -128,9 +128,23 @@ export class FFSCheckComponent extends FFSInputBase {
         providers: [{ provide: FFSInputBase, useExisting: forwardRef(() => FFSNumberComponent) }]
     }
 )
-export class FFSNumberComponent extends FFSInputBase {
+export class FFSNumberComponent extends FFSInputBase implements AfterViewInit {
+
     @Input() min: number;
     @Input() max: number;
+
+    ngAfterViewInit(): void {
+        this.form.controls[this.key].valueChanges.subscribe((v: number) => {
+            if (this.min != undefined) {
+                if (v < this.min)
+                    this.form.controls[this.key].setValue(this.min);
+            }
+            if (this.max != undefined) {
+                if (v > this.max)
+                    this.form.controls[this.key].setValue(this.max);
+            }
+        });
+    }
 }
 
 

@@ -24,7 +24,7 @@
             <ffs-number label="Component B" key="TComponent2"></ffs-number>
           </app-panel>
           <app-panel title="Centerline Offset">
-            <ffs-number label="Centerline Offset" key="CenterlineOffset" [unit]="(unit | async)?.distance"></ffs-number>
+            <ffs-number label="Centerline Offset" key="CenterlineOffset" [unit]="(unit | async)?.distance" min="0"></ffs-number>
             <ffs-select label="Fabrication Tolerence" key="WeldOrientarion" [options]="WeldOrientarion | async"></ffs-select>
           </app-panel>
         </div>

@@ -17,7 +17,7 @@
 
   <div class="col-md-12 hidden-md hidden-lg" style="background:whitesmoke;">
     <ul class="nav nav-pills">
-      <li role="presentation" style="cursor:pointer;" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active"><a>{{step.title}}</a></li>
+      <li role="presentation" style="cursor:pointer;" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active"><a><i class="ffs-icons fa fa-{{icons[step.title | lowercase]}} fa-fw" aria-hidden="true"></i> {{step.title}}</a></li>
     </ul>
   </div>
 

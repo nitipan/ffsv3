@@ -17,12 +17,12 @@
               <div class="col-md-7">
                 <app-panel title="Dimension">
                   <ffs-select label="Thickness Data" key="thicknessDataID" [options]="thicknessDatas | async"></ffs-select>
-                  <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance"></ffs-number>
+                  <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance" min="0"></ffs-number>
                   <ffs-browse label="Import Data" key="" accept=".xlsx,.xls"></ffs-browse>
                 </app-panel>
                 <app-panel title="Grid Spacing">
-                  <ffs-number label="Longitudinal" key="widthOfTheLongGrid" [unit]="(unit | async)?.distance"></ffs-number>
-                  <ffs-number label="Circumferential" key="widthOfTheCirGrid" [unit]="(unit | async)?.distance"></ffs-number>
+                  <ffs-number label="Longitudinal" key="widthOfTheLongGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+                  <ffs-number label="Circumferential" key="widthOfTheCirGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
                 </app-panel>
               </div>
               <div class="col-md-5">
