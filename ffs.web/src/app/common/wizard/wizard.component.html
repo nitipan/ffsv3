@@ -1,13 +1,15 @@
 <div class="wizard-component row">
-  <div class="col-md-2 hidden-sm hidden-xs">
+  <div class="col-md-2 col-sm-3 col-xs-3">
     <div class="list-group">
       <a class="list-group-item text-center" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active">
         <div class="row">
-          <div class="col-md-5 no-margin no-padding">
-            <i class="ffs-icons fa fa-{{icons[step.title | lowercase]}} fa-fw fa-3x" aria-hidden="true"></i>
+          <div class="col-md-5 col-sm-5 col-xs-4 no-margin no-padding">
+            <i class="ffs-icons fa fa-{{icons[step.title | lowercase]}} fa-fw fa-3x hidden-xs" aria-hidden="true"></i>
+            <i class="ffs-icons fa fa-{{icons[step.title | lowercase]}} fa-fw fa-2x visible-xs" aria-hidden="true"></i>
           </div>
-          <div class="no-margin no-padding col-md-7 text-left">
-            <h4>{{step.title}}</h4>
+          <div class="no-margin no-padding col-md-7 col-sm-7 col-xs-8 text-left">
+            <h4 class="hidden-xs">{{step.title}}</h4>
+            <h5 class="visible-xs">{{step.title}}</h5>
           </div>
 
         </div>
@@ -15,18 +17,18 @@
     </div>
   </div>
 
-  <div class="col-md-12 hidden-md hidden-lg" style="background:whitesmoke;">
+  <!-- <div class="col-md-12 visible-xs" style="background:whitesmoke;">
     <ul class="nav nav-pills">
       <li role="presentation" style="cursor:pointer;" *ngFor="let step of steps" (click)="selectStep(step)" [class.active]="step.active"><a><i class="ffs-icons fa fa-{{icons[step.title | lowercase]}} fa-fw" aria-hidden="true"></i> {{step.title}}</a></li>
     </ul>
-  </div>
+  </div> -->
 
-  <div class="col-md-10 wizard-component-container">
+  <div class="col-md-10 col-sm-9 col-xs-9 wizard-component-container">
     <div class="row" style="border-bottom:1px #ddd solid;margin-left:5px">
-      <div class="col-md-5" style="padding:0px;">
+      <div class="col-md-5 col-sm-4" style="padding:0px;">
         <h2 class="title">{{step.title}}</h2>
       </div>
-      <div class="col-md-7 text-right" style="margin-top:20px;">
+      <div class="col-md-7 col-sm-8 text-right" style="margin-top:20px;">
 
         <button type="button" class="btn btn-primary" (click)="backStep()" [disabled]="!canBack" *ngIf="step.backVisible">
           <span class="glyphicon glyphicon-menu-left"></span>  Back

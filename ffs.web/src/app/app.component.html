@@ -15,11 +15,8 @@
           </a>
         </div>
 
-
-
-
-        <h2 class="hidden-sm hidden-xs navbar-brand module-title" *ngIf="currentModule != null">{{currentModule.name}}</h2>
-        <h1 class="hidden-sm hidden-xs navbar-brand" *ngIf="commonInput != null"><span class="label label-default" style="font-size:20px;">Level {{commonInput.assessmentLevel}}</span></h1>
+        <h2 class="hidden-xs navbar-brand module-title" *ngIf="currentModule != null">{{currentModule.name}}</h2>
+        <h1 class="hidden-xs navbar-brand" *ngIf="commonInput != null"><span class="label label-default" style="font-size:20px;">Level {{commonInput.assessmentLevel}}</span></h1>
       </div>
 
 
@@ -35,8 +32,15 @@
         </ul>
       </div>
     </div>
+    <div class="row visible-xs" *ngIf="state == 'out'">
+      <div class="col-xs-12">
+        <h2 class="module-title" style="display:inline-block" *ngIf="currentModule != null">{{currentModule.name}}</h2>
+        <h1 *ngIf="commonInput != null" style="display:inline-block"><span class="label label-default" style="font-size:20px;">Level {{commonInput.assessmentLevel}}</span></h1>
+      </div>
+    </div>
   </nav>
-  <div class="container-fluid ">
+  <div class="container-fluid">
+
     <div class="row">
       <div [class.col-md-12]="user" [class.hidden-xs]="!user" [@mainSlideInOut]='state'>
         <router-outlet></router-outlet>
