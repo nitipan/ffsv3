@@ -3,7 +3,8 @@
     <app-panel>
       <ffs-select label="Component Type" key="componentTypeID" text="componentTypeText" [options]="componentType | async" (onReady)="optionReady($event)"></ffs-select>
       <ffs-select label="Component Shape" text="componentShapeText" (onReady)="optionReady($event)" key="componentShapeID" [options]="componentShape | async"></ffs-select>
-      <ffs-select label="Code Design" key="designCode" text="designCodeText" (onReady)="optionReady($event)" [options]="codeDesign | async"></ffs-select>
+      <ffs-select label="Code Design" key="designCode" text="designCodeText" (onReady)="optionReady($event)" [options]="codeDesign | async"
+        disabled></ffs-select>
     </app-panel>
     <app-panel title="Geometry Design">
       <ffs-number label="Internal Diameter" key="insideDiameter" [unit]="(unit | async)?.distance" min="0"></ffs-number>
