@@ -11,8 +11,8 @@ import 'bootstrap-datepicker';
         template: `
         <div class="ffs-input form-horizontal" [formGroup]="form">
             <div class="form-group" [class.has-error]="hasError">
-                <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
-                <div class="input-group col-xs-7">
+                <label class="control-label col-sm-5" [attr.for]="key">{{label}}</label>
+                <div class="input-group col-sm-7 col-xs-12">
                     <input [formControlName]="key" [id]="key" class="form-control">                
                     <label class="input-group-addon control-label" *ngIf="unit != undefined">{{unit}}</label>                  
                 </div>
@@ -35,8 +35,8 @@ export class FFSTextComponent extends FFSInputBase {
         template: `
         <div class="ffs-input form-horizontal" [formGroup]="form">
             <div class="form-group">
-                <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
-                <div class="input-group col-xs-7">
+                <label class="control-label col-sm-5" [attr.for]="key">{{label}}</label>
+                <div class="input-group col-sm-7 col-xs-12">
                     <input type="hidden" *ngIf="text != undefined" [formControlName]="text" />
                      <select  [id]="key" [formControlName]="key" class="form-control">
                          <option  *ngFor="let opt of options" [value]="opt.key">{{opt.value}}</option>
@@ -113,8 +113,8 @@ export class FFSCheckComponent extends FFSInputBase {
         template: `
         <div class="ffs-input form-horizontal" [formGroup]="form">
             <div class="form-group" [class.has-error]="hasError">
-                <label *ngIf="label != undefined" class="control-label" [class.col-xs-5]="label != undefined" [attr.for]="key">{{label}}</label>
-                <div class="input-group" [class.col-xs-5]="label != undefined" [class.col-xs-12]="label == undefined" >
+                <label *ngIf="label != undefined" class="control-label" [class.col-sm-5]="label != undefined" [attr.for]="key">{{label}}</label>
+                <div class="input-group col-xs-12" [class.col-sm-5]="label != undefined" [class.col-sm-12]="label == undefined" >
                     <input [formControlName]="key" type="number" [id]="key" class="form-control" [class.with-unit]="unit != undefined">                
                     <label class="input-group-addon control-label" *ngIf="unit != undefined">{{unit}}</label>
                     
@@ -155,8 +155,8 @@ export class FFSNumberComponent extends FFSInputBase implements AfterViewInit {
         template: `
        <div class="ffs-input form-horizontal" [formGroup]="form">
             <div class="form-group" [class.has-error]="hasError">
-                <label class="control-label col-xs-5" [attr.for]="key">{{label}}</label>
-                <div class="input-group date col-xs-7" #datepicker>
+                <label class="control-label col-sm-5" [attr.for]="key">{{label}}</label>
+                <div class="input-group date col-sm-7 col-xs-12" #datepicker>
                 <input [formControlName]="key" [id]="key" class="form-control">
                 <div class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -204,7 +204,7 @@ export class FFSDateComponent extends FFSInputBase implements AfterViewInit {
                 <input type="file" [attr.accept]="accept" [attr.for]="key" size="chars" #file (change)="fileBrowserChanged($event)">
                 <button class="btn btn-primary col-xs-7" (click)="browseFile()" [disabled]="this.form.get(this.key).disabled">Browse</button>
             </div>
-            <div class=" col-xs-7 col-xs-offset-5" *ngIf="filename != ''">
+            <div class=" col-sm-7 col-sm-offset-5" *ngIf="filename != ''">
                 <div class="chip">
                 {{filename}}
                 <span class="closebtn" (click)="removeFile()">&times;</span>

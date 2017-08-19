@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 col-sm-6">
+  <div class="col-md-6 col-sm-6  col-xs-6">
     <app-panel>
       <ffs-select label="Component Type" key="componentTypeID" text="componentTypeText" [options]="componentType | async" (onReady)="optionReady($event)"></ffs-select>
       <ffs-select label="Component Shape" text="componentShapeText" (onReady)="optionReady($event)" key="componentShapeID" [options]="componentShape | async"></ffs-select>
@@ -13,7 +13,7 @@
       <ffs-number label="Weld Join Efficiency" key="weldJointEfficiency"></ffs-number>
     </app-panel>
   </div>
-  <div class="col-md-6 col-sm-6">
+  <div class="col-md-6 col-sm-6  col-xs-6">
     <app-panel title="Min. Require Thickness">
       <p>
         <ffs-check label="Automatically Calculation Min. Thinkness" key="autoCalculateMinRequireThickness"></ffs-check>

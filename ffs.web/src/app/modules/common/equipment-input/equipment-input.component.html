@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 col-sm-6">
+  <div class="col-md-6 col-sm-6 col-xs-6">
     <app-panel>
       <ffs-text label="Equipment Number" key="equipmentNumber"></ffs-text>
       <ffs-select label="Equipment Type" key="equipmentType" text="equipmentTypeText" [options]="equipmentTypes | async" value="1"></ffs-select>
@@ -17,7 +17,7 @@
       <ffs-browse label="Equipment Image" key="equipmentImage" accept="image/*"></ffs-browse>
     </app-panel>
   </div>
-  <div class="col-md-6 col-sm-6">
+  <div class="col-md-6 col-sm-6 col-xs-6">
     <div class="row" *ngIf="currentValue != undefined">
 
       <div class="col-md-8 col-md-offset-2 col-sm-12">
