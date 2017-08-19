@@ -14,6 +14,7 @@ export abstract class FFSInputBase implements OnInit {
     @Input() form: FormGroup;
     @Input() required = false;
     @Input() validators: any[] = [];
+    @Input() disabled: boolean;
 
     @Output() onReady: EventEmitter<FFSInputBase> = new EventEmitter();
 
@@ -37,6 +38,9 @@ export abstract class FFSInputBase implements OnInit {
             this.checkErrors();
         });
 
+        if (this.disabled != undefined) {
+            this.form.controls[this.key].disable();
+        }
     }
 
     checkErrors(markDirty: boolean = false) {
