@@ -17,7 +17,7 @@
   </material>
   <flaw>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-8 col-sm-6 col-xs-6">
         <app-panel>
           <ffs-number label="The Critical Exporsure Temperature" key="TheCriticalExposureTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
           <ffs-number label="The Uncorroded Governing Thickness" key="TheUncorrodedGoverningThickness" [unit]="(unit | async)?.distance"
@@ -36,10 +36,8 @@
           <ffs-number label="The Minimum Allowable Temperature" key="TheMinimumAllowableTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
         </app-panel>
       </div>
-      <div class="col-md-3">
-        <div class="row">
-          <img src="assets/brittle.png" class="img-responsive" />
-        </div>
+      <div class="col-md-4 col-sm-6 col-xs-6">
+        <img src="assets/brittle.png" style="margin:0 auto;" class="img-responsive" />
       </div>
     </div>
   </flaw>
