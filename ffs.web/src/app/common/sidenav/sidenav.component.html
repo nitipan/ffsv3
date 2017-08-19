@@ -21,7 +21,8 @@
       <label class="errorMsg">Username or Password invalid</label>
     </div>
     <div class="text-center">
-      <button type="button" class="btn btn-default" (click)="login()">LOGIN</button>
+      <button type="button" *ngIf="!logging" class="btn btn-default" (click)="login()">LOGIN</button>
+      <button type="button" *ngIf="logging" disabled class="btn btn-default" (click)="login()"><span class='fa fa-spinner fa-spin '></span> LOGGING...</button>
       <button type="button" class="btn btn-default" (click)="close()">CLOSE</button>
     </div>
   </div>

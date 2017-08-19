@@ -1,5 +1,5 @@
 import { EventService } from './../../event.service';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,6 +9,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 export class SidenavComponent implements OnInit {
 
   errorMessage = "";
+  logging: boolean = false;
 
   username: string;
 
@@ -26,6 +27,7 @@ export class SidenavComponent implements OnInit {
   }
 
   login() {
+    this.logging = true;
     var comp = this;
     this.errorMessage = "";
 
@@ -34,8 +36,10 @@ export class SidenavComponent implements OnInit {
       if (comp.username != 'admin') {
         comp.errorMessage = "Username or Password invalid";
         comp.eventService.requestLogin.next(null);
+        comp.logging = false;
       } else {
         comp.eventService.afterLogin.next({ username: comp.username });
+        comp.logging = false;
       }
 
     }, 1000);
