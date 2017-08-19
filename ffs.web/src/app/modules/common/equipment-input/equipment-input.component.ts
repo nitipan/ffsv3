@@ -24,7 +24,7 @@ export class EquipmentInputComponent extends InputBaseComponent implements OnIni
   units: Observable<KV[]>
   assessmentLevel: Observable<KV[]>;
 
-  previewEquipmentImage: any;
+
   form: FormGroup;
 
   currentValue: InputBase;
@@ -59,12 +59,10 @@ export class EquipmentInputComponent extends InputBaseComponent implements OnIni
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
 
-    this.form.get("equipmentImage").valueChanges.subscribe(x => {
-      this.previewEquipmentImage = x;
-    });
-
     this.form.valueChanges.subscribe((v) => {
       this.currentValue = v as InputBase;
+
+      this.moduleEvent.equipmentInputSubject.emit(v);
     });
 
     this.form.get("unitID").valueChanges.subscribe(v => {

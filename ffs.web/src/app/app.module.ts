@@ -34,6 +34,7 @@ import { DentComponent } from './modules/dent/dent.component';
 import { HelpComponent } from './help/help.component';
 import { FocusDirective } from './common/focus.directive';
 import { FourthOrderPolyNomialComponent } from './common/inputs/fourth-order-poly-nomial/fourth-order-poly-nomial.component';
+import { EquipmentImageComponent } from './modules/common/equipment-image/equipment-image.component';
 
 
 const appRoutes: Routes = [
@@ -87,6 +88,7 @@ const appRoutes: Routes = [
     HelpComponent,
     FocusDirective,
     FourthOrderPolyNomialComponent,
+    EquipmentImageComponent,
   ],
   imports: [
     RouterModule.forRoot(

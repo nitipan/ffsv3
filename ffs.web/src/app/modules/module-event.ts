@@ -10,6 +10,8 @@ export class ModuleEvent {
     calculatedSubject: EventEmitter<any> = new EventEmitter();
     equipmentTypeSubject: EventEmitter<any> = new EventEmitter();
 
+    equipmentInputSubject: EventEmitter<any> = new EventEmitter();
+
     stepChanged: EventEmitter<any> = new EventEmitter();
 
     unit: Subject<IUnit> = new Subject();
