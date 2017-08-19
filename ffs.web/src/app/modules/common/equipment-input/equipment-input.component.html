@@ -20,14 +20,17 @@
   <div class="col-md-6 col-sm-6 col-xs-6">
     <div class="row" *ngIf="currentValue != undefined">
 
-      <div class="col-md-8 col-md-offset-2 col-sm-12">
-        <img src="assets/equipment_type_1.png" class="img-responsive" *ngIf="currentValue.equipmentType == 1" />
-        <img src="assets/equipment_type_2.png" class="img-responsive" *ngIf="currentValue.equipmentType == 2" />
-        <img src="assets/equipment_type_3.png" class="img-responsive" *ngIf="currentValue.equipmentType == 3" />
+      <div class="col-md-8 col-md-offset-1 col-sm-12">
+        <img src="assets/equipment_type_1.png" style="margin:0 auto;" class="img-responsive" *ngIf="currentValue.equipmentType == 1"
+        />
+        <img src="assets/equipment_type_2.png" style="margin:0 auto;" class="img-responsive" *ngIf="currentValue.equipmentType == 2"
+        />
+        <img src="assets/equipment_type_3.png" style="margin:0 auto;" class="img-responsive" *ngIf="currentValue.equipmentType == 3"
+        />
       </div>
     </div>
     <div class="row ">
-      <div class="col-md-8 col-md-offset-2 mt-md-3 col-sm-12 mt-sm-3" style="margin-top:10px; ">
+      <div class="col-md-8 col-md-offset-1 mt-md-3 col-sm-12 mt-sm-3" style="margin-top:10px; ">
         <img [attr.src]="previewEquipmentImage " class="img-responsive " *ngIf="previewEquipmentImage !='' " />
       </div>
     </div>

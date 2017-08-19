@@ -25,10 +25,10 @@
 
   <div class="col-md-10 col-sm-9 col-xs-9 wizard-component-container">
     <div class="row" style="border-bottom:1px #ddd solid;margin-left:5px">
-      <div class="col-md-5 col-sm-4" style="padding:0px;">
+      <div class="col-md-5 col-sm-3" style="padding:0px;">
         <h2 class="title">{{step.title}}</h2>
       </div>
-      <div class="col-md-7 col-sm-8 text-right" style="margin-top:20px;">
+      <div class="col-md-7 col-sm-9 text-sm-right text-md-center" style="margin-top:20px;margin-bottom: 10px;">
 
         <button type="button" class="btn btn-primary" (click)="backStep()" [disabled]="!canBack" *ngIf="step.backVisible">
           <span class="glyphicon glyphicon-menu-left"></span>  Back
