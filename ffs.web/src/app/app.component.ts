@@ -4,7 +4,7 @@ import { InputBase } from './model/inputbase';
 import { EventService } from './event.service';
 import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { ModuleBase } from "./modules/module-base.component";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute, ResolveEnd } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -52,7 +52,13 @@ export class AppComponent implements AfterViewInit {
 
   user: any;
 
-  constructor(private eventService: EventService, private router: Router, private canActivateViaAuthGuard: CanActivateViaAuthGuard) {
+  routeUrl: any;
+  constructor(private eventService: EventService, private router: Router, private canActivateViaAuthGuard: CanActivateViaAuthGuard, private route: ActivatedRoute) {
+    this.router.events
+      .filter(e => e instanceof ResolveEnd)
+      .subscribe((e: ResolveEnd) => {
+        this.routeUrl = e.url;
+      });
     this.eventService.afterLogin.subscribe((u) => {
       localStorage.setItem("user", JSON.stringify(u));
       this.user = u;
