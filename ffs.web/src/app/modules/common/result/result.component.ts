@@ -191,134 +191,126 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
       PWHTtext = 'Yes';
     }
 
-    const equipment = [
-      {
-        layout: 'noBorders',
-        table: {
-          width: ['*', '*'],
-          body: [
-            [
-              { text: '1. Equipment & Component', style: 'h2' }, ''
-            ],
-            [
-              { text: '1.1 Overview', style: 'subheader' }, ''
-            ],
-            [
-              { text: '- Equipment Number', style: 'p' }, { style: 'p', text: this.result.param.equipmentNumber }
-            ],
-            [
-              { text: '- Equipment Type', style: 'p' }, { style: 'p', text: this.result.param.equipmentTypeText }
-            ],
-            [
-              { text: '- Component Type', style: 'p' }, { style: 'p', text: this.result.param.componentTypeText }
-            ],
-            [
-              { text: '- Material of construction', style: 'p' }, { style: 'p', text: '' }
-            ],
-            [
-              { text: '- Design Code', style: 'p' }, { style: 'p', text: this.result.param.designCodeText }
-            ],
-            [
-              { text: '- Year of fabrication', style: 'p' }, { style: 'p', text: '' }
-            ],
-            [
-              equipmentImage
-            ],
-            [
-              { text: '1.2 Design data', style: 'subheader' }, ''
-            ],
-            [
-              { text: '- Pressure', style: 'p' }, { style: 'p', text: this.result.param.designPressure }
-            ],
-            [
-              { text: '- Temperature', style: 'p' }, { style: 'p', text: this.result.param.designTemperature }
-            ],
-            [
-              { text: '1.3 Operating data', style: 'subheader' }, ''
-            ],
-            [
-              { text: '- Max. pressure', style: 'p' }, { style: 'p', text: this.result.param.operatingPressure }
-            ],
-            [
-              { text: '- Temperature', style: 'p' }, { style: 'p', text: this.result.param.operatingTemperature }
-            ],
-            [
-              { text: '- Critical exposure temp., CET ', style: 'p' },
-              { style: 'p', text: this.result.param.TheCriticalExposureTemperature }
-            ],
-          ],
-        }
-      }
+    let equipment = [
+      [
+        { text: '1. Equipment & Component', style: 'h2' }, ''
+      ],
+      [
+        { text: '1.1 Overview', style: 'subheader' }, ''
+      ],
+      [
+        { text: '- Equipment Number', style: 'p' }, { style: 'p', text: this.result.param.equipmentNumber }
+      ],
+      [
+        { text: '- Equipment Type', style: 'p' }, { style: 'p', text: this.result.param.equipmentTypeText }
+      ],
+      [
+        { text: '- Component Type', style: 'p' }, { style: 'p', text: this.result.param.componentTypeText }
+      ],
+      [
+        { text: '- Material of construction', style: 'p' }, { style: 'p', text: this.result.param.materialText }
+      ],
+      [
+        { text: '- Design Code', style: 'p' }, { style: 'p', text: this.result.param.designCodeText }
+      ],
+      [
+        equipmentImage
+      ],
+      [
+        { text: '1.2 Design data', style: 'subheader' }, ''
+      ],
+      [
+        { text: '- Pressure', style: 'p' }, { style: 'p', text: this.result.param.designPressure }
+      ],
+      [
+        { text: '- Temperature', style: 'p' }, { style: 'p', text: this.result.param.designTemperature }
+      ],
+      [
+        { text: '1.3 Operating data', style: 'subheader' }, ''
+      ],
+      [
+        { text: '- Max. pressure', style: 'p' }, { style: 'p', text: this.result.param.operatingPressure }
+      ],
+      [
+        { text: '- Temperature', style: 'p' }, { style: 'p', text: this.result.param.operatingTemperature }
+      ],
+      [
+        { text: '- Critical exposure temp., CET ', style: 'p' },
+        { style: 'p', text: this.result.param.TheCriticalExposureTemperature }
+      ]
     ];
 
-    const assesment = [
-      {
-        layout: 'noBorders',
-        table: {
-          body: [
-            [
-              { text: '2. Assessments', style: 'h2' }, ''
-            ],
-            [
-              { text: '2.1 Overview', style: 'subheader' }, ''
-            ],
-            [
-              { text: '- Methodlogy', style: 'p' }, { style: 'p', text: this.result.param.methodologyText }
-            ],
-            [
-              { text: '- Level', style: 'p' }, { style: 'p', text: this.result.param.assessmentLevel }
-            ],
-            [
-              { text: '- Assessor\' name', style: 'p' }, { style: 'p', text: this.result.param.analysisBy }
-            ],
-            [
-              { text: '- Date', style: 'p' }, { style: 'p', text: this.datePipe.transform(this.result.param.analysisDate, 'MM/dd/yyyy') }
-            ],
-            [
-              { text: '2.2 Required data', style: 'subheader' }, ''
-            ],
-            [
-              { text: '- Nominal wall thickness of component, tn ', style: 'p' }, { style: 'p', text: this.result.param.nominalThickness }
-            ],
-            [
-              { text: '- Uncorroded governing thickness, tg ', style: 'p' }, { style: 'p', text: '' }
-            ],
-            [
-              { text: '- Weld joint eff., E ', style: 'p' }, { style: 'p', text: this.result.param.weldJointEfficiency }
-            ],
-            [
-              { text: '- Uniform metal loss, LOSS', style: 'p' }, { style: 'p', text: this.result.param.loss }
-            ],
-            [
-              { text: '- Future corrosion allowance, FCA', style: 'p' }, { style: 'p', text: this.result.param.fca }
-            ],
-            [
-              { text: '- PWHT done at initial construction and after all repairs?', style: 'p' }, { style: 'p', text: PWHTtext }
-            ],
-            [
-              { text: '2.3 Calculation Result', style: 'subheader' }, ''
-            ],
-            [
-              { text: '- Allowable stress', style: 'p' }, { style: 'p', text: this.result.param.allowableStress }
-            ],
-            [
-              { text: '- Min. required thickness, tmin', style: 'p' },
-              { style: 'p', text: this.result.param.minRequireLongitutinalThickness }
-            ],
-            [
-              { text: '- Applicable ASME exemption curve', style: 'p' }, { style: 'p', text: 'ASME Exemption Curves B' }
-            ],
-            [
-              { text: '- Min. allowable temp., MAT', style: 'p' }, { style: 'p', text: this.result.param.TheCriticalExposureTemperature }
-            ],
-            [
-              { text: '2.4 Summary', style: 'subheader' }, { style: 'subheader', text: 'The Component is unsafe from brittle fricture' }
-            ],
-          ]
-        }
-      }
+    let assesment: any[][] = [
+      [
+        { text: '2. Assessments', style: 'h2' }, ''
+      ],
+      [
+        { text: '2.1 Overview', style: 'subheader' }, ''
+      ],
+      [
+        { text: '- Methodlogy', style: 'p' }, { style: 'p', text: this.result.param.methodologyText }
+      ],
+      [
+        { text: '- Level', style: 'p' }, { style: 'p', text: this.result.param.assessmentLevel }
+      ],
+      [
+        { text: '- Assessor\' name', style: 'p' }, { style: 'p', text: this.result.param.analysisBy }
+      ],
+      [
+        { text: '- Date', style: 'p' }, { style: 'p', text: this.datePipe.transform(this.result.param.analysisDate, 'MM/dd/yyyy') }
+      ],
+      [
+        { text: '2.2 Required data', style: 'subheader' }, ''
+      ],
+      [
+        { text: '- Nominal wall thickness of component, tn ', style: 'p' }, { style: 'p', text: this.result.param.nominalThickness }
+      ],
+      [
+        { text: '- Uncorroded governing thickness, tg ', style: 'p' }, { style: 'p', text: this.result.param.TheUncorrodedGoverningThickness }
+      ],
+      [
+        { text: '- Weld joint eff., E ', style: 'p' }, { style: 'p', text: this.result.param.weldJointEfficiency }
+      ],
+      [
+        { text: '- Uniform metal loss, LOSS', style: 'p' }, { style: 'p', text: this.result.param.loss }
+      ],
+      [
+        { text: '- Future corrosion allowance, FCA', style: 'p' }, { style: 'p', text: this.result.param.fca }
+      ],
+      [
+        { text: '- PWHT done at initial construction and after all repairs?', style: 'p' }, { style: 'p', text: PWHTtext }
+      ],
+      [
+        { text: '2.3 Calculation Result', style: 'subheader' }, ''
+      ],
+      [
+        { text: '- Allowable stress', style: 'p' }, { style: 'p', text: this.result.param.allowableStress }
+      ],
+      [
+        { text: '- Min. required thickness, tmin', style: 'p' },
+        { style: 'p', text: this.result.param.minRequireLongitutinalThickness }
+      ],
+      [
+        { text: '- Applicable ASME exemption curve', style: 'p' }, { style: 'p', text: 'ASME Exemption Curves B' }
+      ],
+      [
+        { text: '- Min. allowable temp., MAT', style: 'p' }, { style: 'p', text: this.result.param.TheCriticalExposureTemperature }
+      ],
+      [
+        { text: '2.4 Summary', style: 'subheader' }, { style: 'subheader', text: summary }
+      ]
     ];
 
+
+    if (this.result.param.assessmentLevel === 1) {
+      equipment = equipment.filter(function (x) {
+        return x[0].text !== '- Pressure' && x[0].text !== '- Max. pressure';
+      })
+
+      assesment = assesment.filter(function (y) {
+        return y[0].text !== '- Allowable stress' && y[0].text !== '- Min. required thickness, tmin';
+      })
+    }
 
     const contents: any[] = [
       {
@@ -333,13 +325,16 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
       {
         layout: 'noBorders',
         table: {
-          widths: ['*', '*'],
-          body: [
-            [equipment, assesment]
-          ]
+          body: equipment
         }
       },
-
+      { text: '', pageBreak: 'after' },
+      {
+        layout: 'noBorders',
+        table: {
+          body: assesment
+        }
+      }
     ];
 
     if (this.summaryFactory !== undefined) {
@@ -348,7 +343,6 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
     }
     const docDefinition = {
       'pageSize': 'A4',
-      'pageOrientation': 'landscape',
       'pageMargins': [
         20,
         20,
