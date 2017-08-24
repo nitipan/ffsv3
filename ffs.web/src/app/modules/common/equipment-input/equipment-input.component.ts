@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { FFSSelectComponent } from './../../../common/inputs/ffs-input.component';
 import { SIUnit, MatricUnit } from './../../../common/unit';
 import { EventService } from './../../../event.service';
@@ -31,7 +32,7 @@ export class EquipmentInputComponent extends InputBaseComponent implements OnIni
 
   @ViewChildren(FFSInputBase) private inputs: QueryList<FFSInputBase>;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private datePipe: DatePipe) {
     super();
   }
 
@@ -65,13 +66,24 @@ export class EquipmentInputComponent extends InputBaseComponent implements OnIni
       this.moduleEvent.equipmentInputSubject.emit(v);
     });
 
+    this.form.get('equipmentNumber').setValue('Equipment01');
+
+    this.form.get('analysisBy').setValue(JSON.parse(localStorage.getItem('user')).username);
+
+    this.form.get('analysisDate').setValue(this.datePipe.transform(new Date(), 'MM/dd/yyyy'));
+
     this.form.get("unitID").valueChanges.subscribe(v => {
       this.moduleEvent.unit.next(v == 1 ? new SIUnit() : new MatricUnit());
     });
+
     this.form.get("unitID").setValue(1);
 
     this.form.get("equipmentType").valueChanges.subscribe(v => {
       this.moduleEvent.equipmentTypeSubject.emit(v);
+    });
+
+    this.form.get('assessmentLevel').valueChanges.subscribe(v => {
+      this.moduleEvent.assessmentLevelSubject.emit(v);
     });
   }
 

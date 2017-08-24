@@ -1,50 +1,54 @@
 <app-wizard (stepChanged)="onStepChange($event)" (onStepsInit)="onStepsInit($event)">
-  <equipment>
-    <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
-  </equipment>
-  <design>
-    <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-      </div>
-    </div>
-  </design>
-  <material>
-    <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
-  </material>
-  <flaw>
-    <div class="row">
-      <div class="col-md-8 col-sm-6 col-xs-6">
-        <app-panel>
-          <ffs-number label="The Critical Exporsure Temperature" key="TheCriticalExposureTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
-          <ffs-number label="The Uncorroded Governing Thickness" key="TheUncorrodedGoverningThickness" [unit]="(unit | async)?.distance"
-            min="0"></ffs-number>
-        </app-panel>
-        <app-panel>
-          <ffs-check label="The component was fabricated from ASME P1 Group 1 or P1 Group 2 material" key="Fabricated"></ffs-check>
-          <ffs-check label="The component has a wall thickness that is less than or equal to 38 mm (1.5 inches)" key="WallThickness38"></ffs-check>
-          <ffs-check label="The component was subjected to PWHT" key="PWHT"></ffs-check>
-        </app-panel>
-        <app-panel>
-          <ffs-select label="Stress Ratio" key="ReductionInTheMATID" [options]="stressRatios | async" value="1"></ffs-select>
-          <p>
-            <ffs-check label="Automatically The Minimum Allowable Temperature" key="AutomaticcallyTheMinimumAllowableTemperature" value="true"></ffs-check>
-          </p>
-          <ffs-number label="The Minimum Allowable Temperature" key="TheMinimumAllowableTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
-        </app-panel>
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-6">
-        <img src="assets/brittle.png" style="margin:0 auto;" class="img-responsive" />
-      </div>
-    </div>
-  </flaw>
-  <loads (onCalculate)="onCalculate($event)">
-    <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
-  </loads>
-  <result>
-    <app-result [moduleEvent]="moduleEvent"></app-result>
-  </result>
+    <equipment>
+        <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
+    </equipment>
+    <design>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+            </div>
+        </div>
+    </design>
+    <material>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+        </div>
+    </material>
+    <flaw>
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-6">
+                <app-panel>
+                    <ffs-number label="The Critical Exposure Temperature" key="TheCriticalExposureTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
+                    <ffs-number label="The Uncorroded Governing Thickness" key="TheUncorrodedGoverningThickness" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+                </app-panel>
+                <app-panel>
+                    <ffs-check label="The component was fabricated from ASME P1 Group 1 or P1 Group 2 material" key="Fabricated"></ffs-check>
+                    <ffs-check label="The component has a wall thickness that is less than or equal to 38 mm (1.5 inches)" key="WallThickness38"></ffs-check>
+                    <ffs-check label="The component was subjected to PWHT" key="PWHT"></ffs-check>
+                </app-panel>
+                <app-panel>
+                    <ffs-select label="Stress Ratio" key="ReductionInTheMATID" [options]="stressRatios | async" value="1"></ffs-select>
+                    <p>
+                        <ffs-check label="Automatically The Minimum Allowable Temperature" key="AutomaticcallyTheMinimumAllowableTemperature" value="true"></ffs-check>
+                    </p>
+                    <ffs-number label="The Minimum Allowable Temperature" key="TheMinimumAllowableTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
+                </app-panel>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <img src="assets/brittle.png" style="margin:0 auto;" class="img-responsive" />
+            </div>
+        </div>
+    </flaw>
+    <loads (onCalculate)="onCalculate($event)">
+        <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
+    </loads>
+    <result>
+        <app-result [moduleEvent]="moduleEvent"></app-result>
+    </result>
 </app-wizard>

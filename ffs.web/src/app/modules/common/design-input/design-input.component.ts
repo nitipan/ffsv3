@@ -24,6 +24,8 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
 
   unit: Observable<IUnit>;
 
+  assesmentLevel: number;
+
   constructor(private http: Http) {
     super();
 
@@ -40,12 +42,14 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
 
     this.form = FFSInputBase.toFormGroup(this.inputs);
     this.form.get("autoCalculateMinRequireThickness").valueChanges.subscribe((v: boolean) => {
-      if (v) {
-        this.form.get("minRequireLongitutinalThickness").disable();
-        this.form.get("minRequireCircumferentialThickness").disable();
-      } else {
-        this.form.get("minRequireLongitutinalThickness").enable();
-        this.form.get("minRequireCircumferentialThickness").enable();
+      if (this.assesmentLevel != 1) {
+        if (v) {
+          this.form.get("minRequireLongitutinalThickness").disable();
+          this.form.get("minRequireCircumferentialThickness").disable();
+        } else {
+          this.form.get("minRequireLongitutinalThickness").enable();
+          this.form.get("minRequireCircumferentialThickness").enable();
+        }
       }
     });
 
@@ -72,6 +76,22 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
         this.form.get("componentShapeID").setValue(1);
       } else {
         this.form.get("componentShapeID").enable();
+      }
+    });
+
+    this.moduleEvent.assessmentLevelSubject.subscribe(assessmentLevel => {
+      this.assesmentLevel = assessmentLevel;
+
+      if (assessmentLevel == 1) {
+        this.form.get('insideDiameter').disable();
+        this.form.get('designPressure').disable();
+        this.form.get('weldJointEfficiency').disable();
+        this.form.get("minRequireLongitutinalThickness").disable();
+        this.form.get("minRequireCircumferentialThickness").disable();
+      } else {
+        this.form.get('insideDiameter').enable();
+        this.form.get('designPressure').enable();
+        this.form.get('weldJointEfficiency').enable();
       }
     });
 

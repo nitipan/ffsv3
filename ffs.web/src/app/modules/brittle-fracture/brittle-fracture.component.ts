@@ -112,6 +112,16 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     this.form.get("ReductionInTheMATID").disable();
     this.form.get("AutomaticcallyTheMinimumAllowableTemperature").disable();
     this.form.get("AutomaticcallyTheMinimumAllowableTemperature").setValue(true);
+
+    this.designInput.form.get('designTemperature').valueChanges.subscribe(v => {
+      this.form.get("TheCriticalExposureTemperature").setValue(v)
+    });
+
+    this.designInput.form.get('nominalThickness').valueChanges.subscribe(v => {
+      this.form.get("TheUncorrodedGoverningThickness").setValue(v)
+    });
+
+    ;
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
     this.cdRef.detectChanges();
   }

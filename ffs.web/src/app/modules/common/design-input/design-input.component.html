@@ -1,29 +1,27 @@
 <div class="row">
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <app-panel>
-      <ffs-select label="Component Type" key="componentTypeID" text="componentTypeText" [options]="componentType | async" (onReady)="optionReady($event)"></ffs-select>
-      <ffs-select label="Component Shape" text="componentShapeText" (onReady)="optionReady($event)" key="componentShapeID" [options]="componentShape | async"></ffs-select>
-      <ffs-select label="Code Design" key="designCode" text="designCodeText" (onReady)="optionReady($event)" [options]="codeDesign | async"
-        disabled></ffs-select>
-    </app-panel>
-    <app-panel title="Geometry Design">
-      <ffs-number label="Internal Diameter" key="insideDiameter" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-      <ffs-number label="Norminal Thickness" key="nominalThickness" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-      <ffs-number label="Uniform Metal Loss" key="loss" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-      <ffs-number label="Future Corrosion Allowance" key="fca" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-      <ffs-number label="Weld Join Efficiency" key="weldJointEfficiency"></ffs-number>
-    </app-panel>
-    <app-panel title="Min. Require Thickness">
-      <p>
-        <ffs-check label="Automatically Calculation Min. Thinkness" key="autoCalculateMinRequireThickness"></ffs-check>
-      </p>
-      <ffs-number label="Longitudinal Direction" [unit]="(unit | async)?.distance" min="0" key="minRequireLongitutinalThickness"></ffs-number>
-      <ffs-number label="Circumferaintial Direction" key="minRequireCircumferentialThickness" [unit]="(unit | async)?.distance"
-        min="0"></ffs-number>
-    </app-panel>
-    <app-panel title="Load Design">
-      <ffs-number label="Pressure" [unit]="(unit | async)?.pressure" key="designPressure"></ffs-number>
-      <ffs-number label="Temperature" [unit]="(unit | async)?.temperature" key="designTemperature"></ffs-number>
-    </app-panel>
-  </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <app-panel>
+            <ffs-select label="Component Type" key="componentTypeID" text="componentTypeText" [options]="componentType | async" (onReady)="optionReady($event)"></ffs-select>
+            <ffs-select label="Component Shape" text="componentShapeText" (onReady)="optionReady($event)" key="componentShapeID" [options]="componentShape | async"></ffs-select>
+            <ffs-select label="Code Design" key="designCode" text="designCodeText" (onReady)="optionReady($event)" [options]="codeDesign | async" disabled></ffs-select>
+        </app-panel>
+        <app-panel title="Geometry Design">
+            <ffs-number label="Internal Diameter" key="insideDiameter" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+            <ffs-number label="Norminal Thickness" key="nominalThickness" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+            <ffs-number label="Uniform Metal Loss" key="loss" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+            <ffs-number label="Future Corrosion Allowance" key="fca" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+            <ffs-number label="Weld Join Efficiency" key="weldJointEfficiency" min="0" max="1"></ffs-number>
+        </app-panel>
+        <app-panel title="Min. Require Thickness">
+            <p>
+                <ffs-check label="Automatically Calculation Min. Thinkness" key="autoCalculateMinRequireThickness"></ffs-check>
+            </p>
+            <ffs-number label="Longitudinal Direction" [unit]="(unit | async)?.distance" min="0" max="1" key="minRequireLongitutinalThickness"></ffs-number>
+            <ffs-number label="Circumferaintial Direction" key="minRequireCircumferentialThickness" [unit]="(unit | async)?.distance" min="0" max="1"></ffs-number>
+        </app-panel>
+        <app-panel title="Load Design">
+            <ffs-number label="Pressure" [unit]="(unit | async)?.pressure" key="designPressure" min="0" max="1"></ffs-number>
+            <ffs-number label="Temperature" [unit]="(unit | async)?.temperature" key="designTemperature"></ffs-number>
+        </app-panel>
+    </div>
 </div>

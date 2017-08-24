@@ -1,38 +1,26 @@
 <div class="row">
-  <div class="col-md-12">
-    <app-panel title="Material Specification">
-      <div class="col-md-6">
-        <ffs-select label="Material Type" key="materialTypeID" [options]="materialTypes | async"></ffs-select>
-        <ffs-select label="Material Specification" key="material" text="materialText" (onReady)="optionReady($event)" [options]="materials | async"></ffs-select>
-        <ffs-text label="" key="materialName" *ngIf="showOther"></ffs-text>
-        <ffs-select label="ASME Excemtion Curves" [options]="asmeExemptionCurves | async" key="asmeExemptionCurvesID"></ffs-select>
-      </div>
-    </app-panel>
-    <app-panel title="Physical Property">
-      <p>
-        <ffs-check label="Automatically Calculate Allowable Stress" key="automaticallyCalculationAllowableStress"></ffs-check>
-      </p>
-      <div class="row">
-        <div class="col-md-6">
-          <ffs-number label="Allowable Stress" key="allowableStress" [unit]="(unit | async)?.stress"></ffs-number>
-          <ffs-number label="Ultimate Tensile Strength" key="ultimatedTensileStrength" [unit]="(unit | async)?.stress"></ffs-number>
-          <ffs-number label="Young Modulus" key="youngModulus" [unit]="(unit | async)?.stress"></ffs-number>
-        </div>
-        <div class="col-md-6">
-          <ffs-number label="Yield Strength" key="yieldStrength" [unit]="(unit | async)?.stress"></ffs-number>
-          <ffs-number label="Possion Ratio" key="poissonRatio" [unit]="(unit | async)?.stress"></ffs-number>
-        </div>
-      </div>
-    </app-panel>
-    <app-panel title="Fracture Property">
-      <p>
-        <ffs-check label="Automatic calculation reference temperature" key="automaticCalculationReferenceTemperature"></ffs-check>
-      </p>
-      <div class="row">
-        <div class="col-md-6">
-          <ffs-number label="Reference temperature" key="referenceTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
-        </div>
-      </div>
-    </app-panel>
-  </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <app-panel title="Material Specification">
+            <ffs-select label="Material Type" key="materialTypeID" [options]="materialTypes | async"></ffs-select>
+            <ffs-select label="Material Specification" key="material" text="materialText" (onReady)="optionReady($event)" [options]="materials | async"></ffs-select>
+            <ffs-text label="" key="materialName" *ngIf="showOther"></ffs-text>
+            <ffs-select label="ASME Excemtion Curves" [options]="asmeExemptionCurves | async" key="asmeExemptionCurvesID"></ffs-select>
+        </app-panel>
+        <app-panel title="Physical Property">
+            <p>
+                <ffs-check label="Automatically Calculate Allowable Stress" key="automaticallyCalculationAllowableStress"></ffs-check>
+            </p>
+            <ffs-number label="Allowable Stress" key="allowableStress" [unit]="(unit | async)?.stress"></ffs-number>
+            <ffs-number label="Ultimate Tensile Strength" key="ultimatedTensileStrength" [unit]="(unit | async)?.stress"></ffs-number>
+            <ffs-number label="Young Modulus" key="youngModulus" [unit]="(unit | async)?.stress"></ffs-number>
+            <ffs-number label="Yield Strength" key="yieldStrength" [unit]="(unit | async)?.stress"></ffs-number>
+            <ffs-number label="Possion Ratio" key="poissonRatio" [unit]="(unit | async)?.stress"></ffs-number>
+        </app-panel>
+        <app-panel title="Fracture Property">
+            <p>
+                <ffs-check label="Automatic calculation reference temperature" key="automaticCalculationReferenceTemperature"></ffs-check>
+            </p>
+            <ffs-number label="Reference temperature" key="referenceTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
+        </app-panel>
+    </div>
 </div>
