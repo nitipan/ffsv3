@@ -95,7 +95,9 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
       }
     });
 
-
+    this.form.valueChanges.subscribe((v) => {
+      this.moduleEvent.designInputSubject.emit(v);
+    });
     // SPECIAL CODE
     this.moduleEvent.equipmentTypeSubject.emit(1);
   }

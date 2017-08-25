@@ -11,6 +11,8 @@ export class ModuleEvent {
     equipmentTypeSubject: EventEmitter<any> = new EventEmitter();
 
     equipmentInputSubject: EventEmitter<any> = new EventEmitter();
+    designInputSubject: EventEmitter<any> = new EventEmitter();
+
     assessmentLevelSubject: EventEmitter<any> = new EventEmitter();
 
     stepChanged: EventEmitter<any> = new EventEmitter();

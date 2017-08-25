@@ -35,4 +35,14 @@ export class FourthOrderPolyNomialComponent implements OnInit, AfterViewInit {
   redraw() {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, this.el.nativeElement]);
   }
+
+  disable() {
+    this.form.reset();
+    this.form.disable();
+
+  }
+  enable() {
+    this.form.enable();
+    this.redraw();
+  }
 }

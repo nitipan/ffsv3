@@ -158,6 +158,7 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
         this.form.get('allowableStress').disable();
         this.form.get('ultimatedTensileStrength').disable();
         this.form.get('yieldStrength').disable();
+        this.form.get("automaticallyCalculationAllowableStress").disable();
       } else {
         let autoCalChkbox = this.form.get("automaticallyCalculationAllowableStress").value;
         if (autoCalChkbox) {

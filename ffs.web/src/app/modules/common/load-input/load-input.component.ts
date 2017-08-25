@@ -20,6 +20,8 @@ export class LoadInputComponent extends InputBaseComponent implements OnInit, Af
   form: FormGroup;
   calculating: boolean;
   unit: Observable<IUnit>;
+  assesmentLevel: number;
+
   constructor(private cdRef: ChangeDetectorRef, private fb: FormBuilder) {
     super();
   }
@@ -83,6 +85,25 @@ export class LoadInputComponent extends InputBaseComponent implements OnInit, Af
 
     // this.form.get("supplementalLoad").setValue(true);
     // this.form.get("supplementalLoad").disable();
+
+    this.moduleEvent.assessmentLevelSubject.subscribe(assessmentLevel => {
+      this.assesmentLevel = assessmentLevel;
+      if (assessmentLevel == 1) {
+        this.form.get('operatingPressure').disable();
+        this.polynomials.forEach(p => p.disable());
+
+      } else {
+        this.form.get('operatingPressure').enable();
+        this.polynomials.forEach(p => p.enable());
+      }
+    });
+
+
+    this.moduleEvent.designInputSubject.subscribe(v => {
+
+      this.form.get("operatingTemperature").setValue(v.designTemperature);
+    });
+
     this.cdRef.detectChanges();
   }
 }
