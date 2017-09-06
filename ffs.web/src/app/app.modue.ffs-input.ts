@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { FFSTextComponent, FFSSelectComponent, FFSCheckComponent, FFSNumberComponent, FFSDateComponent, FFSBrowseComponent } from './common/inputs/ffs-input.component';
+import { FFSTextComponent, FFSSelectComponent, FFSCheckComponent, FFSNumberComponent, FFSDateComponent, FFSBrowseComponent, FFSColorComponent } from './common/inputs/ffs-input.component';
 import { NgModule } from '@angular/core';
 
 @NgModule({
@@ -16,7 +16,8 @@ import { NgModule } from '@angular/core';
     FFSCheckComponent,
     FFSNumberComponent,
     FFSDateComponent,
-    FFSBrowseComponent
+    FFSBrowseComponent,
+    FFSColorComponent
   ],
   exports: [
     FFSTextComponent,
@@ -24,7 +25,8 @@ import { NgModule } from '@angular/core';
     FFSCheckComponent,
     FFSNumberComponent,
     FFSDateComponent,
-    FFSBrowseComponent
+    FFSBrowseComponent,
+    FFSColorComponent
   ]
 })
 export class FFSInputModule { }

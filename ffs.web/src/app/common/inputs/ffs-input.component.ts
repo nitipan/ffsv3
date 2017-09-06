@@ -4,6 +4,8 @@ import { FFSInputBase } from "./ffs-input-base";
 import * as $ from 'jquery';
 import 'bootstrap-datepicker';
 import * as XLSX from 'xlsx';
+import * as _ from 'underscore';
+import 'bootstrap-colorpicker';
 
 @Component(
     {
@@ -167,10 +169,10 @@ export class FFSNumberComponent extends FFSInputBase implements AfterViewInit {
             </div>
         </div>
         `,
-        providers: [{ provide: FFSInputBase, useExisting: forwardRef(() => FFSDateComponent) }]
+        providers: [{ provide: FFSInputBase, useExisting: forwardRef(() => FFSColorComponent) }]
     }
 )
-export class FFSDateComponent extends FFSInputBase implements AfterViewInit {
+export class FFSColorComponent extends FFSInputBase implements AfterViewInit {
 
     @ViewChild("datepicker") datepicker;
 
@@ -236,11 +238,14 @@ export class FFSBrowseComponent extends FFSInputBase implements AfterViewInit {
             var reader = new FileReader();
 
             reader.onload = function (e: any) {
-                if (extension == 'xls' || extension == 'xlsx') {
+                if (extension === 'xls' || extension === 'xlsx') {
                     const wb = XLSX.read(e.target.result, { type: 'binary' });
                     const wsname = wb.SheetNames[0];
                     const ws = wb.Sheets[wsname];
-                    var data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+                    const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+                    for (let i = 0; i < data.length; i++) {
+                        data[i] = _.toArray(data[i]).map(Number);
+                    }
                     inputForm.setValue(data);
                 } else {
                     inputForm.setValue((e.target as any).result);
@@ -248,7 +253,7 @@ export class FFSBrowseComponent extends FFSInputBase implements AfterViewInit {
             }
 
             this.filename = input.files[0].name;
-            if (extension == 'xls' || extension == 'xlsx') {
+            if (extension === 'xls' || extension === 'xlsx') {
                 reader.readAsBinaryString(input.files[0]);
             } else {
                 if (this.type == 'text')
@@ -268,6 +273,43 @@ export class FFSBrowseComponent extends FFSInputBase implements AfterViewInit {
 
     ngAfterViewInit(): void {
 
+    }
+
+}
+
+
+@Component(
+    {
+        selector: 'ffs-colorpicker',
+        styleUrls: ['./ffs-input.component.scss'],
+        template: `
+       <div class="ffs-input form-horizontal" [formGroup]="form">
+            <div class="form-group" [class.has-error]="hasError">
+                <div class="input-group date col-sm-7 col-xs-12" #colorpicker>
+                    <input type="text" [formControlName]="key" [id]="key" class="form-control">
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+            </div>
+        </div>
+        `,
+        providers: [{ provide: FFSInputBase, useExisting: forwardRef(() => FFSDateComponent) }]
+    }
+)
+export class FFSDateComponent extends FFSInputBase implements AfterViewInit {
+
+    @ViewChild('colorpicker') colorpicker;
+
+    value: any;
+    constructor() {
+        super();
+    }
+
+    ngAfterViewInit(): void {
+        const input = this.form.get(this.key);
+
+        this.form.controls[this.key].valueChanges.subscribe((v: string) => {
+            ($(this.colorpicker.nativeElement) as any).colorpicker('setValue', input.value);
+        });
     }
 
 }

@@ -91,6 +91,7 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
 
     this.designInput.form.get('autoCalculateMinRequireThickness').setValue(true);
 
+    this.metalLossInput.form.get('thicknessDataID').setValue(1);
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
     this.cdRef.detectChanges();
   }

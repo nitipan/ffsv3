@@ -23,6 +23,7 @@
     "@angular/router": "^4.3.2",
     "@types/underscore": "^1.8.1",
     "bootstrap": "^3.3.7",
+    "bootstrap-colorpicker": "^2.5.1",
     "bootstrap-datepicker": "^1.7.1",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",

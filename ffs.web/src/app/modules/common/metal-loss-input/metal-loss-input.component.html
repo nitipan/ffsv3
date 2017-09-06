@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-7">
                         <app-panel title="Dimension">
-                            <ffs-select label="Thickness Data" key="thicknessDataID" [options]="thicknessDatas | async" value="2"></ffs-select>
+                            <ffs-select label="Thickness Data" key="thicknessDataID" [options]="thicknessDatas | async"></ffs-select>
                             <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance" min="0"></ffs-number>
                             <ffs-browse label="Import Data" key="excelDatas" accept=".xlsx,.xls"></ffs-browse>
                         </app-panel>
@@ -48,10 +48,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let colorPicker of colorPickers">
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                <tr>
+                                    <td>
+                                        <ffs-colorpicker key="color1"></ffs-colorpicker>
+                                    </td>
+                                    <td>
+                                        <ffs-number key="min1" disabled="true"></ffs-number>
+                                    </td>
+                                    <td>
+                                        <ffs-number key="max1" disabled="true"></ffs-number>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ffs-colorpicker key="color2"></ffs-colorpicker>
+                                    </td>
+                                    <td>
+                                        <ffs-number key="min2" disabled="true"></ffs-number>
+                                    </td>
+                                    <td>
+                                        <ffs-number key="max2" disabled="true"></ffs-number>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ffs-colorpicker key="color3"></ffs-colorpicker>
+                                    </td>
+                                    <td>
+                                        <ffs-number key="min3" disabled="true"></ffs-number>
+                                    </td>
+                                    <td>
+                                        <ffs-number key="max3" disabled="true"></ffs-number>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -59,7 +87,27 @@
                 </div>
             </app-tab-item>
             <app-tab-item title="Inspection Grid">
-                Inspection Grid
+                <div class="row">
+                    <div class="col-md-5" *ngIf="arrayDatas !== undefined">
+                        <table class="table">
+                            <thead *ngIf="thicknessId == 1">
+                                <td>No.</td>
+                                <td>Thickness Data</td>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let arrayData of arrayDatas| slice: 0: limitRow;  let i = index">
+                                    <td *ngIf="thicknessId == 1">
+                                        <span>{{i}}</span>
+                                    </td>
+                                    <td *ngFor="let data of arrayData | slice: 0 : limitColumn">
+                                        <div col-md-3><input type="number" class="form-control" value="{{data}}" [ngStyle]="getStyle(data)">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </app-tab-item>
             <app-tab-item title="Graph">
                 Graph
