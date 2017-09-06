@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-md-12">
+        <app-tab>
+            <app-tab-item title="Dimension">
+                <div class="row">
+                    <div class="col-md-7">
+                        <app-panel title="Dimension">
+                            <ffs-select label="Thickness Data" key="thicknessDataID" [options]="thicknessDatas | async" value="2"></ffs-select>
+                            <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+                            <ffs-browse label="Import Data" key="excelDatas" accept=".xlsx,.xls"></ffs-browse>
+                        </app-panel>
+                        <app-panel title="Grid Spacing">
+                            <ffs-number label="Longitudinal" key="widthOfTheLongGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+                            <ffs-number label="Circumferential" key="widthOfTheCirGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+                        </app-panel>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <img src="assets/profile.png" style="width:100%" class="img-responsive" *ngIf="thicknessImage == 1" />
+                                <img src="assets/point.png" style="width:100%" class="img-responsive" *ngIf="thicknessImage == 2" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <app-panel title="Number of Grid">
+                            <ffs-number label="Longitudinal" key="numberOfInspectionRow"></ffs-number>
+                            <ffs-number label="Circumferential" key="numberOfInspectionColumn"></ffs-number>
+                        </app-panel>
+                    </div>
+                    <div class="col-md-5">
+                        <app-panel title="Remaining Strength Factor, RSF">
+                            <ffs-check label="Automatically Allowable RSF" key="autoAllowableRSF"></ffs-check>
+                            <ffs-number label="Allowable RSF" key="allowRSF"></ffs-number>
+                        </app-panel>
+                    </div>
+                </div>
+            </app-tab-item>
+            <app-tab-item title="Color Dimension">
+                <div class="row">
+                    <div class="col-md-5">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Color Scale</th>
+                                    <th>Min Value</th>
+                                    <th>Max Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let colorPicker of colorPickers">
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </app-tab-item>
+            <app-tab-item title="Inspection Grid">
+                Inspection Grid
+            </app-tab-item>
+            <app-tab-item title="Graph">
+                Graph
+            </app-tab-item>
+        </app-tab>
+    </div>
+</div>

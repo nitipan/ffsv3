@@ -35,6 +35,7 @@ import { HelpComponent } from './help/help.component';
 import { FocusDirective } from './common/focus.directive';
 import { FourthOrderPolyNomialComponent } from './common/inputs/fourth-order-poly-nomial/fourth-order-poly-nomial.component';
 import { EquipmentImageComponent } from './modules/common/equipment-image/equipment-image.component';
+import { MetalLossInputComponent } from './modules/common/metal-loss-input/metal-loss-input.component';
 
 
 const appRoutes: Routes = [
@@ -89,6 +90,7 @@ const appRoutes: Routes = [
     FocusDirective,
     FourthOrderPolyNomialComponent,
     EquipmentImageComponent,
+    MetalLossInputComponent,
   ],
   imports: [
     RouterModule.forRoot(

@@ -3,6 +3,7 @@ import { Input, Component, OnInit, forwardRef, ViewChild, AfterViewInit, OnChang
 import { FFSInputBase } from "./ffs-input-base";
 import * as $ from 'jquery';
 import 'bootstrap-datepicker';
+import * as XLSX from 'xlsx';
 
 @Component(
     {
@@ -230,18 +231,31 @@ export class FFSBrowseComponent extends FFSInputBase implements AfterViewInit {
     fileBrowserChanged(event: any) {
         var inputForm = this.form.get(this.key);
         let input = event.target;
+        var extension = input.files[0].name.split('.').pop().toLowerCase();
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            reader.onload = function (e) {
-                inputForm.setValue((e.target as any).result);
+
+            reader.onload = function (e: any) {
+                if (extension == 'xls' || extension == 'xlsx') {
+                    const wb = XLSX.read(e.target.result, { type: 'binary' });
+                    const wsname = wb.SheetNames[0];
+                    const ws = wb.Sheets[wsname];
+                    var data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+                    inputForm.setValue(data);
+                } else {
+                    inputForm.setValue((e.target as any).result);
+                }
             }
 
             this.filename = input.files[0].name;
-
-            if (this.type == 'text')
-                reader.readAsText(input.files[0]);
-            else
-                reader.readAsDataURL(input.files[0]);
+            if (extension == 'xls' || extension == 'xlsx') {
+                reader.readAsBinaryString(input.files[0]);
+            } else {
+                if (this.type == 'text')
+                    reader.readAsText(input.files[0]);
+                else
+                    reader.readAsDataURL(input.files[0]);
+            }
         }
     }
 

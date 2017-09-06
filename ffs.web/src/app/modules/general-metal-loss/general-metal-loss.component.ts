@@ -8,6 +8,7 @@ import { InputBase } from './../../model/inputbase';
 import { EventService } from './../../event.service';
 import { DesignInputComponent } from './../common/design-input/design-input.component';
 import { EquipmentInputComponent } from './../common/equipment-input/equipment-input.component';
+import { MetalLossInputComponent } from './../common/metal-loss-input/metal-loss-input.component';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { ModuleBase } from './../module-base.component';
 import { Component, OnInit, Injectable, Input, QueryList, ContentChildren, AfterContentInit, forwardRef, AfterViewInit, ViewChildren, ViewChild, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
@@ -32,6 +33,7 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
   @ViewChild(DesignInputComponent) designInput: DesignInputComponent;
   @ViewChild(MaterialInputComponent) materialInput: MaterialInputComponent;
   @ViewChild(LoadInputComponent) loadInput: LoadInputComponent;
+  @ViewChild(MetalLossInputComponent) metalLossInput: MetalLossInputComponent;
 
   form: FormGroup;
   thicknessImage: any;
@@ -51,9 +53,6 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
     this.equipmentInput.form.valueChanges.subscribe(f => {
       let inputs = f as InputBase;
       this.valueChangedSubject.next(inputs);
-    });
-    this.form.get('thicknessDataID').valueChanges.subscribe(x => {
-      this.thicknessImage = x;
     });
 
     // calculate
@@ -89,8 +88,7 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
     // this.form.get('ThicknessDataTypeID').disable();
     //this.thicknessImage = this.form.get('thicknessDataID').value();
-    this.form.get('autoAllowableRSF').setValue(true);
-    this.form.get('allowRSF').disable();
+
     this.designInput.form.get('autoCalculateMinRequireThickness').setValue(true);
 
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
@@ -98,12 +96,6 @@ export class GeneralMetalLossComponent extends ModuleBase implements OnInit, Aft
   }
 
   ngOnInit() {
-    this.thicknessDatas = this.http.get("/api/lookup/thicknessdatas")
-      .map(response => response.json() as any[])
-      .map(arr => arr.map(a => { return { key: a.thicknessDataID, value: a.thicknessDataName }; }));
-    this.thicknessDatas.subscribe((m: KV[]) => {
-      this.form.get('thicknessDataID').setValue(m[0].key);
-    });
   }
 
 
