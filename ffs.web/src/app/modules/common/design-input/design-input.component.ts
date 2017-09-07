@@ -72,27 +72,11 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
         .map(arr => arr.map(a => { return { key: a.designCodeID, value: a.designCodeName }; }));
 
       if (equipmentType == 1) {
-        this.form.get("componentShapeID").disable();
         this.form.get("componentShapeID").setValue(1);
-      } else {
-        this.form.get("componentShapeID").enable();
       }
     });
-
     this.moduleEvent.assessmentLevelSubject.subscribe(assessmentLevel => {
       this.assesmentLevel = assessmentLevel;
-
-      if (assessmentLevel == 1) {
-        this.form.get('insideDiameter').disable();
-        this.form.get('designPressure').disable();
-        this.form.get('weldJointEfficiency').disable();
-        this.form.get("minRequireLongitutinalThickness").disable();
-        this.form.get("minRequireCircumferentialThickness").disable();
-      } else {
-        this.form.get('insideDiameter').enable();
-        this.form.get('designPressure').enable();
-        this.form.get('weldJointEfficiency').enable();
-      }
     });
 
     this.form.valueChanges.subscribe((v) => {

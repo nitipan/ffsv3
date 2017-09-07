@@ -18,9 +18,9 @@
         </app-panel>
         <app-panel title="Fracture Property">
             <p>
-                <ffs-check label="Automatic calculation reference temperature" key="automaticCalculationReferenceTemperature"></ffs-check>
+                <ffs-check label="Automatic calculation reference temperature" key="automaticCalculationReferenceTemperature" disabled></ffs-check>
             </p>
-            <ffs-number label="Reference temperature" key="referenceTemperature" [unit]="(unit | async)?.temperature"></ffs-number>
+            <ffs-number label="Reference temperature" key="referenceTemperature" [unit]="(unit | async)?.temperature" disabled></ffs-number>
         </app-panel>
     </div>
 </div>

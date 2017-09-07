@@ -100,6 +100,34 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     });
 
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
+    this.designInput.form.get('insideDiameter').disable();
+    this.designInput.form.get('loss').disable();
+    this.designInput.form.get('fca').disable();
+    this.designInput.form.get('weldJointEfficiency').disable();
+    this.designInput.form.get('autoCalculateMinRequireThickness').disable();
+    this.designInput.form.get('minRequireLongitutinalThickness').disable();
+    this.designInput.form.get('minRequireCircumferentialThickness').disable();
+    this.moduleEvent.assessmentLevelSubject.subscribe(assessmentLevel => {
+      if (assessmentLevel == 1) {
+        this.designInput.form.get('designPressure').disable();
+        this.loadInput.form.get('operatingPressure').disable();
+      } else {
+        this.designInput.form.get('designPressure').enable();
+        this.loadInput.form.get('operatingPressure').enable();
+      }
+    });
+
+    this.materialInput.form.get('automaticallyCalculationAllowableStress').disable();
+    this.materialInput.form.get('allowableStress').disable();
+    this.materialInput.form.get('ultimatedTensileStrength').disable();
+    this.materialInput.form.get('youngModulus').disable();
+    this.materialInput.form.get('yieldStrength').disable();
+    this.materialInput.form.get('poissonRatio').disable();
+
+    this.loadInput.form.get('automaticallyCalculationTheNominalStressOfTheComponent').disable();
+    this.loadInput.form.get('theNominalStressOfTheComponent').disable();
+
+
 
     this.form.get("AutomaticcallyTheMinimumAllowableTemperature").valueChanges.subscribe((v: boolean) => {
       if (v)
@@ -121,7 +149,6 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
       this.form.get("TheUncorrodedGoverningThickness").setValue(v)
     });
 
-    ;
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
     this.cdRef.detectChanges();
   }

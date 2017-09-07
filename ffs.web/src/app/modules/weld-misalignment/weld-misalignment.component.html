@@ -1,66 +1,69 @@
 <app-wizard (stepChanged)="onStepChange($event)" (onStepsInit)="onStepsInit($event)">
-  <equipment>
-    <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
-  </equipment>
-  <design>
-    <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-      </div>
-    </div>
-  </design>
-  <material>
-    <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
-  </material>
-  <flaw>
-    <div class="row">
-      <div class="col-md-7">
-        <app-panel title="Flow Dimension">
-          <ffs-select label="Fabrication Tolerence" key="FabricationTolerance" [options]="FabricationTolerance | async"></ffs-select>
-        </app-panel>
-        <div *ngIf="!outOfPattern">
-          <app-panel title="Mean Radius of Component">
-            <ffs-number label="Component A" key="RComponent1"></ffs-number>
-            <ffs-number label="Component B" key="RComponent2"></ffs-number>
-          </app-panel>
-          <app-panel title="Wall Thickness of Component">
-            <ffs-number label="Component A" key="TComponent1"></ffs-number>
-            <ffs-number label="Component B" key="TComponent2"></ffs-number>
-          </app-panel>
-          <app-panel title="Centerline Offset">
-            <ffs-number label="Centerline Offset" key="CenterlineOffset" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-            <ffs-select label="Fabrication Tolerence" key="WeldOrientarion" [options]="WeldOrientarion | async"></ffs-select>
-          </app-panel>
-        </div>
-        <app-panel title="Dimension Data" *ngIf="outOfPattern">
-          <ffs-number label="Max Internal Diameter" key="MaxInternalDiameter"></ffs-number>
-          <ffs-number label="Min Internal Diameter" key="MinInternalDiameter"></ffs-number>
-          <ffs-number label="Angle to Define to Stress" key="AngleToDefineToStress"></ffs-number>
-        </app-panel>
-      </div>
-      <div class="col-md-4">
+    <equipment>
+        <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
+    </equipment>
+    <design>
         <div class="row">
-          <img src="assets/weld1.png" style="width:80%;margin-left:auto;margin-right:auto" class="img-responsive" *ngIf="outOfPattern"
-          />
-          <img src="assets/weld2.png" style="width:80%;margin-left:auto;margin-right:auto" class="img-responsive" *ngIf="!outOfPattern"
-          />
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+            </div>
         </div>
-        <div class="row" style="margin-top:20px">
-          <app-panel title="Remaining Strength Factor, RSF">
-            <ffs-check label="Automatically Allowable RSF" key="autoAllowableRSF"></ffs-check>
-            <ffs-number label="Allowable RSF" key="allowRSF"></ffs-number>
-          </app-panel>
+    </design>
+    <material>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
         </div>
-      </div>
-    </div>
-  </flaw>
-  <loads (onCalculate)="onCalculate($event)">
-    <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
-  </loads>
-  <result>
-    <app-result [moduleEvent]="moduleEvent"></app-result>
-  </result>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+        </div>
+    </material>
+    <flaw>
+        <div class="row">
+            <div class="col-md-7">
+                <app-panel title="Flow Dimension">
+                    <ffs-select label="Fabrication Tolerence" key="FabricationTolerance" [options]="FabricationTolerance | async" (onReady)="optionReady($event)"></ffs-select>
+                </app-panel>
+                <div *ngIf="!outOfPattern">
+                    <app-panel title="Mean Radius of Component">
+                        <ffs-number label="Component A" key="RComponent1"></ffs-number>
+                        <ffs-number label="Component B" key="RComponent2"></ffs-number>
+                    </app-panel>
+                    <app-panel title="Wall Thickness of Component">
+                        <ffs-number label="Component A" key="TComponent1"></ffs-number>
+                        <ffs-number label="Component B" key="TComponent2"></ffs-number>
+                    </app-panel>
+                    <app-panel title="Centerline Offset">
+                        <ffs-number label="Centerline Offset" key="CenterlineOffset" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+                        <ffs-select label="Fabrication Tolerence" key="WeldOrientarion" [options]="WeldOrientarion | async" (onReady)="optionReady($event)"></ffs-select>
+                    </app-panel>
+                </div>
+                <app-panel title="Dimension Data" *ngIf="outOfPattern">
+                    <ffs-number label="Max Internal Diameter" key="MaxInternalDiameter"></ffs-number>
+                    <ffs-number label="Min Internal Diameter" key="MinInternalDiameter"></ffs-number>
+                    <ffs-number label="Angle to Define to Stress" key="AngleToDefineToStress"></ffs-number>
+                </app-panel>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <img src="assets/weld1.png" style="width:80%;margin-left:auto;margin-right:auto" class="img-responsive" *ngIf="outOfPattern" />
+                    <img src="assets/weld2.png" style="width:80%;margin-left:auto;margin-right:auto" class="img-responsive" *ngIf="!outOfPattern" />
+                </div>
+                <div class="row" style="margin-top:20px">
+                    <app-panel title="Remaining Strength Factor, RSF">
+                        <ffs-check label="Automatically Allowable RSF" key="autoAllowableRSF"></ffs-check>
+                        <ffs-number label="Allowable RSF" key="allowRSF"></ffs-number>
+                    </app-panel>
+                </div>
+            </div>
+        </div>
+    </flaw>
+    <loads (onCalculate)="onCalculate($event)">
+        <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
+    </loads>
+    <result>
+        <app-result [moduleEvent]="moduleEvent"></app-result>
+    </result>
 </app-wizard>

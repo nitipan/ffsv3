@@ -56,13 +56,18 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
         this.form.get('theStandardPitChart').enable();
         this.form.get('browseBtn').disable();
         this.form.get('dataRow').disable();
+        this.loadInput.form.get('automaticallyCalculationTheNominalStressOfTheComponent').disable();
       } else if (this.assessmentLevel == 2) {
         this.form.get('theMaximumPitDepth').disable();
         this.form.get('theStandardPitChart').disable();
         this.form.get('browseBtn').enable();
         this.form.get('dataRow').enable();
+        this.loadInput.form.get('automaticallyCalculationTheNominalStressOfTheComponent').enable();
       }
     });
+
+    this.materialInput.form.get('youngModulus').disable();
+    this.materialInput.form.get('poissonRatio').disable();
 
     this.form.get('theStandardPitChart').valueChanges.subscribe(x => {
       this.imgPath = 'assets/chart' + x + '.bmp';

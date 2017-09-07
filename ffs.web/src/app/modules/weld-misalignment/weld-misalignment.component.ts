@@ -1,3 +1,4 @@
+import { FFSSelectComponent } from './../../common/inputs/ffs-input.component';
 import { InputBase } from './../../model/inputbase';
 import { FormGroup } from '@angular/forms';
 import { IUnit } from '../../common/unit';
@@ -71,6 +72,52 @@ export class WeldMisalignmentComponent extends ModuleBase implements OnInit, Aft
       }
     });
 
+    this.designInput.form.get("autoCalculateMinRequireThickness").setValue(true);
+    this.designInput.form.get('autoCalculateMinRequireThickness').disable();
+    this.designInput.form.get('minRequireLongitutinalThickness').disable();
+    this.designInput.form.get('minRequireCircumferentialThickness').disable();
+    this.moduleEvent.assessmentLevelSubject.subscribe(assessmentLevel => {
+      if (assessmentLevel == 1) {
+        this.designInput.form.get('designPressure').enable();
+        this.designInput.form.get('designTemperature').enable();
+        this.loadInput.form.get('operatingPressure').enable();
+
+        this.materialInput.form.get('materialTypeID').enable();
+        //this.materialInput.form.get('material').enable();
+        this.materialInput.form.get('asmeExemptionCurvesID').enable();
+        this.materialInput.form.get('automaticallyCalculationAllowableStress').enable();
+        this.materialInput.form.get('allowableStress').enable();
+        this.materialInput.form.get('ultimatedTensileStrength').enable();
+        this.materialInput.form.get('youngModulus').enable();
+        this.materialInput.form.get('yieldStrength').enable();
+        this.materialInput.form.get('poissonRatio').enable();
+
+        this.loadInput.form.get('automaticallyCalculationTheNominalStressOfTheComponent').enable();
+        this.loadInput.form.get('operatingPressure').enable();
+        this.loadInput.form.get('operatingTemperature').enable();
+
+      } else {
+        this.designInput.form.get('designPressure').disable();
+        this.designInput.form.get('designTemperature').disable();
+        this.loadInput.form.get('operatingPressure').disable();
+
+        this.materialInput.form.get('materialTypeID').disable();
+        //this.materialInput.form.get('material').disable();
+        this.materialInput.form.get('asmeExemptionCurvesID').disable();
+        this.materialInput.form.get('automaticallyCalculationAllowableStress').disable();
+        this.materialInput.form.get('allowableStress').disable();
+        this.materialInput.form.get('ultimatedTensileStrength').disable();
+        this.materialInput.form.get('youngModulus').disable();
+        this.materialInput.form.get('yieldStrength').disable();
+        this.materialInput.form.get('poissonRatio').disable();
+
+        this.loadInput.form.get('automaticallyCalculationTheNominalStressOfTheComponent').disable();
+        this.loadInput.form.get('operatingPressure').disable();
+        this.loadInput.form.get('operatingTemperature').disable();
+
+      }
+    });
+
     // calculate
     this.moduleEvent.requestCalculateSubject.subscribe(() => {
 
@@ -117,6 +164,13 @@ export class WeldMisalignmentComponent extends ModuleBase implements OnInit, Aft
     // this.WeldOrientarion.subscribe((m: KV[]) => {
     //   this.form.get('WeldOrientarion').setValue(m[0].key);
     // });
+  }
+
+  optionReady(select: FFSSelectComponent) {
+    if (select.options.length > 0)
+      select.setValue(select.options[0].key);
+    else
+      select.setValue("");
   }
 
   initDesignInput() {

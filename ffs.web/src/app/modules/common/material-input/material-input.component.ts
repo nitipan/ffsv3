@@ -89,9 +89,7 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
 
     setTimeout(() => {
       this.form.get("automaticallyCalculationAllowableStress").setValue(true);
-
       this.form.get("automaticCalculationReferenceTemperature").setValue(true);
-      this.form.get("automaticCalculationReferenceTemperature").disable();
     });
 
     this.form.get("automaticCalculationReferenceTemperature").valueChanges.subscribe((v: boolean) => {
@@ -103,29 +101,29 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
 
 
 
-    this.form.get("automaticallyCalculationAllowableStress").valueChanges.subscribe((v: boolean) => {
-      if (this.assesmentLevel != 1) {
-        if (v) {
-          this.form.get("allowableStress").disable();
-          this.form.get("yieldStrength").enable();
-          this.form.get("ultimatedTensileStrength").enable();
-          this.form.get("poissonRatio").disable();
-          this.form.get("youngModulus").disable();
-        } else {
-          this.form.get("allowableStress").enable();
-          this.form.get("yieldStrength").disable();
-          this.form.get("ultimatedTensileStrength").disable();
-          this.form.get("poissonRatio").disable();
-          this.form.get("youngModulus").disable();
-        }
-      }
-    });
+    // this.form.get("automaticallyCalculationAllowableStress").valueChanges.subscribe((v: boolean) => {
+    //   if (this.assesmentLevel != 1) {
+    //     if (v) {
+    //       this.form.get("allowableStress").disable();
+    //       this.form.get("yieldStrength").enable();
+    //       this.form.get("ultimatedTensileStrength").enable();
+    //       this.form.get("poissonRatio").disable();
+    //       this.form.get("youngModulus").disable();
+    //     } else {
+    //       this.form.get("allowableStress").enable();
+    //       this.form.get("yieldStrength").disable();
+    //       this.form.get("ultimatedTensileStrength").disable();
+    //       this.form.get("poissonRatio").disable();
+    //       this.form.get("youngModulus").disable();
+    //     }
+    //   }
+    // });
 
     this.materialSubject.subscribe(m => {
 
       if (m.curve != null) {
         this.form.get("asmeExemptionCurvesID").setValue(m.curve);
-        this.form.get("asmeExemptionCurvesID").disable();
+        //this.form.get("asmeExemptionCurvesID").disable();
       } else {
         this.form.get("asmeExemptionCurvesID").enable();
       }
@@ -152,26 +150,26 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
       this.form.get("material").setValue(this.form.get("material").value);
     });
 
-    this.moduleEvent.assessmentLevelSubject.subscribe(assessmentLevel => {
-      this.assesmentLevel = assessmentLevel;
-      if (assessmentLevel == 1) {
-        this.form.get('allowableStress').disable();
-        this.form.get('ultimatedTensileStrength').disable();
-        this.form.get('yieldStrength').disable();
-        this.form.get("automaticallyCalculationAllowableStress").disable();
-      } else {
-        let autoCalChkbox = this.form.get("automaticallyCalculationAllowableStress").value;
-        if (autoCalChkbox) {
-          this.form.get("allowableStress").disable();
-          this.form.get("yieldStrength").enable();
-          this.form.get("ultimatedTensileStrength").enable();
-        } else {
-          this.form.get("allowableStress").enable();
-          this.form.get("yieldStrength").disable();
-          this.form.get("ultimatedTensileStrength").disable();
-        }
-      }
-    });
+    // this.moduleEvent.assessmentLevelSubject.subscribe(assessmentLevel => {
+    //   this.assesmentLevel = assessmentLevel;
+    //   if (assessmentLevel == 1) {
+    //     this.form.get('allowableStress').disable();
+    //     this.form.get('ultimatedTensileStrength').disable();
+    //     this.form.get('yieldStrength').disable();
+    //     this.form.get("automaticallyCalculationAllowableStress").disable();
+    //   } else {
+    //     let autoCalChkbox = this.form.get("automaticallyCalculationAllowableStress").value;
+    //     if (autoCalChkbox) {
+    //       this.form.get("allowableStress").disable();
+    //       this.form.get("yieldStrength").enable();
+    //       this.form.get("ultimatedTensileStrength").enable();
+    //     } else {
+    //       this.form.get("allowableStress").enable();
+    //       this.form.get("yieldStrength").disable();
+    //       this.form.get("ultimatedTensileStrength").disable();
+    //     }
+    //   }
+    // });
 
 
 
