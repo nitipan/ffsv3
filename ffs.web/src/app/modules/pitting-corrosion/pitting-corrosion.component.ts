@@ -68,6 +68,7 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
 
     this.materialInput.form.get('youngModulus').disable();
     this.materialInput.form.get('poissonRatio').disable();
+    this.materialInput.form.get('asmeExemptionCurvesID').disable();
 
     this.form.get('theStandardPitChart').valueChanges.subscribe(x => {
       this.imgPath = 'assets/chart' + x + '.bmp';

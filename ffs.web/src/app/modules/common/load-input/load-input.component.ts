@@ -90,7 +90,7 @@ export class LoadInputComponent extends InputBaseComponent implements OnInit, Af
 
 
     this.moduleEvent.designInputSubject.subscribe(v => {
-
+      this.form.get('operatingPressure').setValue(v.designPressure);
       this.form.get("operatingTemperature").setValue(v.designTemperature);
     });
 

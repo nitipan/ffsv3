@@ -117,6 +117,15 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
       }
     });
 
+
+    this.moduleEvent.materialSubject.subscribe(m => {
+      if (m.curve != null) {
+        this.materialInput.form.get("asmeExemptionCurvesID").setValue(m.curve);
+      } else {
+        this.materialInput.form.get("asmeExemptionCurvesID").enable();
+      }
+    });
+
     this.materialInput.form.get('automaticallyCalculationAllowableStress').disable();
     this.materialInput.form.get('allowableStress').disable();
     this.materialInput.form.get('ultimatedTensileStrength').disable();

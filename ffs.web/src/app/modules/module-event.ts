@@ -19,4 +19,6 @@ export class ModuleEvent {
 
     unit: Subject<IUnit> = new Subject();
 
+    materialSubject: Subject<any> = new Subject();
+
 }

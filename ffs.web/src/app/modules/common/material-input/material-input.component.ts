@@ -30,7 +30,6 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
 
   showOther: boolean = false;
 
-  private materialSubject: Subject<any> = new Subject();
 
   unit: Observable<IUnit>;
 
@@ -84,7 +83,7 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
     this.form = FFSInputBase.toFormGroup(this.inputs);
     this.form.get("material").valueChanges.subscribe(m => {
       this.showOther = m == '999';
-      this.materialSubject.next(this.materialObjects.find(o => o.materialID == m));
+      this.moduleEvent.materialSubject.next(this.materialObjects.find(o => o.materialID == m));
     });
 
     setTimeout(() => {
@@ -119,15 +118,7 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
     //   }
     // });
 
-    this.materialSubject.subscribe(m => {
-
-      if (m.curve != null) {
-        this.form.get("asmeExemptionCurvesID").setValue(m.curve);
-        //this.form.get("asmeExemptionCurvesID").disable();
-      } else {
-        this.form.get("asmeExemptionCurvesID").enable();
-      }
-
+    this.moduleEvent.materialSubject.subscribe(m => {
       if (this.currentUnit instanceof SIUnit) {
         this.form.get("allowableStress").setValue(m.allowableStress);
         this.form.get("ultimatedTensileStrength").setValue(m.tensileStrength);
