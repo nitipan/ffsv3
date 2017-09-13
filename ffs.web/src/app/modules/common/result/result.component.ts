@@ -220,23 +220,23 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
         { text: '1.2 Design data', style: 'subheader' }, ''
       ],
       [
-        { text: '- Pressure', style: 'p' }, { style: 'p', text: this.result.param.designPressure }
+        { text: '- Pressure', style: 'p' }, { style: 'p', text: this.result.param.designPressure + ' ' + this.result.module.currentUnit.pressure }
       ],
       [
-        { text: '- Temperature', style: 'p' }, { style: 'p', text: this.result.param.designTemperature }
+        { text: '- Temperature', style: 'p' }, { style: 'p', text: this.result.param.designTemperature + ' ' + this.result.module.currentUnit.temperature }
       ],
       [
         { text: '1.3 Operating data', style: 'subheader' }, ''
       ],
       [
-        { text: '- Max. pressure', style: 'p' }, { style: 'p', text: this.result.param.operatingPressure }
+        { text: '- Max. pressure', style: 'p' }, { style: 'p', text: this.result.param.operatingPressure + ' ' + this.result.module.currentUnit.pressure }
       ],
       [
-        { text: '- Temperature', style: 'p' }, { style: 'p', text: this.result.param.operatingTemperature }
+        { text: '- Temperature', style: 'p' }, { style: 'p', text: this.result.param.operatingTemperature + ' ' + this.result.module.currentUnit.temperature }
       ],
       [
         { text: '- Critical exposure temp., CET ', style: 'p' },
-        { style: 'p', text: this.result.param.TheCriticalExposureTemperature }
+        { style: 'p', text: this.result.param.TheCriticalExposureTemperature + ' ' + this.result.module.currentUnit.temperature }
       ]
     ];
 
@@ -263,19 +263,19 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
         { text: '2.2 Required data', style: 'subheader' }, ''
       ],
       [
-        { text: '- Nominal wall thickness of component, tn ', style: 'p' }, { style: 'p', text: this.result.param.nominalThickness }
+        { text: '- Nominal wall thickness of component, tn ', style: 'p' }, { style: 'p', text: this.result.param.nominalThickness + ' ' + this.result.module.currentUnit.distance }
       ],
       [
-        { text: '- Uncorroded governing thickness, tg ', style: 'p' }, { style: 'p', text: this.result.param.TheUncorrodedGoverningThickness }
+        { text: '- Uncorroded governing thickness, tg ', style: 'p' }, { style: 'p', text: this.result.param.TheUncorrodedGoverningThickness + ' ' + this.result.module.currentUnit.distance }
       ],
       [
         { text: '- Weld joint eff., E ', style: 'p' }, { style: 'p', text: this.result.param.weldJointEfficiency }
       ],
       [
-        { text: '- Uniform metal loss, LOSS', style: 'p' }, { style: 'p', text: this.result.param.loss }
+        { text: '- Uniform metal loss, LOSS', style: 'p' }, { style: 'p', text: this.result.param.loss + ' ' + this.result.module.currentUnit.distance }
       ],
       [
-        { text: '- Future corrosion allowance, FCA', style: 'p' }, { style: 'p', text: this.result.param.fca }
+        { text: '- Future corrosion allowance, FCA', style: 'p' }, { style: 'p', text: this.result.param.fca + ' ' + this.result.module.currentUnit.distance }
       ],
       [
         { text: '- PWHT done at initial construction and after all repairs?', style: 'p' }, { style: 'p', text: PWHTtext }
@@ -294,7 +294,7 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
         { text: '- Applicable ASME exemption curve', style: 'p' }, { style: 'p', text: 'ASME Exemption Curves B' }
       ],
       [
-        { text: '- Min. allowable temp., MAT', style: 'p' }, { style: 'p', text: this.result.param.TheCriticalExposureTemperature }
+        { text: '- Min. allowable temp., MAT', style: 'p' }, { style: 'p', text: this.result.param.TheCriticalExposureTemperature + ' ' + this.result.module.currentUnit.temperature }
       ],
       [
         { text: '2.4 Summary', style: 'subheader' }, { style: 'subheader', text: summary }
@@ -302,14 +302,14 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
     ];
 
 
-    if (this.result.param.assessmentLevel === 1) {
-      equipment = equipment.filter(function (x) {
+    if (this.result.param.assessmentLevel === 2) {
+      equipment = equipment.filter(function (x: any) {
         return x[0].text !== '- Pressure' && x[0].text !== '- Max. pressure';
-      })
+      });
 
-      assesment = assesment.filter(function (y) {
+      assesment = assesment.filter(function (y: any) {
         return y[0].text !== '- Allowable stress' && y[0].text !== '- Min. required thickness, tmin';
-      })
+      });
     }
 
     const contents: any[] = [
@@ -332,6 +332,15 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
       {
         layout: 'noBorders',
         table: {
+          widths: [50, '*'],
+          body: [
+            [{ width: 50, image: this.logo }, { text: this.module.name + ' Assessment Reports', style: 'h1', margin: [10, 10, 0, 0] }],
+          ]
+        }
+      },
+      {
+        layout: 'noBorders',
+        table: {
           body: assesment
         }
       }
@@ -341,6 +350,7 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
       contents.push({ text: '', pageBreak: 'after' });
       contents.push(...this.summaryFactory(this.result));
     }
+
     const docDefinition = {
       'pageSize': 'A4',
       'pageMargins': [
@@ -370,7 +380,8 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
         img: {
           margin: [50, 10, 0, 0]
         }
-      }
+      },
+      footer: function (currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; },
     };
 
     pdfMake.createPdf(docDefinition).open();

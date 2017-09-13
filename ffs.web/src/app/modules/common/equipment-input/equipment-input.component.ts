@@ -83,6 +83,9 @@ export class EquipmentInputComponent extends InputBaseComponent implements OnIni
     });
 
     this.form.get('assessmentLevel').valueChanges.subscribe(v => {
+      if (v == 3) {
+        this.form.get('assessmentLevel').setValue(2);
+      }
       this.moduleEvent.assessmentLevelSubject.emit(v);
     });
   }
