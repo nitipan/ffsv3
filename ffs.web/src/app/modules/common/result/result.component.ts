@@ -1,15 +1,14 @@
-import { EventService } from './../../../event.service';
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { InputBaseComponent } from "../input-base.component";
-
+import { DatePipe } from '@angular/common';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
+import { toDataURL } from '../../../common/functions';
+import { ModuleBase } from '../../module-base.component';
+import { InputBaseComponent } from '../input-base.component';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import { ModuleBase } from "../../module-base.component";
-import { toDataURL } from "../../../common/functions";
-import { DatePipe } from "@angular/common";
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -168,9 +167,6 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
 
   summary() {
     const equipmentImage: any = {};
-    let PWHTtext = 'No';
-    let summary = '';
-
     if (this.result.param.equipmentImage !== '') {
       equipmentImage.image = this.result.param.equipmentImage;
       equipmentImage.fit = [200, 200];
@@ -179,16 +175,6 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
     } else {
       equipmentImage.colSpan = 2;
       equipmentImage.text = '';
-    }
-
-    if (this.result.resultBool) {
-      summary = 'The component is safe from brittle fracture.';
-    } else {
-      summary = 'The component is unsafe from brittle fracture.';
-    }
-
-    if (this.result.param.PWHT) {
-      PWHTtext = 'Yes';
     }
 
     let equipment = [
@@ -240,75 +226,10 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
       ]
     ];
 
-    let assesment: any[][] = [
-      [
-        { text: '2. Assessments', style: 'h2' }, ''
-      ],
-      [
-        { text: '2.1 Overview', style: 'subheader' }, ''
-      ],
-      [
-        { text: '- Methodlogy', style: 'p' }, { style: 'p', text: this.result.param.methodologyText }
-      ],
-      [
-        { text: '- Level', style: 'p' }, { style: 'p', text: this.result.param.assessmentLevel }
-      ],
-      [
-        { text: '- Assessor\' name', style: 'p' }, { style: 'p', text: this.result.param.analysisBy }
-      ],
-      [
-        { text: '- Date', style: 'p' }, { style: 'p', text: this.datePipe.transform(this.result.param.analysisDate, 'MM/dd/yyyy') }
-      ],
-      [
-        { text: '2.2 Required data', style: 'subheader' }, ''
-      ],
-      [
-        { text: '- Nominal wall thickness of component, tn ', style: 'p' }, { style: 'p', text: this.result.param.nominalThickness + ' ' + this.result.module.currentUnit.distance }
-      ],
-      [
-        { text: '- Uncorroded governing thickness, tg ', style: 'p' }, { style: 'p', text: this.result.param.TheUncorrodedGoverningThickness + ' ' + this.result.module.currentUnit.distance }
-      ],
-      [
-        { text: '- Weld joint eff., E ', style: 'p' }, { style: 'p', text: this.result.param.weldJointEfficiency }
-      ],
-      [
-        { text: '- Uniform metal loss, LOSS', style: 'p' }, { style: 'p', text: this.result.param.loss + ' ' + this.result.module.currentUnit.distance }
-      ],
-      [
-        { text: '- Future corrosion allowance, FCA', style: 'p' }, { style: 'p', text: this.result.param.fca + ' ' + this.result.module.currentUnit.distance }
-      ],
-      [
-        { text: '- PWHT done at initial construction and after all repairs?', style: 'p' }, { style: 'p', text: PWHTtext }
-      ],
-      [
-        { text: '2.3 Calculation Result', style: 'subheader' }, ''
-      ],
-      [
-        { text: '- Allowable stress', style: 'p' }, { style: 'p', text: this.result.param.allowableStress }
-      ],
-      [
-        { text: '- Min. required thickness, tmin', style: 'p' },
-        { style: 'p', text: this.result.param.minRequireLongitutinalThickness }
-      ],
-      [
-        { text: '- Applicable ASME exemption curve', style: 'p' }, { style: 'p', text: 'ASME Exemption Curves B' }
-      ],
-      [
-        { text: '- Min. allowable temp., MAT', style: 'p' }, { style: 'p', text: this.result.param.TheCriticalExposureTemperature + ' ' + this.result.module.currentUnit.temperature }
-      ],
-      [
-        { text: '2.4 Summary', style: 'subheader' }, { style: 'subheader', text: summary }
-      ]
-    ];
-
 
     if (this.result.param.assessmentLevel === 2) {
       equipment = equipment.filter(function (x: any) {
         return x[0].text !== '- Pressure' && x[0].text !== '- Max. pressure';
-      });
-
-      assesment = assesment.filter(function (y: any) {
-        return y[0].text !== '- Allowable stress' && y[0].text !== '- Min. required thickness, tmin';
       });
     }
 
@@ -337,17 +258,10 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
             [{ width: 50, image: this.logo }, { text: this.module.name + ' Assessment Reports', style: 'h1', margin: [10, 10, 0, 0] }],
           ]
         }
-      },
-      {
-        layout: 'noBorders',
-        table: {
-          body: assesment
-        }
       }
     ];
 
-    if (this.summaryFactory !== undefined) {
-      contents.push({ text: '', pageBreak: 'after' });
+    if (this.summaryFactory != undefined) {
       contents.push(...this.summaryFactory(this.result));
     }
 

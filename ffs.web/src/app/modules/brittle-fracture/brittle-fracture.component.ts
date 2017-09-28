@@ -1,23 +1,22 @@
-import { ResultComponent } from './../common/result/result.component';
-import { IUnit } from './../../common/unit';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Rx';
+import { DatePipe } from '@angular/common';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Http } from '@angular/http';
-import { KV } from './../../model/kv';
-import { LoadInputComponent } from './../common/load-input/load-input.component';
-import { MaterialInputComponent } from './../common/material-input/material-input.component';
-import { InputBase } from './../../model/inputbase';
+import { Observable } from 'rxjs/Rx';
+
+import { FFSInputBase } from '../../common/inputs/ffs-input-base';
+import { routerTransition } from '../../common/router.animations';
+import { IUnit } from './../../common/unit';
 import { EventService } from './../../event.service';
+import { InputBase } from './../../model/inputbase';
+import { KV } from './../../model/kv';
 import { DesignInputComponent } from './../common/design-input/design-input.component';
 import { EquipmentInputComponent } from './../common/equipment-input/equipment-input.component';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { LoadInputComponent } from './../common/load-input/load-input.component';
+import { MaterialInputComponent } from './../common/material-input/material-input.component';
+import { ResultComponent } from './../common/result/result.component';
 import { ModuleBase } from './../module-base.component';
-import { Component, OnInit, Injectable, Input, QueryList, ContentChildren, AfterContentInit, forwardRef, AfterViewInit, ViewChildren, ViewChild, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
-import { FFSInputBase } from "../../common/inputs/ffs-input-base";
 
-
-
-import { routerTransition } from "../../common/router.animations";
 
 @Component({
   selector: 'app-brittle-fracture',
@@ -47,7 +46,8 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   constructor(
     private http: Http,
     private cdRef: ChangeDetectorRef,
-    eventService: EventService) {
+    eventService: EventService,
+    private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
     this.unit.subscribe(u => {
@@ -59,7 +59,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     this.form = FFSInputBase.toFormGroup(this.inputs);
 
     this.result.reportFactory = this.reportFactory;
-    //this.result.summaryFactory = this.summaryFactory;
+    this.result.summaryFactory = this.summaryFactory;
 
     this.equipmentInput.form.valueChanges.subscribe(f => {
       let inputs = f as InputBase;
@@ -107,6 +107,16 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
     this.designInput.form.get('autoCalculateMinRequireThickness').disable();
     this.designInput.form.get('minRequireLongitutinalThickness').disable();
     this.designInput.form.get('minRequireCircumferentialThickness').disable();
+    this.designInput.form.get("autoCalculateMinRequireThickness").setValue(true);
+
+    this.designInput.form.get('designTemperature').valueChanges.subscribe(v => {
+      this.form.get("TheCriticalExposureTemperature").setValue(v)
+    });
+
+    this.designInput.form.get('nominalThickness').valueChanges.subscribe(v => {
+      this.form.get("TheUncorrodedGoverningThickness").setValue(v)
+    });
+
     this.moduleEvent.assessmentLevelSubject.subscribe(assessmentLevel => {
       if (assessmentLevel == 1) {
         this.designInput.form.get('designPressure').disable();
@@ -138,26 +148,16 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
 
 
+
     this.form.get("AutomaticcallyTheMinimumAllowableTemperature").valueChanges.subscribe((v: boolean) => {
       if (v)
         this.form.get("TheMinimumAllowableTemperature").disable();
       else
         this.form.get("TheMinimumAllowableTemperature").enable();
     });
-
-    this.designInput.form.get("autoCalculateMinRequireThickness").setValue(true);
     this.form.get("ReductionInTheMATID").disable();
     this.form.get("AutomaticcallyTheMinimumAllowableTemperature").disable();
     this.form.get("AutomaticcallyTheMinimumAllowableTemperature").setValue(true);
-
-    this.designInput.form.get('designTemperature').valueChanges.subscribe(v => {
-      this.form.get("TheCriticalExposureTemperature").setValue(v)
-    });
-
-    this.designInput.form.get('nominalThickness').valueChanges.subscribe(v => {
-      this.form.get("TheUncorrodedGoverningThickness").setValue(v)
-    });
-
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
     this.cdRef.detectChanges();
   }
@@ -297,8 +297,92 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   }
 
   summaryFactory(result) {
-    const content: any[] = [
+    let PWHTtext = 'No';
+    let summary = '';
+    if (result.resultBool) {
+      summary = 'The component is safe from brittle fracture.';
+    } else {
+      summary = 'The component is unsafe from brittle fracture.';
+    }
+
+    if (result.param.PWHT) {
+      PWHTtext = 'Yes';
+    }
+
+    let assesment: any[][] = [
+      [
+        { text: '2. Assessments', style: 'h2' }, ''
+      ],
+      [
+        { text: '2.1 Overview', style: 'subheader' }, ''
+      ],
+      [
+        { text: '- Methodlogy', style: 'p' }, { style: 'p', text: result.param.methodologyText }
+      ],
+      [
+        { text: '- Level', style: 'p' }, { style: 'p', text: result.param.assessmentLevel }
+      ],
+      [
+        { text: '- Assessor\' name', style: 'p' }, { style: 'p', text: result.param.analysisBy }
+      ],
+      [
+        { text: '- Date', style: 'p' }, { style: 'p', text: this.datePipe.transform(result.param.analysisDate, 'MM/dd/yyyy') }
+      ],
+      [
+        { text: '2.2 Required data', style: 'subheader' }, ''
+      ],
+      [
+        { text: '- Nominal wall thickness of component, tn ', style: 'p' }, { style: 'p', text: result.param.nominalThickness + ' ' + result.module.currentUnit.distance }
+      ],
+      [
+        { text: '- Uncorroded governing thickness, tg ', style: 'p' }, { style: 'p', text: result.param.TheUncorrodedGoverningThickness + ' ' + result.module.currentUnit.distance }
+      ],
+      [
+        { text: '- Weld joint eff., E ', style: 'p' }, { style: 'p', text: result.param.weldJointEfficiency }
+      ],
+      [
+        { text: '- Uniform metal loss, LOSS', style: 'p' }, { style: 'p', text: result.param.loss + ' ' + result.module.currentUnit.distance }
+      ],
+      [
+        { text: '- Future corrosion allowance, FCA', style: 'p' }, { style: 'p', text: result.param.fca + ' ' + result.module.currentUnit.distance }
+      ],
+      [
+        { text: '- PWHT done at initial construction and after all repairs?', style: 'p' }, { style: 'p', text: PWHTtext }
+      ],
+      [
+        { text: '2.3 Calculation Result', style: 'subheader' }, ''
+      ],
+      [
+        { text: '- Allowable stress', style: 'p' }, { style: 'p', text: result.param.allowableStress }
+      ],
+      [
+        { text: '- Min. required thickness, tmin', style: 'p' },
+        { style: 'p', text: result.param.minRequireLongitutinalThickness }
+      ],
+      [
+        { text: '- Applicable ASME exemption curve', style: 'p' }, { style: 'p', text: 'ASME Exemption Curves B' }
+      ],
+      [
+        { text: '- Min. allowable temp., MAT', style: 'p' }, { style: 'p', text: result.param.TheCriticalExposureTemperature + ' ' + result.module.currentUnit.temperature }
+      ],
+      [
+        { text: '2.4 Summary', style: 'subheader' }, { style: 'subheader', text: summary }
+      ]
     ];
+
+
+    if (result.param.assessmentLevel === 2) {
+      assesment = assesment.filter(function (y: any) {
+        return y[0].text !== '- Allowable stress' && y[0].text !== '- Min. required thickness, tmin';
+      });
+    }
+
+    const content = [{
+      layout: 'noBorders',
+      table: {
+        body: assesment
+      }
+    }];
     return content;
   }
 
