@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nancy.Bootstrapper;
 using Nancy.Session;
-
+using System.Configuration;
 
 namespace ffs.api
 {
@@ -32,9 +32,16 @@ namespace ffs.api
     {
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
+
+
+            container.Register<IDbContext>((c, n) =>
+            {
+                return new FFSDbContext(container.Resolve<IRootPathProvider>().GetRootPath(), ConfigurationManager.AppSettings["connectionString"]);
+            });
+
             Nancy.Json.JsonSettings.MaxJsonLength = int.MaxValue;
             Nancy.Json.JsonSettings.MaxRecursions = 100;
-          
+
 
             CookieBasedSessions.Enable(pipelines);
         }
@@ -62,5 +69,5 @@ namespace ffs.api
 
 
     }
-    
+
 }
