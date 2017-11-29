@@ -5,8 +5,9 @@
   <div class="row">
     <div class="col-md-6">
       <app-panel title="Primary Stress">
-        <p>Fourth Order Polynomial Stress Distribution</p>
-        <app-fourth-order-poly-nomial prefix="primaryStress"></app-fourth-order-poly-nomial>
+
+        <ffs-select label="Crack Type" key="CrackTypeID" [options]=" url | asynckv: 'crackTypeID' :  'crackTypeName' | async" value="1"></ffs-select>
+
       </app-panel>
     </div>
   </div>

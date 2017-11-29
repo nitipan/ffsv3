@@ -11,7 +11,7 @@ namespace ffs.api
     public class LookupModule : NancyModule
     {
         private IDbContext db;
-        
+
         public LookupModule(IDbContext db) : base("/api/lookup")
         {
             this.db = db;
@@ -156,6 +156,14 @@ namespace ffs.api
 
             };
 
+
+            Get["/generic/{table}"] = x =>
+            {
+                string table = x.table;
+
+                IEnumerable<dynamic> result = this.db.Connection.Query<dynamic>("SELECT * FROM " + table);
+                return Response.AsJson(result);
+            };
 
         }
     }

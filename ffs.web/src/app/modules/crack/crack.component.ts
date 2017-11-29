@@ -25,6 +25,9 @@ import { ResultComponent } from './../common/result/result.component';
 })
 export class CrackComponent extends ModuleBase implements OnInit, AfterViewInit {
   name = 'Crack-like Flaw';
+  CrackTypeIDUrl: string = 'api/lookup/generic/CrackType';
+  CrackLocationIDUrl: string = 'api/lookup/generic/CrackLocation';
+
 
   form: FormGroup;
   unit: Observable<IUnit>;
@@ -36,10 +39,13 @@ export class CrackComponent extends ModuleBase implements OnInit, AfterViewInit 
   @ViewChild(MaterialInputComponent) materialInput: MaterialInputComponent;
   @ViewChild(LoadInputComponent) loadInput: LoadInputComponent;
   @ViewChild(ResultComponent) result: ResultComponent;
-
+  currentUnit: IUnit;
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+    });
   }
 
   ngAfterViewInit(): void {

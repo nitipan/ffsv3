@@ -1,3 +1,4 @@
+import { AsyncKVPipe } from './common/asynckv.pipe';
 import { DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -39,12 +40,12 @@ import { LaminationComponent } from './modules/lamination/lamination.component';
 import { LocalMetalLossComponent } from './modules/local-metal-loss/local-metal-loss.component';
 import { PittingCorrosionComponent } from './modules/pitting-corrosion/pitting-corrosion.component';
 import {
-    DesignStepComponent,
-    EquipmentStepComponent,
-    FlawStepComponent,
-    LoadsStepComponent,
-    MaterialStepComponent,
-    ResultStepComponent,
+  DesignStepComponent,
+  EquipmentStepComponent,
+  FlawStepComponent,
+  LoadsStepComponent,
+  MaterialStepComponent,
+  ResultStepComponent,
 } from './modules/steps/steps.component';
 import { WeldMisalignmentComponent } from './modules/weld-misalignment/weld-misalignment.component';
 import { PlaygroundComponent } from './playground/playground.component';
@@ -115,6 +116,7 @@ const appRoutes: Routes = [
     FireDamageComponent,
     LaminationComponent,
     FatigueComponent,
+    AsyncKVPipe
   ],
   imports: [
     RouterModule.forRoot(

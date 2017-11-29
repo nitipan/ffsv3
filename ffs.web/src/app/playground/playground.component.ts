@@ -20,6 +20,8 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
 
+  url: string = 'api/lookup/generic/CrackType';
+
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.input);
   }
