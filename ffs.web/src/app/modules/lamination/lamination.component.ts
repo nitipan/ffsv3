@@ -114,7 +114,7 @@ export class LaminationComponent extends ModuleBase implements OnInit, AfterView
         this.NumberOfFlow = v;
       });
     this.form.get('NumberOfFlow').setValue(1);
-
+    this.form.get('Damage').setValue(false);
     this.cdRef.detectChanges();
   }
 
