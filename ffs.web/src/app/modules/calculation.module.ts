@@ -14,7 +14,7 @@ const appRoutes: Routes = [
     // { path: 'weld', component: WeldMisalignmentComponent, canActivate: [CanActivateViaAuthGuard] },
     // { path: 'dent', component: DentComponent, canActivate: [CanActivateViaAuthGuard] },
     // { path: 'creeprupture', component: CreepRuptureComponent, canActivate: [CanActivateViaAuthGuard] },
-    // { path: 'hydrogen', component: HydrogenComponent, canActivate: [CanActivateViaAuthGuard] },
+    { path: 'hydrogen', loadChildren: './hydrogen/hydrogen.module#HydrogenModule', canActivate: [CanActivateViaAuthGuard] },
     // { path: 'crack', component: CrackComponent, canActivate: [CanActivateViaAuthGuard] },
     { path: 'fire', loadChildren: './fire-damage/fire-damage.module#FireDamageModule', canActivate: [CanActivateViaAuthGuard] },
     // { path: 'lamination', component: LaminationComponent, canActivate: [CanActivateViaAuthGuard] },

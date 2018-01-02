@@ -15,6 +15,8 @@ import { EquipmentInputComponent } from './../common/equipment-input/equipment-i
 import { LoadInputComponent } from './../common/load-input/load-input.component';
 import { MaterialInputComponent } from './../common/material-input/material-input.component';
 import { ResultComponent } from './../common/result/result.component';
+import { KV } from '../../model/kv';
+import { DataGridComponent } from '../../common/datagrid/datagrid.component';
 
 
 
@@ -31,6 +33,18 @@ export class HydrogenComponent extends ModuleBase implements OnInit, AfterViewIn
 
   form: FormGroup;
   unit: Observable<IUnit>;
+  NumberOfFlow: any;
+  rowModels: KV[] = [
+    { key: 'HICDepth', value: 'Depth of HIC damage' },
+    { key: 'DirectionCircumferential', value: 'Flaw Dimension in Circumferential Direction' },
+    { key: 'DirectionLongitudinal', value: 'Flaw Dimension in Longitudinal Direction' },
+    { key: 'InternalSurface', value: 'Minimum Measured Thickness to Internal Surface' },
+    { key: 'ExternalSurface', value: 'Minimum Measured Thickness to External Surface' },
+    { key: 'TotalOfBothSides', value: 'Minimum Measured Thickness; Total of Both Sides' },
+    { key: 'SpacingToNearestHIC', value: 'Edge-To-Edge Spacing To Nearest HIC or Blister' },
+    { key: 'WeldJoint', value: 'Spacing To Nearest Weld Joint' },
+    { key: 'MajorStructuralDiscontinuity', value: 'Spacing To Nearest Major Structural Discontinuity' }
+  ];
 
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
 
@@ -39,7 +53,7 @@ export class HydrogenComponent extends ModuleBase implements OnInit, AfterViewIn
   @ViewChild(MaterialInputComponent) materialInput: MaterialInputComponent;
   @ViewChild(LoadInputComponent) loadInput: LoadInputComponent;
   @ViewChild(ResultComponent) result: ResultComponent;
-
+  @ViewChild('flowGrid') flowGrid: DataGridComponent;
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
@@ -77,6 +91,7 @@ export class HydrogenComponent extends ModuleBase implements OnInit, AfterViewIn
         ...flawInput,
         ...loadInput
       };
+      calculationParam.HydrogenItem = this.flowGrid.data;
 
 
       this.moduleEvent.calculatingSubject.emit(null);
@@ -88,6 +103,14 @@ export class HydrogenComponent extends ModuleBase implements OnInit, AfterViewIn
           this.moduleEvent.calculatedSubject.emit({ param: calculationParam, result: r, module: this });
         });
     });
+
+    this.form.get('NumberOfFlow').valueChanges
+      .debounceTime(500)
+      .distinctUntilChanged()
+      .subscribe(v => {
+        this.NumberOfFlow = v;
+      });
+    this.form.get('NumberOfFlow').setValue(1);
 
 
 
