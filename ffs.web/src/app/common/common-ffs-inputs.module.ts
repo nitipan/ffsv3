@@ -1,15 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { FFSTextComponent, FFSSelectComponent, FFSCheckComponent, FFSNumberComponent, FFSDateComponent, FFSBrowseComponent, FFSColorComponent } from './common/inputs/ffs-input.component';
 import { NgModule } from '@angular/core';
+import { FFSTextComponent, FFSSelectComponent, FFSCheckComponent, FFSDateComponent, FFSNumberComponent, FFSBrowseComponent, FFSColorComponent } from './inputs/ffs-input.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule],
   declarations: [
     FFSTextComponent,
     FFSSelectComponent,
@@ -20,6 +19,9 @@ import { NgModule } from '@angular/core';
     FFSColorComponent
   ],
   exports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     FFSTextComponent,
     FFSSelectComponent,
     FFSCheckComponent,

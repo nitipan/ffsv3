@@ -1,15 +1,21 @@
 <div class="row">
 
-  <button class="btn btn-primary" (click)="getPValue()">Get Value</button>
 
-  <div class="row">
-    <div class="col-md-6">
-      <app-panel title="Primary Stress">
+  <div class="col-md-6">
 
-        <ffs-select label="Crack Type" key="CrackTypeID" [options]=" url | asynckv: 'crackTypeID' :  'crackTypeName' | async" value="1"></ffs-select>
-
-      </app-panel>
+    <div>
+      <div class="form-inline">
+        <div class="form-group">
+          <label>Number of Flaw</label>
+          <input class="form-control" [(ngModel)]="nbOfFlaw">
+        </div>
+      </div>
     </div>
+    <app-panel>
+      <app-datagrid [rowModels]="rowModels" [numberColumns]="nbOfFlaw" header="Lamination Data"></app-datagrid>
+    </app-panel>
+
+
   </div>
 
 

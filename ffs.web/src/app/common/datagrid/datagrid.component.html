@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-grid">
+    <thead>
+      <tr>
+        <th>
+          <span>{{header}}</span>
+        </th>
+        <th *ngFor="let c of columns">
+          <span style="width:80px;">No. {{c+1}}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of rowModels">
+        <td>
+          <span style="width:250px;">{{r.value}}</span>
+        </td>
+        <td *ngFor="let c of columns">
+          <input type="number" class="form-control" (change)="onDataChange(r,c,$event.target.value)">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

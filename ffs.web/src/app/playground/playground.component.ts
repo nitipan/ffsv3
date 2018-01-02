@@ -1,9 +1,11 @@
 import { FourthOrderPolyNomialComponent } from './../common/inputs/fourth-order-poly-nomial/fourth-order-poly-nomial.component';
 import { FormGroup, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Component, OnInit, AfterViewInit, QueryList, ViewChildren, ViewChild } from '@angular/core';
-import { FFSInputBase } from "../common/inputs/ffs-input-base";
+import { FFSInputBase } from '../common/inputs/ffs-input-base';
 import '../common/functions';
-import { toDataURL } from "../common/functions";
+import { toDataURL } from '../common/functions';
+
+import { KV } from '../model/kv';
 
 @Component({
   selector: 'app-playground',
@@ -12,7 +14,7 @@ import { toDataURL } from "../common/functions";
 })
 export class PlaygroundComponent implements OnInit, AfterViewInit {
 
-  @ViewChildren(FFSInputBase) input: QueryList<FFSInputBase>
+  @ViewChildren(FFSInputBase) input: QueryList<FFSInputBase>;
 
 
   @ViewChild(FourthOrderPolyNomialComponent) polyNomial: FourthOrderPolyNomialComponent;
@@ -20,7 +22,7 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
   form: FormGroup;
 
 
-  url: string = 'api/lookup/generic/CrackType';
+  url = 'api/lookup/generic/CrackType';
 
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.input);
@@ -32,8 +34,21 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
   getPValue() {
     console.log(this.polyNomial.form.getRawValue());
   }
+  nbOfFlaw: any;
+  rowModels: KV[];
 
   ngOnInit() {
+
+    this.rowModels = [
+      { key: 'LaminationHeight', value: 'Lamination Height' },
+      { key: 'FlawDimensionCircumferentialDirection', value: 'Flaw Dimension in Circumferential Direction' },
+      { key: 'FlawDimensionLongituidinalDirection', value: 'Flaw Dimension in Longitudinal Direction' },
+      { key: 'MinimumMeasuredThickness', value: 'Minimum Measured Thickness' },
+      { key: 'EdgeToEdgeSpacingToNearestLamination', value: 'Edge-To-Edge Spacing To Nearest Lamination' },
+      { key: 'SpacingToNearestWeldJoint', value: 'Spacing To Nearest Weld Joint' },
+      { key: 'SpacingToNearestMajorStructuralDiscontinuity', value: 'Spacing To Nearest Major Structural Discontinuity' },
+    ];
+
     // MathJax.Hub.Queue(["Typeset", MathJax.Hub, this.el.nativeElement]);
     //  var reader = new FileReader();
     // reader.onload = function (e) {
@@ -42,6 +57,7 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
     // }
 
     // reader.readAsDataURL()
+
   }
 
   getValue() {
@@ -54,19 +70,19 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
 
   rule1(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors => {
-      if (this.form == undefined)
+      if (this.form === undefined)
         return null;
 
       const name = control.value;
 
-      let value1: number = this.form.get("value1").value
+      const value1: number = this.form.get('value1').value
 
-      var valid = value1 > name;
+      const valid = value1 > name;
 
       if (!valid)
-        this.form.get("file").enable();
+        this.form.get('file').enable();
       else
-        this.form.get("file").disable();
+        this.form.get('file').disable();
 
       return valid ? { 'error': `should be lower than value 1 (${value1})` } : null;
     };
@@ -81,5 +97,6 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
       return null;
     };
   }
+
 
 }
