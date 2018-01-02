@@ -26,6 +26,9 @@ import { ResultComponent } from './../common/result/result.component';
 export class FireDamageComponent extends ModuleBase implements OnInit, AfterViewInit {
   name = 'Fire Damage';
 
+  materialGroupUrl = 'api/lookup/generic/MaterialGroup';
+  heatExposureZoneUrl = 'api/lookup/generic/HeatExposureZone';
+
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
 
   @ViewChild(EquipmentInputComponent) equipmentInput: EquipmentInputComponent;
@@ -56,6 +59,14 @@ export class FireDamageComponent extends ModuleBase implements OnInit, AfterView
     });
     this.equipmentInput.form.get('assessmentLevel').valueChanges.subscribe((assessmentLevel) => {
       this.assessmentLevel = assessmentLevel;
+      if (this.assessmentLevel === 1) {
+        this.form.get("VickersHardnessNo").reset();
+        this.form.get("AllowableStressFlaw").reset();
+      } else {
+        this.form.get("Leak").reset();
+        this.form.get("Coat").reset();
+        this.form.get("Damage").reset();
+      }
     });
 
     // calculate

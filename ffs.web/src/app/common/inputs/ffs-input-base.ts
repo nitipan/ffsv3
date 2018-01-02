@@ -1,10 +1,13 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { OnInit, Input, QueryList, Output, EventEmitter } from '@angular/core';
+import { OnInit, Input, QueryList, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 
 import * as _ from 'underscore';
+import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
-export abstract class FFSInputBase implements OnInit {
+export abstract class FFSInputBase implements OnInit, OnChanges {
+
+
 
 
     @Input() label: string;
@@ -19,6 +22,16 @@ export abstract class FFSInputBase implements OnInit {
     @Output() onReady: EventEmitter<FFSInputBase> = new EventEmitter();
 
     errorMessages: string[];
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.disabled && this.form) {
+            if (changes.disabled.currentValue) {
+                this.form.controls[this.key].disable();
+            } else {
+                this.form.controls[this.key].enable();
+            }
+        }
+    }
 
     ngOnInit(): void {
         let group: any = {};
@@ -38,7 +51,7 @@ export abstract class FFSInputBase implements OnInit {
             this.checkErrors();
         });
 
-        if (this.disabled != undefined) {
+        if (this.disabled != undefined && this.disabled === true) {
             this.form.controls[this.key].disable();
         }
     }

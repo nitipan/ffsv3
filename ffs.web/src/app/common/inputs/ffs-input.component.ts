@@ -118,14 +118,13 @@ export class FFSCheckComponent extends FFSInputBase {
             <div class="form-group" [class.has-error]="hasError">
                 <label *ngIf="label != undefined" class="control-label" [class.col-sm-5]="label != undefined" [attr.for]="key">{{label}}</label>
                 <div class="input-group col-xs-12" [class.col-sm-5]="label != undefined" [class.col-sm-12]="label == undefined" >
-                    <input [formControlName]="key" type="number" [id]="key" class="form-control" [class.with-unit]="unit != undefined">                
+                    <input [formControlName]="key" type="number" [id]="key" class="form-control" [class.with-unit]="unit != undefined" >                
                     <label class="input-group-addon control-label" *ngIf="unit != undefined">{{unit}}</label>
                     
                 </div>
                 
                 <div class="col-xs-offset-5 col-xs-7 control-label errorText" *ngFor="let error of errorMessages" >* {{error}}</div>
-            </div>
-           
+            </div>           
         </div>
         `,
         providers: [{ provide: FFSInputBase, useExisting: forwardRef(() => FFSNumberComponent) }]

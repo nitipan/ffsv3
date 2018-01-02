@@ -1,31 +1,53 @@
 <app-wizard (stepChanged)="onStepChange($event)" (onStepsInit)="onStepsInit($event)">
-    <equipment>
-        <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
-    </equipment>
-    <design>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-            </div>
-        </div>
-    </design>
-    <material>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-        </div>
-    </material>
-    <flaw>
-    </flaw>
-    <loads (onCalculate)="onCalculate($event)">
-        <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
-    </loads>
-    <result>
-        <app-result [moduleEvent]="moduleEvent"></app-result>
-    </result>
+  <equipment>
+    <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
+  </equipment>
+  <design>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+      </div>
+    </div>
+  </design>
+  <material>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+    </div>
+  </material>
+  <flaw>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-panel>
+          <ffs-select label="Material Group" key="MaterialGroupID" text="MaterialGroupName" [options]="materialGroupUrl | asynckv: 'materialGroupID' :  'materialGroupName' | async"
+            value="1"></ffs-select>
+          <ffs-select label="Heat Exposure Zone" key="HeatExposureZoneID" text="HeatExposureZoneName" [options]="heatExposureZoneUrl | asynckv: 'heatExposureZoneID' :  'heatExposureZoneName' | async"
+            value="1"></ffs-select>
+        </app-panel>
+        <app-panel title="Field Observation">
+          <ffs-check label="Leak (Inspection gasket and leak checking of flange joint before start up)" key="Leak" [disabled]="assessmentLevel == 2"></ffs-check>
+          <ffs-check label="Coat (Protecting coating for external and internal corrosion resistance)" key="Coat" [disabled]="assessmentLevel == 2"></ffs-check>
+          <ffs-check label="Damage (There is no mechanical damage or dimensional deviation)" key="Damage" [disabled]="assessmentLevel == 2"></ffs-check>
+        </app-panel>
+        <app-panel title="Field Observation">
+          <ffs-number label="Vickers Hardness No" key="VickersHardnessNo" [disabled]="assessmentLevel == 1"></ffs-number>
+          <ffs-number label="Allowable Stress" key="AllowableStressFlaw" [disabled]="assessmentLevel == 1"></ffs-number>
+        </app-panel>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+      </div>
+    </div>
+  </flaw>
+  <loads (onCalculate)=" onCalculate($event) ">
+    <app-load-input [moduleEvent]="moduleEvent "></app-load-input>
+  </loads>
+  <result>
+    <app-result [moduleEvent]="moduleEvent "></app-result>
+  </result>
 </app-wizard>
