@@ -7,7 +7,7 @@
       <div class="form-inline">
         <div class="form-group">
           <label>Number of Flaw</label>
-          <input class="form-control" [(ngModel)]="nbOfFlaw">
+          <input class="form-control" (change)="nbOfFlaw = $event.target.value">
         </div>
       </div>
     </div>

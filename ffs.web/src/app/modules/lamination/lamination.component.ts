@@ -15,6 +15,8 @@ import { EquipmentInputComponent } from './../common/equipment-input/equipment-i
 import { LoadInputComponent } from './../common/load-input/load-input.component';
 import { MaterialInputComponent } from './../common/material-input/material-input.component';
 import { ResultComponent } from './../common/result/result.component';
+import { KV } from '../../model/kv';
+import { DataGridComponent } from '../../common/datagrid/datagrid.component';
 
 
 @Component({
@@ -35,10 +37,21 @@ export class LaminationComponent extends ModuleBase implements OnInit, AfterView
   @ViewChild(LoadInputComponent) loadInput: LoadInputComponent;
   @ViewChild(ResultComponent) result: ResultComponent;
 
+  @ViewChild('flowGrid') flowGrid: DataGridComponent;
   form: FormGroup;
   unit: Observable<IUnit>;
 
   assessmentLevel: any = 1;
+  NumberOfFlow: any;
+  rowModels: KV[] = [
+    { key: 'LaminationHeight', value: 'Lamination Height' },
+    { key: 'FlawDimensionCircumferentialDirection', value: 'Flaw Dimension in Circumferential Direction' },
+    { key: 'FlawDimensionLongituidinalDirection', value: 'Flaw Dimension in Longitudinal Direction' },
+    { key: 'MinimumMeasuredThickness', value: 'Minimum Measured Thickness' },
+    { key: 'EdgeToEdgeSpacingToNearestLamination', value: 'Edge-To-Edge Spacing To Nearest Lamination' },
+    { key: 'SpacingToNearestWeldJoint', value: 'Spacing To Nearest Weld Joint' },
+    { key: 'SpacingToNearestMajorStructuralDiscontinuity', value: 'Spacing To Nearest Major Structural Discontinuity' },
+  ];
 
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
@@ -81,6 +94,8 @@ export class LaminationComponent extends ModuleBase implements OnInit, AfterView
         ...loadInput
       };
 
+      calculationParam.LaminationItems = this.flowGrid.data;
+
 
       this.moduleEvent.calculatingSubject.emit(null);
 
@@ -92,7 +107,13 @@ export class LaminationComponent extends ModuleBase implements OnInit, AfterView
         });
     });
 
-
+    this.form.get('NumberOfFlow').valueChanges
+      .debounceTime(500)
+      .distinctUntilChanged()
+      .subscribe(v => {
+        this.NumberOfFlow = v;
+      });
+    this.form.get('NumberOfFlow').setValue(1);
 
     this.cdRef.detectChanges();
   }

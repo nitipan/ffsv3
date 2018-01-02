@@ -1,31 +1,54 @@
 <app-wizard (stepChanged)="onStepChange($event)" (onStepsInit)="onStepsInit($event)">
-    <equipment>
-        <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
-    </equipment>
-    <design>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-            </div>
-        </div>
-    </design>
-    <material>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-        </div>
-    </material>
-    <flaw>
-    </flaw>
-    <loads (onCalculate)="onCalculate($event)">
-        <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
-    </loads>
-    <result>
-        <app-result [moduleEvent]="moduleEvent"></app-result>
-    </result>
+  <equipment>
+    <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
+  </equipment>
+  <design>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+      </div>
+    </div>
+  </design>
+  <material>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+    </div>
+  </material>
+  <flaw>
+    <div class="row">
+      <div class="col-md-8 col-sm-8 col-xs-8">
+        <app-panel>
+          <div>
+            <ffs-number label="Number Of Flaw" key="NumberOfFlow" min="1"></ffs-number>
+            <ffs-check label="There is any surface bulging on either the inside or the outside surface of the component at the location of the lamination."
+              key="Damage"></ffs-check>
+          </div>
+          <app-datagrid [rowModels]="rowModels" [numberColumns]="NumberOfFlow" header="Lamination Data" #flowGrid></app-datagrid>
+        </app-panel>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <img src="assets/lamp1.png" style="margin:0 auto;" class="img-responsive" />
+        <br>
+        <br>
+        <img src="assets/lamp2.png" style="margin:0 auto;" class="img-responsive" />
+        <br>
+        <br>
+        <img src="assets/lamp3.png" style="margin:0 auto;" class="img-responsive" />
+      </div>
+    </div>
+
+
+  </flaw>
+  <loads (onCalculate)="onCalculate($event)">
+    <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
+  </loads>
+  <result>
+    <app-result [moduleEvent]="moduleEvent"></app-result>
+  </result>
 </app-wizard>

@@ -37,6 +37,10 @@ export class PlaygroundComponent implements OnInit, AfterViewInit {
   nbOfFlaw: any;
   rowModels: KV[];
 
+  updateNumberOfFlaw(val) {
+    this.nbOfFlaw = val;
+  }
+
   ngOnInit() {
 
     this.rowModels = [
