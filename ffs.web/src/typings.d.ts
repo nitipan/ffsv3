@@ -6,3 +6,4 @@ interface NodeModule {
 
 
 declare var MathJax: any;
+declare var pdfMake: any;

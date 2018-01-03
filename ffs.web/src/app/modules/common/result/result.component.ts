@@ -1,14 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-
 import { toDataURL } from '../../../common/functions';
 import { ModuleBase } from '../../module-base.component';
 import { InputBaseComponent } from '../input-base.component';
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -28,8 +22,6 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
   summaryFactory: any;
 
   constructor(private datePipe: DatePipe) {
-
-
     super();
 
     toDataURL("/assets/logo_round.png").subscribe(v => {

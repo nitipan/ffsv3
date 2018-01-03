@@ -104,8 +104,11 @@ export class FFSSelectComponent extends FFSInputBase implements OnInit, OnChange
         providers: [{ provide: FFSInputBase, useExisting: forwardRef(() => FFSCheckComponent) }]
     }
 )
-export class FFSCheckComponent extends FFSInputBase {
-
+export class FFSCheckComponent extends FFSInputBase implements OnInit {
+    ngOnInit() {
+        super.ngOnInit();
+        this.form.get(this.key).setValue(false);
+    }
 }
 
 

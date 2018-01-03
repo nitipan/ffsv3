@@ -1,31 +1,58 @@
 <app-wizard (stepChanged)="onStepChange($event)" (onStepsInit)="onStepsInit($event)">
-    <equipment>
-        <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
-    </equipment>
-    <design>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-            </div>
-        </div>
-    </design>
-    <material>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-        </div>
-    </material>
-    <flaw>
-    </flaw>
-    <loads (onCalculate)="onCalculate($event)">
-        <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
-    </loads>
-    <result>
-        <app-result [moduleEvent]="moduleEvent"></app-result>
-    </result>
+  <equipment>
+    <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
+  </equipment>
+  <design>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+      </div>
+    </div>
+  </design>
+  <material>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+    </div>
+  </material>
+  <flaw>
+    <div class="row">
+      <div class="col-md-8 col-sm-8 col-xs-8">
+        <app-panel>
+
+          <ffs-select label="Assessment Material" key="AssessmentMaterialID" [options]="assessmentMaterials | async"></ffs-select>
+          <ffs-check label="Automatically Calculation the Maximum Permissible Time" key="AutomaticallyCalculationTheMaximumPermissibleTime"
+            value="true"></ffs-check>
+          <ffs-number label="The Maximum Permissible Time" key="TheMaximumPermissibleTime" [disabled]="form && form.get('AutomaticallyCalculationTheMaximumPermissibleTime').value == true"
+            unit="Hrs"> </ffs-number>
+          <ffs-check label="Automatically Calculation the Creep Damage Rate" key="AutomaticallyCalculationTheCreepDamageRate" value="true"></ffs-check>
+          <ffs-number label="The Creep Damage Rat" key="TheCreepDamageRate" [disabled]="form && form.get('AutomaticallyCalculationTheCreepDamageRate').value == true"
+            unit="1/mm"></ffs-number>
+          <ffs-check label="The component contains a weld joint" key="TheComponentContainsAWeldJoint"></ffs-check>
+          <ffs-check label="The weld joint is PWHT" key="TheWeldJointIsPWHT"></ffs-check>
+          <ffs-number label="Service time (in creep range)" key="ExcursionDuration" unit="Hrs"></ffs-number>
+        </app-panel>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <!-- <img src="assets/lamp1.png" style="margin:0 auto;" class="img-responsive" />
+        <br>
+        <br>
+        <img src="assets/lamp2.png" style="margin:0 auto;" class="img-responsive" />
+        <br>
+        <br>
+        <img src="assets/lamp3.png" style="margin:0 auto;" class="img-responsive" /> -->
+      </div>
+    </div>
+  </flaw>
+  <loads (onCalculate)="onCalculate($event)">
+    <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
+  </loads>
+  <result>
+    <app-result [moduleEvent]="moduleEvent"></app-result>
+  </result>
 </app-wizard>

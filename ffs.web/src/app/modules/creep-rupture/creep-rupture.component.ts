@@ -15,6 +15,7 @@ import { EquipmentInputComponent } from './../common/equipment-input/equipment-i
 import { LoadInputComponent } from './../common/load-input/load-input.component';
 import { MaterialInputComponent } from './../common/material-input/material-input.component';
 import { ResultComponent } from './../common/result/result.component';
+import { KV } from '../../model/kv';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class CreepRuptureComponent extends ModuleBase implements OnInit, AfterVi
 
   form: FormGroup;
   unit: Observable<IUnit>;
+  assessmentMaterials: Observable<KV[]>;
 
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
 
@@ -54,6 +56,18 @@ export class CreepRuptureComponent extends ModuleBase implements OnInit, AfterVi
     this.equipmentInput.form.valueChanges.subscribe(f => {
       const inputs = f as InputBase;
       this.valueChangedSubject.next(inputs);
+    });
+
+    this.moduleEvent.materialSubject.subscribe(m => {
+
+      this.assessmentMaterials =
+        this.http.get('api/lookup/generic/AssessmentMaterial')
+          .map(response => response.json() as any[])
+          .map(arr => arr.filter(a => a.materialID === m.materialID).map(a => { return { key: a.assessmentMaterialID, value: a.assessmentMaterialName }; }));
+
+      this.assessmentMaterials.subscribe(r => {
+        this.form.get('AssessmentMaterialID').setValue(r[0].key);
+      });
     });
 
     // calculate
@@ -90,7 +104,8 @@ export class CreepRuptureComponent extends ModuleBase implements OnInit, AfterVi
     });
 
 
-
+    this.form.get('AutomaticallyCalculationTheMaximumPermissibleTime').setValue(true);
+    this.form.get('AutomaticallyCalculationTheCreepDamageRate').setValue(true);
     this.cdRef.detectChanges();
   }
 
