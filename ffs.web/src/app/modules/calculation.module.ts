@@ -45,7 +45,7 @@ const appRoutes: Routes = [
         // MetalLossInputComponent,            
         CrackComponent,
         LaminationComponent,
-    /**/    CreepRuptureComponent,
+        CreepRuptureComponent,
         HydrogenComponent,
         CrackComponent,
         LaminationComponent
