@@ -12,13 +12,15 @@ import { CreepRuptureComponent } from './creep-rupture/creep-rupture.component';
 import { DentComponent } from './dent/dent.component';
 import { WeldMisalignmentComponent } from './weld-misalignment/weld-misalignment.component';
 import { PittingCorrosionComponent } from './pitting-corrosion/pitting-corrosion.component';
+import { LocalMetalLossComponent } from './local-metal-loss/local-metal-loss.component';
+import { GeneralMetalLossComponent } from './general-metal-loss/general-metal-loss.component';
 const appRoutes: Routes = [
 
     {
         path: 'brittle', component: BrittleFractureComponent, canActivate: [CanActivateViaAuthGuard]
     },
-    // { path: 'localmetalloss', component: LocalMetalLossComponent, canActivate: [CanActivateViaAuthGuard] },
-    // { path: 'generalmetalloss', component: GeneralMetalLossComponent, canActivate: [CanActivateViaAuthGuard] },
+    { path: 'localmetalloss', component: LocalMetalLossComponent, canActivate: [CanActivateViaAuthGuard] },
+    { path: 'generalmetalloss', component: GeneralMetalLossComponent, canActivate: [CanActivateViaAuthGuard] },
     { path: 'pittingcorrosion', component: PittingCorrosionComponent, canActivate: [CanActivateViaAuthGuard] },
     { path: 'weld', component: WeldMisalignmentComponent, canActivate: [CanActivateViaAuthGuard] },
     { path: 'dent', component: DentComponent, canActivate: [CanActivateViaAuthGuard] },
@@ -37,12 +39,11 @@ const appRoutes: Routes = [
     declarations: [
         FireDamageComponent,
         BrittleFractureComponent,
-        // LocalMetalLossComponent,
-        // GeneralMetalLossComponent,
+        LocalMetalLossComponent,
+        GeneralMetalLossComponent,
         PittingCorrosionComponent,
         WeldMisalignmentComponent,
         DentComponent,
-        // MetalLossInputComponent,            
         CrackComponent,
         LaminationComponent,
         CreepRuptureComponent,

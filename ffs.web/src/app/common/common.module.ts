@@ -14,6 +14,7 @@ import { WizardComponent } from './wizard/wizard.component';
 import { TabComponent } from './tab/tab.component';
 import { TabItemComponent } from './tab/tab-item.component';
 import { FFSInputModule } from './common-ffs-inputs.module';
+import { ChartComponent } from './chart/chart.component';
 
 
 
@@ -31,7 +32,9 @@ import { FFSInputModule } from './common-ffs-inputs.module';
         HelpComponent,
         FocusDirective,
         FourthOrderPolyNomialComponent,
-        AsyncKVPipe],
+        AsyncKVPipe,
+        ChartComponent
+    ],
     declarations: [
         DataGridComponent,
         TopnavComponent,
@@ -43,7 +46,8 @@ import { FFSInputModule } from './common-ffs-inputs.module';
         HelpComponent,
         FocusDirective,
         FourthOrderPolyNomialComponent,
-        AsyncKVPipe
+        AsyncKVPipe,
+        ChartComponent
     ],
     providers: [EventService, DatePipe],
 })

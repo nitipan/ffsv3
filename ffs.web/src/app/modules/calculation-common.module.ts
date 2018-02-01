@@ -8,6 +8,7 @@ import { EquipmentImageComponent } from './common/equipment-image/equipment-imag
 import { EquipmentStepComponent, DesignStepComponent, MaterialStepComponent, LoadsStepComponent, FlawStepComponent, ResultStepComponent } from './steps/steps.component';
 import { ModuleEvent } from './module-event';
 import { AppCommonModule } from '../common/common.module';
+import { MetalLossInputComponent } from './common/metal-loss-input/metal-loss-input.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,7 @@ import { AppCommonModule } from '../common/common.module';
         LoadInputComponent,
         ResultComponent,
         EquipmentImageComponent,
-
+        MetalLossInputComponent,
         EquipmentStepComponent,
         DesignStepComponent,
         MaterialStepComponent,
@@ -34,7 +35,7 @@ import { AppCommonModule } from '../common/common.module';
         LoadInputComponent,
         ResultComponent,
         EquipmentImageComponent,
-
+        MetalLossInputComponent,
         EquipmentStepComponent,
         DesignStepComponent,
         MaterialStepComponent,
