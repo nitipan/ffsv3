@@ -1,117 +1,145 @@
 <div class="row">
-    <div class="col-md-12">
-        <app-tab>
-            <app-tab-item title="Dimension">
-                <div class="row">
-                    <div class="col-md-7">
-                        <app-panel title="Dimension">
-                            <ffs-select label="Thickness Data" key="thicknessDataID" [options]="thicknessDatas | async"></ffs-select>
-                            <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-                            <ffs-browse label="Import Data" key="excelDatas" accept=".xlsx,.xls"></ffs-browse>
-                        </app-panel>
-                        <app-panel title="Grid Spacing">
-                            <ffs-number label="Longitudinal" key="widthOfTheLongGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-                            <ffs-number label="Circumferential" key="widthOfTheCirGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-                        </app-panel>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="row">
-                            <div class="col-md-11 text-center">
-                                <img src="assets/profile.png" style="width:100%" class="img-responsive" *ngIf="thicknessImage == 1" />
-                                <img src="assets/point.png" style="width:100%" class="img-responsive" *ngIf="thicknessImage == 2" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <app-panel title="Number of Grid">
-                            <ffs-number label="Longitudinal" key="numberOfInspectionRow"></ffs-number>
-                            <ffs-number label="Circumferential" key="numberOfInspectionColumn"></ffs-number>
-                        </app-panel>
-                    </div>
-                    <div class="col-md-5">
-                        <app-panel title="Remaining Strength Factor, RSF">
-                            <ffs-check label="Automatically Allowable RSF" key="autoAllowableRSF"></ffs-check>
-                            <ffs-number label="Allowable RSF" key="allowRSF"></ffs-number>
-                        </app-panel>
-                    </div>
-                </div>
-            </app-tab-item>
-            <app-tab-item title="Color Dimension">
-                <div class="row">
-                    <div class="col-md-5">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Color Scale</th>
-                                    <th>Min Value</th>
-                                    <th>Max Value</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <ffs-colorpicker key="color1"></ffs-colorpicker>
-                                    </td>
-                                    <td>
-                                        <ffs-number key="min1" disabled="true"></ffs-number>
-                                    </td>
-                                    <td>
-                                        <ffs-number key="max1" disabled="true"></ffs-number>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ffs-colorpicker key="color2"></ffs-colorpicker>
-                                    </td>
-                                    <td>
-                                        <ffs-number key="min2" disabled="true"></ffs-number>
-                                    </td>
-                                    <td>
-                                        <ffs-number key="max2" disabled="true"></ffs-number>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <ffs-colorpicker key="color3"></ffs-colorpicker>
-                                    </td>
-                                    <td>
-                                        <ffs-number key="min3" disabled="true"></ffs-number>
-                                    </td>
-                                    <td>
-                                        <ffs-number key="max3" disabled="true"></ffs-number>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </app-tab-item>
-            <app-tab-item title="Inspection Grid">
-                <div class="row">
-                    <div class="col-md-5" *ngIf="arrayDatas !== undefined">
-                        <table class="table">
-                            <thead *ngIf="thicknessId == 1">
-                                <td>No.</td>
-                                <td>Thickness Data</td>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let arrayData of arrayDatas| slice: 0: limitRow;  let i = index">
-                                    <td *ngIf="thicknessId == 1">
-                                        <span>{{i}}</span>
-                                    </td>
-                                    <td *ngFor="let data of arrayData | slice: 0 : limitColumn">
-                                        <div col-md-3><input type="number" class="form-control" value="{{data}}" [ngStyle]="getStyle(data)">
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </app-tab-item>
-            <app-tab-item title="Graph">
-                Graph
-            </app-tab-item>
-        </app-tab>
-    </div>
+  <div class="col-md-12">
+    <app-tab>
+      <app-tab-item title="Dimension">
+        <div class="row">
+          <div class="col-xs-7 col-sm-7 col-md-7">
+            <app-panel title="Dimension">
+              <ffs-select label="Thickness Data" key="thicknessDataID" [options]="thicknessDatas | async"></ffs-select>
+              <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance" min="0"
+                *ngIf="isLocal"></ffs-number>
+              <ffs-browse label="Import Data" key="excelDatas" accept=".xlsx,.xls" #browse></ffs-browse>
+            </app-panel>
+            <app-panel title="Number of Grid">
+              <ffs-number label="Longitudinal" key="numberOfInspectionRow"></ffs-number>
+              <ffs-number label="Circumferential" key="numberOfInspectionColumn"></ffs-number>
+            </app-panel>
+
+          </div>
+          <div class="col-xs-5 col-sm-5 col-md-5">
+            <div class="row">
+              <div class="col-md-11 text-center">
+                <img src="assets/profile.png" style="width:100%" class="img-responsive" *ngIf="thicknessImage == 2" />
+                <img src="assets/point.png" style="width:100%" class="img-responsive" *ngIf="thicknessImage == 1" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-7 col-sm-7 col-md-7">
+            <app-panel title="Grid Spacing">
+              <ffs-number label="Longitudinal" key="widthOfTheLongGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+              <ffs-number label="Circumferential" key="widthOfTheCirGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
+            </app-panel>
+          </div>
+          <div class="col-xs-5 col-sm-5 col-md-5">
+            <app-panel title="Remaining Strength Factor, RSF">
+              <ffs-check label="Automatically Allowable RSF" key="autoAllowableRSF"></ffs-check>
+              <ffs-number label="Allowable RSF" key="allowRSF"></ffs-number>
+            </app-panel>
+          </div>
+        </div>
+      </app-tab-item>
+      <app-tab-item title="Color Dimension">
+        <div class="row">
+          <div class="col-xs-12 col-sm-7 col-md-5">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Color Scale</th>
+                  <th>Min Value</th>
+                  <th>Max Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <ffs-colorpicker key="color1"></ffs-colorpicker>
+                  </td>
+                  <td>
+                    <ffs-number key="min1" disabled="true"></ffs-number>
+                  </td>
+                  <td>
+                    <ffs-number key="max1" disabled="true"></ffs-number>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ffs-colorpicker key="color2"></ffs-colorpicker>
+                  </td>
+                  <td>
+                    <ffs-number key="min2" disabled="true"></ffs-number>
+                  </td>
+                  <td>
+                    <ffs-number key="max2" disabled="true"></ffs-number>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ffs-colorpicker key="color3"></ffs-colorpicker>
+                  </td>
+                  <td>
+                    <ffs-number key="min3" disabled="true"></ffs-number>
+                  </td>
+                  <td>
+                    <ffs-number key="max3" disabled="true"></ffs-number>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </app-tab-item>
+      <app-tab-item title="Inspection Grid">
+        <div class="row">
+          <div *ngIf="arrayDatas !== undefined" [ngClass]="{'col-md-3' : value?.thicknessDataID == 1,'col-md-12' : value?.thicknessDataID == 2}">
+            <table class="table inspection-grid">
+              <thead *ngIf="value?.thicknessDataID == 1">
+                <th>No.</th>
+                <th>Thickness Data</th>
+              </thead>
+              <tbody *ngIf="value?.thicknessDataID == 1">
+                <tr *ngFor="let arrayData of arrayDatas;  let i = index">
+                  <td>
+                    <span>
+                      <b>{{arrayData[0]}}</b>
+                    </span>
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" value="{{arrayData[1]}}" [ngStyle]="getStyle(arrayData[1])">
+                  </td>
+
+                </tr>
+              </tbody>
+              <tbody *ngIf="value?.thicknessDataID == 2">
+                <tr *ngFor="let arrayData of arrayDatas;  let i = index">
+                  <td *ngFor="let data of arrayData">
+                    <input type="number" class="form-control" value="{{data}}" [ngStyle]="getStyle(data)">
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </app-tab-item>
+      <app-tab-item title="Graph">
+        <div class="row" *ngIf="thicknessImage == 1">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <app-chart #chart></app-chart>
+          </div>
+        </div>
+        <div class="row" *ngIf="thicknessImage == 2">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <app-chart #chartLong></app-chart>
+          </div>
+        </div>
+        <div class="row" *ngIf="thicknessImage == 2">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <app-chart #chartCir></app-chart>
+          </div>
+        </div>
+      </app-tab-item>
+    </app-tab>
+  </div>
 </div>

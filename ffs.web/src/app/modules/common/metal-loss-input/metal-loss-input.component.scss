@@ -1,0 +1,25 @@
+table.inspection-grid {
+  font-size: 0.9em;
+  td {
+    padding: 1px !important;
+    vertical-align: middle !important;
+  }
+  input {
+    border: none !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    padding: 0px !important;
+    width: 100%;
+  }
+  input[type=number] {
+    text-align: right;
+  }
+  span {
+    display: block;
+  }
+  th {
+    span {
+      text-align: center;
+    }
+  }
+}

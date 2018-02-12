@@ -6,6 +6,9 @@ import 'bootstrap-datepicker';
 import * as XLSX from 'xlsx';
 import * as _ from 'underscore';
 import 'bootstrap-colorpicker';
+import { Subscribable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 @Component(
     {
@@ -287,7 +290,7 @@ export class FFSBrowseComponent extends FFSInputBase implements AfterViewInit {
         template: `
        <div class="ffs-input form-horizontal" [formGroup]="form">
             <div class="form-group" [class.has-error]="hasError">
-                <div class="input-group date col-sm-7 col-xs-12" #colorpicker>
+                <div class="input-group" #colorpicker>
                     <input type="text" [formControlName]="key" [id]="key" class="form-control">
                     <span class="input-group-addon"><i></i></span>
                 </div>
@@ -302,16 +305,25 @@ export class FFSDateComponent extends FFSInputBase implements AfterViewInit {
     @ViewChild('colorpicker') colorpicker;
 
     value: any;
+
     constructor() {
         super();
     }
 
     ngAfterViewInit(): void {
+
         const input = this.form.get(this.key);
+
+        Observable.fromEvent(($(this.colorpicker.nativeElement) as any).colorpicker(), 'changeColor')
+            .debounceTime(500)
+            .subscribe((e: any) => {
+                this.form.controls[this.key].setValue(e.value);
+            });
 
         this.form.controls[this.key].valueChanges.subscribe((v: string) => {
             ($(this.colorpicker.nativeElement) as any).colorpicker('setValue', input.value);
         });
+
     }
 
 }

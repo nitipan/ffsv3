@@ -14,6 +14,7 @@ import { WeldMisalignmentComponent } from './weld-misalignment/weld-misalignment
 import { PittingCorrosionComponent } from './pitting-corrosion/pitting-corrosion.component';
 import { LocalMetalLossComponent } from './local-metal-loss/local-metal-loss.component';
 import { GeneralMetalLossComponent } from './general-metal-loss/general-metal-loss.component';
+import { TestComponent } from './test.component';
 const appRoutes: Routes = [
 
     {
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
     { path: 'crack', component: CrackComponent, canActivate: [CanActivateViaAuthGuard] },
     { path: 'fire', component: FireDamageComponent, canActivate: [CanActivateViaAuthGuard] },
     { path: 'lamination', component: LaminationComponent, canActivate: [CanActivateViaAuthGuard] },
+    { path: 'test', component: TestComponent, canActivate: [CanActivateViaAuthGuard] }
 ];
 
 @NgModule({
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
         CreepRuptureComponent,
         HydrogenComponent,
         CrackComponent,
-        LaminationComponent
+        LaminationComponent,
+        TestComponent
     ],
     providers: [],
 })

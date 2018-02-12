@@ -1,81 +1,32 @@
 <app-wizard (stepChanged)="onStepChange($event)" (onStepsInit)="onStepsInit($event)">
-    <equipment>
-        <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
-    </equipment>
-    <design>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-            </div>
-        </div>
-    </design>
-    <material>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
-        </div>
-    </material>
-    <flaw active="true">
-        <div class="row">
-            <div class="col-md-12">
-                <app-tab>
-                    <app-tab-item title="Dimension">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <app-panel title="Dimension">
-                                    <ffs-select label="Thickness Data" key="thicknessDataID" [options]="thicknessDatas | async"></ffs-select>
-                                    <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-                                    <ffs-browse label="Import Data" key="" accept=".xlsx,.xls"></ffs-browse>
-                                </app-panel>
-                                <app-panel title="Grid Spacing">
-                                    <ffs-number label="Longitudinal" key="widthOfTheLongGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-                                    <ffs-number label="Circumferential" key="widthOfTheCirGrid" [unit]="(unit | async)?.distance" min="0"></ffs-number>
-                                </app-panel>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-11 text-center">
-                                        <img src="assets/profile.png" style="width:100%" class="img-responsive" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-                                <app-panel title="Number of Grid">
-                                    <ffs-number label="Longitudinal" key="numberOfInspectionRow"></ffs-number>
-                                    <ffs-number label="Circumferential" key="numberOfInspectionColumn"></ffs-number>
-                                </app-panel>
-                            </div>
-                            <div class="col-md-5">
-                                <app-panel title="Remaining Strength Factor, RSF">
-                                    <ffs-check label="Automatically Allowable RSF" key="autoAllowableRSF"></ffs-check>
-                                    <ffs-number label="Allowable RSF" key="allowRSF"></ffs-number>
-                                </app-panel>
-                            </div>
-                        </div>
-                    </app-tab-item>
-                    <app-tab-item title="Color Dimension">
-                        Color Dimension
-                    </app-tab-item>
-                    <app-tab-item title="Inspection Grid">
-                        Inspection Grid
-                    </app-tab-item>
-                    <app-tab-item title="Graph">
-                        Graph
-                    </app-tab-item>
-                </app-tab>
-            </div>
-
-        </div>
-    </flaw>
-    <loads (onCalculate)="onCalculate($event)">
-        <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
-    </loads>
-    <result>
-        <app-result [moduleEvent]="moduleEvent"></app-result>
-    </result>
+  <equipment>
+    <app-equipment-input [moduleEvent]="moduleEvent"></app-equipment-input>
+  </equipment>
+  <design>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-design-input [moduleEvent]="moduleEvent"></app-design-input>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+      </div>
+    </div>
+  </design>
+  <material>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <app-material-input [moduleEvent]="moduleEvent"></app-material-input>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <app-equipment-image [moduleEvent]="moduleEvent"></app-equipment-image>
+    </div>
+  </material>
+  <flaw>
+    <app-metal-loss-input [moduleEvent]="moduleEvent" isLocal="true"></app-metal-loss-input>
+  </flaw>
+  <loads (onCalculate)="onCalculate($event)">
+    <app-load-input [moduleEvent]="moduleEvent"></app-load-input>
+  </loads>
+  <result>
+    <app-result [moduleEvent]="moduleEvent"></app-result>
+  </result>
 </app-wizard>

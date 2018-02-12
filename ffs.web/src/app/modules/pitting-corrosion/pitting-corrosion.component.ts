@@ -87,8 +87,15 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
     this.designInput.form.get('autoCalculateMinRequireThickness').setValue(true);
 
 
+    this.materialInput.form.get('automaticallyCalculationAllowableStress').valueChanges.subscribe(v => {
+      if (v) {
 
+      } else {
+        // this.materialInput.form.get('automaticallyCalculationAllowableStress').
+      }
+    });
 
+    // this.materialInput.form.get('automaticallyCalculationAllowableStress').setValue(false);
 
 
     // calculate

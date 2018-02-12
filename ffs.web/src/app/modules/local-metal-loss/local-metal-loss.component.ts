@@ -16,6 +16,7 @@ import { LoadInputComponent } from './../common/load-input/load-input.component'
 import { MaterialInputComponent } from './../common/material-input/material-input.component';
 import { ResultComponent } from './../common/result/result.component';
 import { ModuleBase } from './../module-base.component';
+import { MetalLossInputComponent } from '../common/metal-loss-input/metal-loss-input.component';
 
 @Component({
   selector: 'app-local-metal-loss',
@@ -35,10 +36,10 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
   @ViewChild(MaterialInputComponent) materialInput: MaterialInputComponent;
   @ViewChild(LoadInputComponent) loadInput: LoadInputComponent;
   @ViewChild(ResultComponent) result: ResultComponent;
-
+  @ViewChild(MetalLossInputComponent) metalLossInput: MetalLossInputComponent;
   form: FormGroup;
 
-  thicknessDatas: Observable<KV[]>;
+
   unit: Observable<IUnit>;
 
   constructor(
@@ -94,10 +95,11 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
     // please see condition in UCDesign.cs line 110 - 180 in C# solution
     // this.form.get('ThicknessDataTypeID').disable();
 
-    this.form.get('autoAllowableRSF').setValue(true);
-    this.form.get('allowRSF').disable();
-    this.form.get('thicknessDataID').disable();
+
+
     this.designInput.form.get('autoCalculateMinRequireThickness').setValue(true);
+
+    this.metalLossInput.form.get('thicknessDataID').setValue(2);
 
     // !!! NEED THIS LINE TO TELL ANGULAR THERE ARE FORM INPUT CHANGE ABOVE
     this.cdRef.detectChanges();
@@ -111,13 +113,7 @@ export class LocalMetalLossComponent extends ModuleBase implements OnInit, After
   // }
 
   ngOnInit() {
-    this.thicknessDatas = this.http.get("/api/lookup/thicknessdatas")
-      .map(response => response.json() as any[])
-      .map(arr => arr.map(a => { return { key: a.thicknessDataID, value: a.thicknessDataName }; }));
 
-    this.thicknessDatas.subscribe((m: KV[]) => {
-      this.form.get('thicknessDataID').setValue(m[1].key);
-    });
   }
 
 
