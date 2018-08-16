@@ -17,6 +17,7 @@ const appRoutes: Routes = [
     }
 ];
 
+
 @NgModule({
     declarations: [PlaygroundComponent, HomeComponent],
     imports: [AppCommonModule, RouterModule.forRoot(appRoutes)],

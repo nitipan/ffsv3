@@ -95,7 +95,7 @@ export class CreepRuptureComponent extends ModuleBase implements OnInit, AfterVi
 
       this.moduleEvent.calculatingSubject.emit(null);
 
-      this.http.post(`/api/creep/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+      this.http.post(`api/creep/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);

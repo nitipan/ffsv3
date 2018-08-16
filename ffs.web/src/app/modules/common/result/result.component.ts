@@ -24,7 +24,7 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
   constructor(private datePipe: DatePipe) {
     super();
 
-    toDataURL("/assets/logo_round.png").subscribe(v => {
+    toDataURL("assets/logo_round.png").subscribe(v => {
       this.logo = v;
     });
   }

@@ -4,6 +4,8 @@
     "name": "ffs.web"
   },
   "apps": [{
+   "deployUrl": "/ffs/",
+    "baseHref": "/ffs/",
     "root": "src",
     "outDir": "../dist/public",
     "assets": [

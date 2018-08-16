@@ -83,7 +83,7 @@ export class DentComponent extends ModuleBase implements OnInit, AfterViewInit {
 
       this.moduleEvent.calculatingSubject.emit(null);
 
-      this.http.post(`/api/dent/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+      this.http.post(`api/dent/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);

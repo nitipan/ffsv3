@@ -31,21 +31,23 @@
       <div class="col-md-7 col-sm-9 text-sm-right text-md-center" style="margin-top:20px;margin-bottom: 10px;">
 
         <button type="button" class="btn btn-primary" (click)="backStep()" [disabled]="!canBack" *ngIf="step.backVisible">
-          <span class="glyphicon glyphicon-menu-left"></span>  Back
+          <span class="glyphicon glyphicon-menu-left"></span> Back
         </button>
         <button type="button" class="btn btn-primary" (click)="nextStep()" [disabled]="!canNext" *ngIf="step.nextVisible">
-          Next <span class="glyphicon glyphicon-menu-right"></span>
+          Next
+          <span class="glyphicon glyphicon-menu-right"></span>
         </button>
 
-        <button type="button" (click)="calculate()" class="btn btn-success" style="background: #00695C;border-color: #00695C;" *ngIf="step.calculateVisible"><span class="glyphicon glyphicon-hourglass"></span>      Calculate
+        <button type="button" (click)="calculate()" class="btn btn-success" style="background: #00695C;border-color: #00695C;" *ngIf="step.calculateVisible">
+          <span class="glyphicon glyphicon-hourglass"></span> Calculate
         </button>
-
+        <!-- 
         <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Open
         </button>
         <button type="button" class="btn btn-success" (click)="newInput()"><span class="glyphicon glyphicon-plus"></span>       New
         </button>
         <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span>  Save
-        </button>
+        </button> -->
       </div>
     </div>
     <div class="row" style="height:100%;">

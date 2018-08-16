@@ -37,19 +37,19 @@ export class EquipmentInputComponent extends InputBaseComponent implements OnIni
   }
 
   ngOnInit() {
-    this.equipmentTypes = this.http.get("/api/lookup/equipmenttypes")
+    this.equipmentTypes = this.http.get("api/lookup/equipmenttypes")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.equipmentTypeID, value: a.equipmentTypeName }; }));
 
-    this.methodologies = this.http.get("/api/lookup/methodologies")
+    this.methodologies = this.http.get("api/lookup/methodologies")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.methodologyID, value: a.methodologyName }; }));
 
-    this.units = this.http.get("/api/lookup/units")
+    this.units = this.http.get("api/lookup/units")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.unitID, value: a.unitName }; }));
 
-    this.assessmentLevel = this.http.get("/api/lookup/assessmentLevel")
+    this.assessmentLevel = this.http.get("api/lookup/assessmentLevel")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.assessmentLevelID, value: a.assessmentLevelName }; }));
     this.assessmentLevel.subscribe((m: KV[]) => {

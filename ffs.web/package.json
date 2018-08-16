@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --serve-path /ffs --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -37,7 +37,7 @@
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
-    "@angular/cli": "1.2.6",
+    "@angular/cli": "^1.4.3",
     "@angular/compiler-cli": "^4.3.2",
     "@angular/language-service": "^4.3.2",
     "@types/bootstrap-datepicker": "0.0.9",

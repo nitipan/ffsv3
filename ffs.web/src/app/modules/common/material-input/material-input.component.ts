@@ -44,7 +44,7 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
   ngOnInit() {
     this.unit = this.moduleEvent.unit.asObservable();
 
-    this.materialTypes = this.http.get("/api/lookup/materialtypes")
+    this.materialTypes = this.http.get("api/lookup/materialtypes")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.materialTypeID, value: a.materialTypeName }; }));
 
@@ -52,7 +52,7 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
       this.form.get("materialTypeID").setValue(m[0].key);
     });
 
-    this.materials = this.http.get("/api/lookup/materials")
+    this.materials = this.http.get("api/lookup/materials")
       .map(response => response.json() as any[])
       .do(m => {
         this.materialObjects = m;
@@ -60,7 +60,7 @@ export class MaterialInputComponent extends InputBaseComponent implements OnInit
       .map(arr => arr.map(a => { return { key: a.materialID, value: a.materialName }; }));
 
 
-    this.asmeExemptionCurves = this.http.get("/api/lookup/asmeexemptioncurves")
+    this.asmeExemptionCurves = this.http.get("api/lookup/asmeexemptioncurves")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.aSMEExemptionCurvesID, value: a.aSMEExemptionCurvesName }; }));
 

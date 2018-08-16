@@ -60,7 +60,7 @@ export class WeldMisalignmentComponent extends ModuleBase implements OnInit, Aft
     });
 
     this.moduleEvent.equipmentTypeSubject.subscribe(equipmentType => {
-      this.FabricationTolerance = this.http.get(`/api/lookup/fabricationTolerance/${equipmentType}`)
+      this.FabricationTolerance = this.http.get(`api/lookup/fabricationTolerance/${equipmentType}`)
         .map(response => response.json() as any[])
         .map(arr => arr.map(a => { return { key: a.fabricationToleranceID, value: a.fabricationToleranceName }; }));
 
@@ -149,7 +149,7 @@ export class WeldMisalignmentComponent extends ModuleBase implements OnInit, Aft
 
       this.moduleEvent.calculatingSubject.emit(null);
 
-      this.http.post(`/api/weld/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+      this.http.post(`api/weld/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);
@@ -163,7 +163,7 @@ export class WeldMisalignmentComponent extends ModuleBase implements OnInit, Aft
   }
 
   ngOnInit() {
-    this.WeldOrientarion = this.http.get('/api/lookup/weldorientarion/')
+    this.WeldOrientarion = this.http.get('api/lookup/weldorientarion/')
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.weldOrientarionID, value: a.weldOrientarionName }; }));
 

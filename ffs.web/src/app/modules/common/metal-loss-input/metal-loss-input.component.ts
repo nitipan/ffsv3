@@ -50,7 +50,7 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
 
   ngOnInit() {
     this.unit = this.moduleEvent.unit.asObservable();
-    this.thicknessDatas = this.http.get('/api/lookup/thicknessdatas')
+    this.thicknessDatas = this.http.get('api/lookup/thicknessdatas')
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.thicknessDataID, value: a.thicknessDataName }; }));
   }

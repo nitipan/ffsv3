@@ -99,7 +99,7 @@ export class LaminationComponent extends ModuleBase implements OnInit, AfterView
 
       this.moduleEvent.calculatingSubject.emit(null);
 
-      this.http.post(`/api/lamination/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+      this.http.post(`api/lamination/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);

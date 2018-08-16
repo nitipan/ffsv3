@@ -1,6 +1,6 @@
 {
-  "/api": {
-    "target": "http://pok.luxe-real-estate.com",
+  "/ffs/api": {
+    "target": "http://localhost:5000",
     "secure": false,
     "changeOrigin": true
   }
