@@ -41,10 +41,13 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
   theStandardPitCharts: Observable<KV[]>;
   imgPath: String;
   assessmentLevel: any = 1;
-
+  currentUnit: IUnit;
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+    });
   }
 
   ngAfterViewInit(): void {

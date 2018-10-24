@@ -36,12 +36,15 @@ export class DentComponent extends ModuleBase implements OnInit, AfterViewInit {
 
   form: FormGroup;
   unit: Observable<IUnit>;
-
+  currentUnit: IUnit;
   assessmentLevel: any = 1;
 
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+    });
   }
 
   ngAfterViewInit(): void {

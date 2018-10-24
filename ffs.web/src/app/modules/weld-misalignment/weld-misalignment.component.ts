@@ -31,6 +31,7 @@ export class WeldMisalignmentComponent extends ModuleBase implements OnInit, Aft
 
   form: FormGroup;
   unit: Observable<IUnit>;
+  currentUnit: IUnit;
   FabricationTolerance: Observable<KV[]>;
   WeldOrientarion: Observable<KV[]>;
   outOfPattern: boolean = true;
@@ -46,11 +47,33 @@ export class WeldMisalignmentComponent extends ModuleBase implements OnInit, Aft
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+    });
+
   }
 
   ngAfterViewInit(): void {
+    this.inputs.changes.subscribe(i => {
+      this.form = FFSInputBase.toFormGroup(this.inputs);
+      this.form.get('FabricationTolerance').valueChanges.subscribe(v => {
+        const farbricId = parseInt(v);
+        if (farbricId === 2 || farbricId === 3 || farbricId === 5 || farbricId === 8) {
+          this.outOfPattern = false;
+        } else {
+          this.outOfPattern = true;
+        }
+      });
+    });
     this.form = FFSInputBase.toFormGroup(this.inputs);
-
+    this.form.get('FabricationTolerance').valueChanges.subscribe(v => {
+      const farbricId = parseInt(v);
+      if (farbricId === 2 || farbricId === 3 || farbricId === 5 || farbricId === 8) {
+        this.outOfPattern = false;
+      } else {
+        this.outOfPattern = true;
+      }
+    });
     this.result.reportFactory = this.reportFactory;
     this.result.summaryFactory = this.summaryFactory;
 
@@ -69,14 +92,7 @@ export class WeldMisalignmentComponent extends ModuleBase implements OnInit, Aft
       });
     })
 
-    this.form.get('FabricationTolerance').valueChanges.subscribe(v => {
-      const farbricId = parseInt(v);
-      if (farbricId === 2 || farbricId === 3 || farbricId === 5 || farbricId === 8) {
-        this.outOfPattern = false;
-      } else {
-        this.outOfPattern = true;
-      }
-    });
+
 
     this.designInput.form.get("autoCalculateMinRequireThickness").setValue(true);
     this.designInput.form.get('autoCalculateMinRequireThickness').disable();
