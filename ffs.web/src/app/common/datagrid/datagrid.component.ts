@@ -1,19 +1,23 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Input } from '@angular/core';
 import { KV } from '../../model/kv';
-import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OnChanges, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import * as _ from 'underscore';
+import { FFSBrowseComponent } from '../inputs/ffs-input.component';
 @Component({
     selector: 'app-datagrid',
     templateUrl: 'datagrid.component.html',
     styleUrls: ['datagrid.component.scss']
 })
 
-export class DataGridComponent implements OnInit, OnChanges {
+export class DataGridComponent implements OnInit, OnChanges, AfterViewInit {
+
 
     @Input() header: string;
     @Input() rowModels: KV[];
     @Input() numberColumns: number;
+
+    @ViewChild('browse') browse: FFSBrowseComponent;
 
     columns = [];
 
@@ -36,6 +40,7 @@ export class DataGridComponent implements OnInit, OnChanges {
     }
 
     onDataChange(row, index, value: string) {
+        console.log(row, index, value);
         if (index + 1 > this._data.length) {
             const obj = {};
             this.rowModels.forEach(v => {
@@ -46,6 +51,24 @@ export class DataGridComponent implements OnInit, OnChanges {
         } else {
             this._data[index][row.key] = Number.parseFloat(value);
         }
+    }
+
+    ngAfterViewInit(): void {
+        this.browse.form.get('excelDatas').valueChanges.subscribe(v => {
+            if (v) {
+                let change: any = {
+                    numberColumns: {
+                        currentValue: v[0].length
+                    }
+                };
+                this.ngOnChanges(change);
+                for (let i = 0; i < this.rowModels.length; i++) {
+                    for (let c = 0; c < v[0].length; c++) {
+                        this.onDataChange(this.rowModels[i], c, v[i][c]);
+                    }
+                }
+            }
+        });
     }
 
     get data() {
