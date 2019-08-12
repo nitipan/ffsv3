@@ -32,6 +32,7 @@ export class CreepRuptureComponent extends ModuleBase implements OnInit, AfterVi
 
   form: FormGroup;
   unit: Observable<IUnit>;
+  currentUnit: IUnit;
   assessmentMaterials: Observable<KV[]>;
 
   @ViewChildren(FFSInputBase) inputs: QueryList<FFSInputBase>;
@@ -45,6 +46,9 @@ export class CreepRuptureComponent extends ModuleBase implements OnInit, AfterVi
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -95,7 +99,7 @@ export class CreepRuptureComponent extends ModuleBase implements OnInit, AfterVi
 
       this.moduleEvent.calculatingSubject.emit(null);
 
-      this.http.post(`/api/creep/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+      this.http.post(`api/creep/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);

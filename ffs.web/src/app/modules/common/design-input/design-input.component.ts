@@ -54,7 +54,7 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
     });
 
     this.form.get("componentShapeID").setValue("");
-    this.componentShape = this.http.get(`/api/lookup/componentshapes`)
+    this.componentShape = this.http.get(`api/lookup/componentshapes`)
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.componentShapeID, value: a.componentShapeName }; }));
 
@@ -62,12 +62,12 @@ export class DesignInputComponent extends InputBaseComponent implements OnInit, 
     this.moduleEvent.equipmentTypeSubject.subscribe(equipmentType => {
 
       this.form.get("componentTypeID").setValue("");
-      this.componentType = this.http.get(`/api/lookup/componenttypes/${equipmentType}`)
+      this.componentType = this.http.get(`api/lookup/componenttypes/${equipmentType}`)
         .map(response => response.json() as any[])
         .map(arr => arr.map(a => { return { key: a.componentTypeID, value: a.componentTypeName }; }));
 
       this.form.get("designCode").setValue("");
-      this.codeDesign = this.http.get(`/api/lookup/designcodes/${equipmentType}`)
+      this.codeDesign = this.http.get(`api/lookup/designcodes/${equipmentType}`)
         .map(response => response.json() as any[])
         .map(arr => arr.map(a => { return { key: a.designCodeID, value: a.designCodeName }; }));
 

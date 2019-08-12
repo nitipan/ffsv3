@@ -91,7 +91,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
 
       this.moduleEvent.calculatingSubject.emit(null);
 
-      this.http.post(`/api/brittle/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+      this.http.post(`api/brittle/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);
@@ -163,7 +163,7 @@ export class BrittleFractureComponent extends ModuleBase implements OnInit, Afte
   }
 
   ngOnInit() {
-    this.stressRatios = this.http.get("/api/lookup/reductions")
+    this.stressRatios = this.http.get("api/lookup/reductions")
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.reductionInTheMATID, value: a.reductionInTheMATName }; }));
   }

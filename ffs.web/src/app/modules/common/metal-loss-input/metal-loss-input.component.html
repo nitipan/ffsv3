@@ -6,8 +6,8 @@
           <div class="col-xs-7 col-sm-7 col-md-7">
             <app-panel title="Dimension">
               <ffs-select label="Thickness Data" key="thicknessDataID" [options]="thicknessDatas | async"></ffs-select>
-              <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance" min="0"
-                *ngIf="isLocal"></ffs-number>
+              <ffs-number label="Distance to the nearest major structural discontinuty" key="lmsd" [unit]="(unit | async)?.distance"
+                min="0" *ngIf="isLocal"></ffs-number>
               <ffs-browse label="Import Data" key="excelDatas" accept=".xlsx,.xls" #browse></ffs-browse>
             </app-panel>
             <app-panel title="Number of Grid">
@@ -106,7 +106,8 @@
                     </span>
                   </td>
                   <td>
-                    <input type="number" class="form-control" value="{{arrayData[1]}}" [ngStyle]="getStyle(arrayData[1])">
+                    <input type="number" class="form-control" value="{{arrayData[1]}}" [ngStyle]="getStyle(arrayData[1])"
+                      (change)="updateGraph(i,$event)">
                   </td>
 
                 </tr>

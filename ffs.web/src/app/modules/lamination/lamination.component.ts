@@ -40,7 +40,7 @@ export class LaminationComponent extends ModuleBase implements OnInit, AfterView
   @ViewChild('flowGrid') flowGrid: DataGridComponent;
   form: FormGroup;
   unit: Observable<IUnit>;
-
+  currentUnit: IUnit;
   assessmentLevel: any = 1;
   NumberOfFlow: any;
   rowModels: KV[] = [
@@ -56,6 +56,9 @@ export class LaminationComponent extends ModuleBase implements OnInit, AfterView
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -99,7 +102,7 @@ export class LaminationComponent extends ModuleBase implements OnInit, AfterView
 
       this.moduleEvent.calculatingSubject.emit(null);
 
-      this.http.post(`/api/lamination/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+      this.http.post(`api/lamination/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);

@@ -50,7 +50,7 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
 
   ngOnInit() {
     this.unit = this.moduleEvent.unit.asObservable();
-    this.thicknessDatas = this.http.get('/api/lookup/thicknessdatas')
+    this.thicknessDatas = this.http.get('api/lookup/thicknessdatas')
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.thicknessDataID, value: a.thicknessDataName }; }));
   }
@@ -110,7 +110,7 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
           this.form.patchValue({ numberOfInspectionColumn: x.length });
           this.form.patchValue({ numberOfInspectionRow: x[0].length });
         }
-
+        console.log(x);
         this.arrayDatas = x;
         if (this.chart)
           this.chart.clear();
@@ -202,14 +202,49 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
       }
     });
     this.form.get('numberOfInspectionColumn').valueChanges.subscribe(x => {
+
       if (x !== '' && this.value.thicknessDataID != 1) {
         this.limitColumn = x;
+      }
+      if (x !== '') {
+        if (this.form.get('excelDatas').value === "") {
+          this.arrayDatas = [];
+          for (let i = 0; i < +x; i++) {
+            this.arrayDatas.push([
+              i + 1,
+              0
+            ]);
+          }
+          console.log(this.arrayDatas);
+        }
       }
     });
 
     this.cdRef.detectChanges();
   }
 
+  updateGraph(index, $event) {
+    this.arrayDatas[index][1] = $event.target.value;
+    let x = this.arrayDatas;
+    let data = [];
+    if (+this.value.thicknessDataID == 1) {
+      data = x.map(m => m[1]);
+      this.chart.setChartData({
+        labels: x.map(m => m[0]),
+        datasets: [
+          {
+            label: 'Thickness Inspection',
+            data: data,
+            borderWidth: 2,
+            borderColor: '#ee2524',
+            backgroundColor: '#ee2524',
+            fill: false
+          }
+        ]
+      });
+
+    }
+  }
 
   private InitColor() {
     this.form.get('color1').setValue('#ed0404');
@@ -245,4 +280,5 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
   get value() {
     return this.form.getRawValue();
   }
+
 }

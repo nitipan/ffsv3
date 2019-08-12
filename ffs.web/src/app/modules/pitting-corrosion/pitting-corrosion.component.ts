@@ -41,10 +41,13 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
   theStandardPitCharts: Observable<KV[]>;
   imgPath: String;
   assessmentLevel: any = 1;
-
+  currentUnit: IUnit;
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -123,7 +126,7 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
 
       this.moduleEvent.calculatingSubject.emit(null);
 
-      this.http.post(`/api/pitting/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+      this.http.post(`api/pitting/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);
@@ -139,7 +142,7 @@ export class PittingCorrosionComponent extends ModuleBase implements OnInit, Aft
   }
 
   ngOnInit() {
-    this.theStandardPitCharts = this.http.get('/api/lookup/standardpitcharts')
+    this.theStandardPitCharts = this.http.get('api/lookup/standardpitcharts')
       .map(response => response.json() as any[])
       .map(arr => arr.map(a => { return { key: a.theStandardPitChartID, value: a.theStandardPitChartName }; }));
 

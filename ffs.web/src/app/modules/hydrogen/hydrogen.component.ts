@@ -33,6 +33,7 @@ export class HydrogenComponent extends ModuleBase implements OnInit, AfterViewIn
 
   form: FormGroup;
   unit: Observable<IUnit>;
+  currentUnit: IUnit;
   NumberOfFlow: any;
   rowModels: KV[] = [
     { key: 'HICDepth', value: 'Depth of HIC damage' },
@@ -57,6 +58,9 @@ export class HydrogenComponent extends ModuleBase implements OnInit, AfterViewIn
   constructor(private http: Http, private cdRef: ChangeDetectorRef, eventService: EventService, private datePipe: DatePipe) {
     super(eventService);
     this.unit = this.moduleEvent.unit.asObservable();
+    this.unit.subscribe(u => {
+      this.currentUnit = u;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -96,7 +100,7 @@ export class HydrogenComponent extends ModuleBase implements OnInit, AfterViewIn
 
       this.moduleEvent.calculatingSubject.emit(null);
 
-      this.http.post(`/api/hydrogen/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
+      this.http.post(`api/hydrogen/calculation/level${equipmentInput.assessmentLevel}/unit${equipmentInput.unitID}`, calculationParam)
         .map(r => r.json())
         .subscribe(r => {
           this.moduleEvent.calculatingSubject.emit(r);

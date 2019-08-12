@@ -15,6 +15,7 @@ import { PittingCorrosionComponent } from './pitting-corrosion/pitting-corrosion
 import { LocalMetalLossComponent } from './local-metal-loss/local-metal-loss.component';
 import { GeneralMetalLossComponent } from './general-metal-loss/general-metal-loss.component';
 import { TestComponent } from './test.component';
+import { FatigueComponent } from './fatigue/fatigue.component';
 const appRoutes: Routes = [
 
     {
@@ -30,7 +31,9 @@ const appRoutes: Routes = [
     { path: 'crack', component: CrackComponent, canActivate: [CanActivateViaAuthGuard] },
     { path: 'fire', component: FireDamageComponent, canActivate: [CanActivateViaAuthGuard] },
     { path: 'lamination', component: LaminationComponent, canActivate: [CanActivateViaAuthGuard] },
-    { path: 'test', component: TestComponent, canActivate: [CanActivateViaAuthGuard] }
+    { path: 'test', component: TestComponent, canActivate: [CanActivateViaAuthGuard] },
+    { path: 'fatigue', component: FatigueComponent, canActivate: [CanActivateViaAuthGuard] },
+
 ];
 
 @NgModule({
@@ -52,7 +55,8 @@ const appRoutes: Routes = [
         HydrogenComponent,
         CrackComponent,
         LaminationComponent,
-        TestComponent
+        TestComponent,
+        FatigueComponent
     ],
     providers: [],
 })

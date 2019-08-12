@@ -4,6 +4,7 @@
   z-index: 9999;
   height: 100%;
   padding: 10%;
+
   .logo {
     border-radius: 38px;
     display: inline-block;
@@ -16,6 +17,7 @@
     font-size: 4em;
     margin-bottom: 0px;
   }
+
   h4 {
     margin-top: -5px;
     font-size: 1.1em;
@@ -25,15 +27,17 @@
 
 .loginbox {
   margin-top: 40px;
+
   input[type=text],
   input[type=password] {
     background: rgb(216, 91, 84);
-    padding: 20px;
+    // padding: 20px;
     border: none;
     color: white;
     font-size: 15px;
     font-weight: 500;
   }
+
   button {
     width: 49%;
     background: rgb(183, 54, 47);
@@ -42,30 +46,38 @@
     font-size: 15px;
     padding: 10px;
     font-weight: 500;
+
     &:hover {
       background: rgb(160, 54, 47);
     }
   }
+
   .form-group {
     margin-bottom: 10px;
   }
+
   @mixin placeholder {
-     ::-webkit-input-placeholder {
+    ::-webkit-input-placeholder {
       @content
     }
-     :-moz-placeholder {
+
+    :-moz-placeholder {
       @content
     }
-     ::-moz-placeholder {
+
+    ::-moz-placeholder {
       @content
     }
-     :-ms-input-placeholder {
+
+    :-ms-input-placeholder {
       @content
     }
   }
+
   @include placeholder {
     color: white;
   }
+
   .errorMsg {
     background: rgba(255, 255, 255, 0.9);
     color: red;

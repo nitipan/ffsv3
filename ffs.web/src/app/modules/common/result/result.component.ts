@@ -24,7 +24,7 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
   constructor(private datePipe: DatePipe) {
     super();
 
-    toDataURL("/assets/logo_round.png").subscribe(v => {
+    toDataURL("assets/logo_round.png").subscribe(v => {
       this.logo = v;
     });
   }
@@ -154,7 +154,11 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
       }
     }
 
-    pdfMake.createPdf(docDefinition).open();
+    let isIEOrEdge = /msie\s|trident\/|edge\//i.test(window.navigator.userAgent);
+    if (isIEOrEdge)
+      pdfMake.createPdf(docDefinition).download();
+    else
+      pdfMake.createPdf(docDefinition).open();
   }
 
   summary() {
@@ -290,6 +294,10 @@ export class ResultComponent extends InputBaseComponent implements OnInit, After
       footer: function (currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; },
     };
 
-    pdfMake.createPdf(docDefinition).open();
+    let isIEOrEdge = /msie\s|trident\/|edge\//i.test(window.navigator.userAgent);
+    if (isIEOrEdge)
+      pdfMake.createPdf(docDefinition).download();
+    else
+      pdfMake.createPdf(docDefinition).open();
   }
 }

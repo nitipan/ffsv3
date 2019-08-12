@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --serve-path / --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -26,8 +26,10 @@
     "bootstrap-colorpicker": "^2.5.1",
     "bootstrap-datepicker": "^1.7.1",
     "chart.js": "^2.7.1",
+    "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
+    "intl": "^1.2.5",
     "jquery": "^3.2.1",
     "pdfmake": "^0.1.31",
     "rxjs": "^5.1.0",
@@ -37,7 +39,7 @@
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
-    "@angular/cli": "1.2.6",
+    "@angular/cli": "^1.4.3",
     "@angular/compiler-cli": "^4.3.2",
     "@angular/language-service": "^4.3.2",
     "@types/bootstrap-datepicker": "0.0.9",
