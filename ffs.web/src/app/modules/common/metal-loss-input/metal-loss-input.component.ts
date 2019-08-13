@@ -1,4 +1,7 @@
-import { FFSSelectComponent, FFSBrowseComponent } from './../../../common/inputs/ffs-input.component';
+import {
+  FFSSelectComponent,
+  FFSBrowseComponent
+} from './../../../common/inputs/ffs-input.component';
 import { IUnit } from './../../../common/unit';
 import { Observable } from 'rxjs/Rx';
 import { EventService } from './../../../event.service';
@@ -6,7 +9,15 @@ import { FormGroup } from '@angular/forms';
 import { InputBase } from './../../../model/inputbase';
 import { Http } from '@angular/http';
 import { KV } from './../../../model/kv';
-import { Component, OnInit, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  QueryList,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Input
+} from '@angular/core';
 import { FFSInputBase } from '../../../common/inputs/ffs-input-base';
 import { InputBaseComponent } from '../input-base.component';
 import { ColorRange } from './../../../model/colorRange';
@@ -20,8 +31,8 @@ import { ChartComponent } from '../../../common/chart/chart.component';
   templateUrl: './metal-loss-input.component.html',
   styleUrls: ['./metal-loss-input.component.scss']
 })
-export class MetalLossInputComponent extends InputBaseComponent implements OnInit, AfterViewInit {
-
+export class MetalLossInputComponent extends InputBaseComponent
+  implements OnInit, AfterViewInit {
   unit: Observable<IUnit>;
   form: FormGroup;
   thicknessDatas: Observable<KV[]>;
@@ -50,15 +61,19 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
 
   ngOnInit() {
     this.unit = this.moduleEvent.unit.asObservable();
-    this.thicknessDatas = this.http.get('api/lookup/thicknessdatas')
+    this.thicknessDatas = this.http
+      .get('api/lookup/thicknessdatas')
       .map(response => response.json() as any[])
-      .map(arr => arr.map(a => { return { key: a.thicknessDataID, value: a.thicknessDataName }; }));
+      .map(arr =>
+        arr.map(a => {
+          return { key: a.thicknessDataID, value: a.thicknessDataName };
+        })
+      );
   }
 
   ngAfterViewInit(): void {
     this.form = FFSInputBase.toFormGroup(this.inputs);
-    if (this.isLocal)
-      this.form.get('thicknessDataID').disable();
+    if (this.isLocal) this.form.get('thicknessDataID').disable();
     this.InitColor();
 
     // common behaviour
@@ -74,14 +89,11 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
       this.browse.removeFile();
       this.InitColor();
       this.arrayDatas = undefined;
-      if (this.chart)
-        this.chart.clear();
+      if (this.chart) this.chart.clear();
 
-      if (this.chartCir)
-        this.chartCir.clear();
+      if (this.chartCir) this.chartCir.clear();
 
-      if (this.chartLong)
-        this.chartLong.clear();
+      if (this.chartLong) this.chartLong.clear();
 
       this.form.patchValue({ thicknessDataID: x }, { emitEvent: false });
 
@@ -98,12 +110,9 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
       }
     });
 
-
     // get data from excel
     this.form.get('excelDatas').valueChanges.subscribe(x => {
-
       if (x !== null && x !== undefined && x !== '') {
-
         if (this.value.thicknessDataID === 1) {
           this.form.patchValue({ numberOfInspectionColumn: x.length });
         } else {
@@ -112,15 +121,11 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
         }
         console.log(x);
         this.arrayDatas = x;
-        if (this.chart)
-          this.chart.clear();
+        if (this.chart) this.chart.clear();
 
-        if (this.chartCir)
-          this.chartCir.clear();
+        if (this.chartCir) this.chartCir.clear();
 
-        if (this.chartLong)
-          this.chartLong.clear();
-
+        if (this.chartLong) this.chartLong.clear();
 
         let data = [];
         if (+this.value.thicknessDataID == 1) {
@@ -138,17 +143,14 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
               }
             ]
           });
-
         } else {
-
-          data = x.reduce(function (p, c) {
+          data = x.reduce(function(p, c) {
             return p.concat(c);
           });
 
-          let cir = _.zip.apply(_, x)
-            .map(r => {
-              return _.min(r);
-            });
+          let cir = _.zip.apply(_, x).map(r => {
+            return _.min(r);
+          });
 
           let long = x.map(r => {
             return _.min(r);
@@ -195,25 +197,20 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
       }
     });
 
-
     this.form.get('numberOfInspectionRow').valueChanges.subscribe(x => {
       if (x !== '') {
         this.limitRow = x;
       }
     });
     this.form.get('numberOfInspectionColumn').valueChanges.subscribe(x => {
-
       if (x !== '' && this.value.thicknessDataID != 1) {
         this.limitColumn = x;
       }
       if (x !== '') {
-        if (this.form.get('excelDatas').value === "") {
+        if (this.form.get('excelDatas').value === '') {
           this.arrayDatas = [];
           for (let i = 0; i < +x; i++) {
-            this.arrayDatas.push([
-              i + 1,
-              0
-            ]);
+            this.arrayDatas.push([i + 1, 0]);
           }
           console.log(this.arrayDatas);
         }
@@ -242,7 +239,6 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
           }
         ]
       });
-
     }
   }
 
@@ -258,27 +254,39 @@ export class MetalLossInputComponent extends InputBaseComponent implements OnIni
     const step = (max - min) / 3;
     this.form.get('min1').setValue(min);
     this.form.get('max1').setValue(min + step);
-    this.form.get('max2').setValue(min + (step * 2));
+    this.form.get('max2').setValue(min + step * 2);
     this.form.get('min2').setValue(min + step);
     this.form.get('max3').setValue(max);
-    this.form.get('min3').setValue(min + (step * 2));
+    this.form.get('min3').setValue(min + step * 2);
   }
 
   getStyle(value) {
     let backgroundColor: any;
     if (value <= this.form.get('max1').value) {
       backgroundColor = { 'background-color': this.form.get('color1').value };
-    } else if (value > this.form.get('min2').value && value <= this.form.get('max2').value) {
+    } else if (
+      value > this.form.get('min2').value &&
+      value <= this.form.get('max2').value
+    ) {
       backgroundColor = { 'background-color': this.form.get('color2').value };
-    } else if (value > this.form.get('min3').value && value <= this.form.get('max3').value) {
+    } else if (
+      value > this.form.get('min3').value &&
+      value <= this.form.get('max3').value
+    ) {
       backgroundColor = { 'background-color': this.form.get('color3').value };
     }
     return backgroundColor;
   }
 
-
   get value() {
     return this.form.getRawValue();
   }
 
+  get inspectionGridData() {
+    let data = this.arrayDatas.map(a => {
+      return a.map(aa => Number.parseFloat(aa));
+    });
+    return data;
+    // return this.arrayDatas.flat().map(r => Number.parseFloat(r));
+  }
 }
