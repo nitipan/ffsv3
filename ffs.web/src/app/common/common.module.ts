@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { EventService } from '../event.service';
 import { DatePipe } from '@angular/common';
@@ -15,40 +14,41 @@ import { TabComponent } from './tab/tab.component';
 import { TabItemComponent } from './tab/tab-item.component';
 import { FFSInputModule } from './common-ffs-inputs.module';
 import { ChartComponent } from './chart/chart.component';
-
-
+import { DataGridItemDirective } from './datagrid/datagrid-item.directive';
 
 @NgModule({
-    imports: [FFSInputModule],
-    exports: [
-        FFSInputModule,
-        DataGridComponent,
-        TopnavComponent,
-        SidenavComponent,
-        WizardComponent,
-        PanelComponent,
-        TabComponent,
-        TabItemComponent,
-        HelpComponent,
-        FocusDirective,
-        FourthOrderPolyNomialComponent,
-        AsyncKVPipe,
-        ChartComponent
-    ],
-    declarations: [
-        DataGridComponent,
-        TopnavComponent,
-        SidenavComponent,
-        WizardComponent,
-        PanelComponent,
-        TabComponent,
-        TabItemComponent,
-        HelpComponent,
-        FocusDirective,
-        FourthOrderPolyNomialComponent,
-        AsyncKVPipe,
-        ChartComponent
-    ],
-    providers: [EventService, DatePipe],
+  imports: [FFSInputModule],
+  exports: [
+    FFSInputModule,
+    DataGridComponent,
+    TopnavComponent,
+    SidenavComponent,
+    WizardComponent,
+    PanelComponent,
+    TabComponent,
+    TabItemComponent,
+    HelpComponent,
+    FocusDirective,
+    FourthOrderPolyNomialComponent,
+    AsyncKVPipe,
+    ChartComponent,
+    DataGridItemDirective
+  ],
+  declarations: [
+    DataGridComponent,
+    TopnavComponent,
+    SidenavComponent,
+    WizardComponent,
+    PanelComponent,
+    TabComponent,
+    TabItemComponent,
+    HelpComponent,
+    FocusDirective,
+    FourthOrderPolyNomialComponent,
+    AsyncKVPipe,
+    ChartComponent,
+    DataGridItemDirective
+  ],
+  providers: [EventService, DatePipe]
 })
-export class AppCommonModule { }
+export class AppCommonModule {}

@@ -19,7 +19,8 @@
           <span style="width:250px;">{{r.value}}</span>
         </td>
         <td *ngFor="let c of columns">
-          <input type="number" class="form-control" (change)="onDataChange(r,c,$event.target.value)">
+          <input type="number" class="form-control" (change)="onDataChange(r,c,$event.target.value)" appDataGridItem
+            [dataGridItemRow]="r.key" [dataGridItemColumn]="c">
         </td>
       </tr>
     </tbody>
